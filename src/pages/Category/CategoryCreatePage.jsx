@@ -28,7 +28,7 @@ export const CategoryCreatePage = () => {
             })
             if (res && res.data.success) {
                 toast.success(res.data && res.data.message)
-                navigate('/categorias')
+                navigate('/admin/categorias')
             } else {
                 toast.error(res.data.message)
             }

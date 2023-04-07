@@ -16,6 +16,7 @@ export const ProductCreatePage = () => {
     const [description, setDescription] = useState('')
     const [state, setState] = useState('')
     const [category, setCategory] = useState('')
+    const [imageUrl, setImageUrl] = useState('')
 
     const navigate = useNavigate()
 
@@ -24,11 +25,11 @@ export const ProductCreatePage = () => {
         e.preventDefault()
         try {
             const res = await axios.post(`${BACKENDURL}/api/productLG/create-productLG`, {
-                name, description, state, category
+                name, description, state, category, imageUrl
             })
             if (res && res.data.success) {
                 toast.success(res.data && res.data.message)
-                navigate('/productos')
+                navigate('/admin/productos')
             } else {
                 toast.error(res.data.message)
             }
@@ -118,7 +119,24 @@ export const ProductCreatePage = () => {
                                         <option>Abarrotes</option>
                                     </select>
                                 </div>
+
                             </div>
+                            <div className="row  mb-3">
+                                <div className="col">
+                                    <label htmlFor="disabledTextInput" className="form-label">Link de imagen</label>
+                                    <input
+                                        type="text"
+                                        value={imageUrl}
+                                        onChange={(e) => setImageUrl(e.target.value)}
+                                        className="form-control"
+                                        id="exampleInputEmail1"
+                                        placeholder=""
+                                        required
+                                        autoFocus
+                                    />
+                                </div>
+                            </div>
+
 
                             <button type="submit" className="btn btn-primary">
                                 REGISTER

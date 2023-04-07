@@ -30,7 +30,7 @@ export const ProveedorCreatePage = () => {
             })
             if (res && res.data.success) {
                 toast.success(res.data && res.data.message)
-                navigate('/proveedors')
+                navigate('/admin/proveedors')
             } else {
                 toast.error(res.data.message)
             }
