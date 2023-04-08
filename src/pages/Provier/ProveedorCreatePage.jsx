@@ -24,12 +24,23 @@ export const ProveedorCreatePage = () => {
     // form function
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const regex = /^[a-zA-Z ]*$/
+        if (!regex.test(name)) {
+            toast.error('El nombre no es válido')
+            return
+        }
+        const phoneRegex = /^[0-9]+$/
+        if (!phoneRegex.test(phonenumber1) || !phoneRegex.test(phonenumber2)) {
+        toast.error('Los campos de teléfono deben contener solo números')
+        return
+    }
         try {
             const res = await axios.post(`${BACKENDURL}/api/supplierLG/create-supplierLG`, {
                 name, address, phonenumber1, phonenumber2, email1, email2
             })
             if (res && res.data.success) {
                 toast.success(res.data && res.data.message)
+                alert('Guardado exitosamente');
                 navigate('/admin/proveedors')
             } else {
                 toast.error(res.data.message)
