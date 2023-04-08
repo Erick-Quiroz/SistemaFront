@@ -1,6 +1,6 @@
 import { Layout, Menu } from 'antd'
 import { useState } from 'react'
-import { items } from '../../helpers'
+import { items } from '../../../helpers'
 
 export const AdminSidebar = () => {
     const { Sider } = Layout

@@ -1,13 +1,13 @@
 import { Layout } from 'antd'
-import { Footer, Header, Sidebar } from '../ui'
 
+import { Navbar,Footer} from '../ui/user'
 export const ShopLayout = ({ children }) => {                                                   //eslint-disable-line
     return (
         <>
             <Layout style={{ minHeight: '100vh' }}>
-                <Sidebar />
+                <Navbar />
                 <Layout className="site-layout">
-                    <Header />
+                    
                     {children}
                     <Footer />
                 </Layout>

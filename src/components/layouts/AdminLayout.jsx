@@ -1,5 +1,5 @@
 import { Layout } from 'antd'
-import { Footer, Header, AdminSidebar } from '../ui'
+import { Footer, Header, AdminSidebar } from '../ui/admin'
 
 // eslint-disable-next-line
 export const AdminLayout = ({ children }) => {                                                   //eslint-disable-line

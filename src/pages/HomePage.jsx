@@ -11,8 +11,8 @@ export const HomePage = () => {
                 <Content style={{ margin: '0 8px' }}>
                     <div
                         style={{
-                            padding: 14,
-                            minHeight: '86vh',
+                            padding: 0,
+                            minHeight: '80vh',
                             background: colorBgContainer
                         }}
                     >
