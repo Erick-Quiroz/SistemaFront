@@ -42,10 +42,10 @@ export const ProductPage = () => {
     const handleDelete = async (pId) => {
         try {
             const { data } = await axios.delete(
-                `${BACKENDURL}/api/productLG/roductLG/${pId}`
+                `${BACKENDURL}/api/productLG/productLG/${pId}`
             )
             if (data.success) {
-                toast.success('Product is deleted')
+                toast.success('category is deleted')
 
                 getAllCategory()
             } else {
@@ -105,7 +105,7 @@ export const ProductPage = () => {
                         <div className="text-center"><h1>PRODUCTO</h1></div>
                         <div className="col-10"></div>
                         <div className="col-2" >
-                            <a href="/registro/producto" >
+                            <a href="/admin/registro/producto" >
                                 <Button className=" btn btn-success" type="primary" htmlType="submit" style={{
                                     padding: 10,
                                     width: 80,
@@ -141,16 +141,10 @@ export const ProductPage = () => {
                                                 <td>0</td>
                                                 <td><img src={v.imageUrl} width="100" height="100"/></td>
                                                 <td>
-                                                    <Button className='btn btn-primary' onClick={() => handleGetProduct(v._id)}>Edit</Button>{' '}
-                                                    <Button className='btn btn-danger' onClick={() => handleDelete(v._id)} >Remove</Button>
-                                                </td>
-                                                <td>
                                                     <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
-                                                            setVisible(true)
-                                                            setUpdatedName(v.name)
-                                                            setSelected(v)
+                                                            handleGetProduct(v._id)
                                                         }} style={{
                                                             padding: 2,
                                                             width: 80,
