@@ -14,9 +14,10 @@ export const ProductCreatePage = () => {
     } = theme.useToken()
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
+    const [imageUrl, setImageUrl] = useState('')
     const [state, setState] = useState('')
     const [category, setCategory] = useState('')
-    const [imageUrl, setImageUrl] = useState('')
+    
 
     const navigate = useNavigate()
 
