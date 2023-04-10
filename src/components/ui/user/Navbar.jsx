@@ -11,9 +11,6 @@ export const Navbar = () => {
                 <h3 className='logo'>LG</h3>
 
                 <ul className={Mobile ? 'nav-links-mobile' : 'nav-links'} onClick={() => setMobile(false)}>
-                    <Link to='/' className='home'>
-                        <li>Inicio</li>
-                    </Link>
                     <Link to={'/admin'} className='text-center'>
                         <button type="summit" className="btn btn-outline-success "
                             style={{

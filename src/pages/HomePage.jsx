@@ -1,5 +1,6 @@
 import { Layout, theme } from 'antd'
 import { ShopLayout } from '../components/layouts/ShopLayout'
+import './HomePage.css'
 
 export const HomePage = () => {
     const { Content } = Layout
@@ -9,19 +10,17 @@ export const HomePage = () => {
         <>
             <ShopLayout>
                 <Content style={{ margin: '0 8px' }}>
-                    <div
-                        style={{
-                            padding: 0,
-                            minHeight: '80vh',
-                            background: colorBgContainer
-                        }}
-                    >
-                        <h1>Home page</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
-                            ut at aspernatur numquam. Quos officiis nihil dolore quae ut molestiae
-                            nulla, nisi repellendus ab, repellat aut. Quod nostrum iure deserunt.
-                        </p>
+                    <div>
+                        <div className="contenedorTodo">
+                            <seccion className='imagenSuperMercado'> 
+                                <div className="contenedorPantalla">
+                                    <img className= "fondoPantalla"
+                                        src="../../public/Fondo.png" 
+                                        alt="Foto_de_fondo"/>
+                                    <p className='textoBien'>Bienvenido</p>   
+                                </div>                  
+                            </seccion>
+                        </div>
                     </div>
                 </Content >
             </ShopLayout>
