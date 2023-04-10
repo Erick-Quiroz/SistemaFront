@@ -1,42 +1,51 @@
-import { useState } from 'react'
+import { enqueueSnackbar } from 'notistack'
 import { Layout, theme } from 'antd'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
-import BACKENDURL from '../../utils/backendUrl.js'
+
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
+import { shopAPI } from '../../services'
+import { useForm } from '../../hooks'
+import axios from 'axios'
 
-// import "../../styles/AuthStyles.css";
+const initialState = {
+    name: '',
+    description: '',
+    state: 'Activo',
+    category: '',
+    price: 0,
+    imageUrl: ''
+}
+
 export const ProductCreatePage = () => {
-    const { Content } = Layout
-    const {
-        token: { colorBgContainer }
-    } = theme.useToken()
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [imageUrl, setImageUrl] = useState('')
-    const [state, setState] = useState('')
-    const [category, setCategory] = useState('')
-    
-
     const navigate = useNavigate()
+    const { token: { colorBgContainer } } = theme.useToken()
+    const [formValues, handlerInputChange] = useForm(initialState)
+    const { name, description, state, category, price, imageUrl } = formValues
+    const { Content } = Layout
 
-    // form function
     const handleSubmit = async (e) => {
         e.preventDefault()
+
         try {
-            const res = await axios.post(`${BACKENDURL}/api/productLG/create-productLG`, {
-                name, description, state, category, imageUrl
-            })
-            if (res && res.data.success) {
-                toast.success(res.data && res.data.message)
+            const { data } = await shopAPI.post('/productLG/create-productLG', { name, description, state, category, price, imageUrl })
+            if (data.success) {
                 navigate('/admin/productos')
-            } else {
-                toast.error(res.data.message)
+                enqueueSnackbar('Producto agregado', {
+                    variant: 'success',
+                    autoHideDuration: 1500,
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right'
+                    }
+                })
             }
         } catch (error) {
-            console.log(error)
-            toast.error('Something went wrong')
+            if (axios.isAxiosError(error)) {
+                return {
+                    hasError: true,
+                    message: error.response?.data.message
+                }
+            }
         }
     }
 
@@ -50,68 +59,97 @@ export const ProductCreatePage = () => {
                         background: colorBgContainer
                     }}
                 >
-
                     <div className="form-container container-fluid " >
-                        <form onSubmit={handleSubmit} className='row g-3'>
-
+                        <form className='row g-3 needs-validation was-validated'
+                            noValidate=""
+                            onSubmit={handleSubmit}
+                        >
                             <h4 className="title" >Registrar Producto</h4>
                             <div className="row  mb-3">
-                                <div className="col">
-                                    <label htmlFor="disabledTextInput" className="form-label">Nombre</label>
+
+                                <div className="col-md-6">
+                                    <label
+                                        htmlFor="validationCustom01"
+                                        className="form-label">
+                                        Nombre
+                                    </label>
                                     <input
+                                        autoFocus
+                                        className="form-control"
+                                        id="name"
+                                        maxLength={20}
+                                        minLength={3}
+                                        name='name'
+                                        onChange={handlerInputChange}
+                                        required
                                         type="text"
                                         value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        className="form-control"
-                                        id="exampleInputEmail1"
-                                        placeholder=""
-                                        required
-                                        autoFocus
                                     />
+                                    <div className="invalid-feedback">
+                                        Nombre es requerido.
+                                    </div>
                                 </div>
 
                                 <div className="col">
-                                    <label htmlFor="disabledTextInput" className="form-label">Descripcion</label>
+                                    <label
+                                        htmlFor="disabledTextInput"
+                                        className="form-label">
+                                        Descripcion
+                                    </label>
                                     <input
-                                        type="text"
-                                        value={description}
-                                        onChange={(e) => setDescription(e.target.value)}
                                         className="form-control"
                                         id="description"
-                                        placeholder=" "
+                                        maxLength={20}
+                                        minLength={3}
+                                        name='description'
+                                        onChange={handlerInputChange}
                                         required
+                                        type="text"
+                                        value={description}
                                     />
+                                    <div className="invalid-feedback">
+                                        Descripcion es requerido.
+                                    </div>
                                 </div>
                             </div>
+
                             <div className="row mb-3">
                                 <div className="col">
-                                    <label htmlFor="disabledSelect" className="form-label">Estado</label>
-
-                                    <select id="disabledSelect"
+                                    <label
+                                        htmlFor="disabledSelect1"
+                                        className="form-label">
+                                        Estado
+                                    </label>
+                                    <select
                                         className="form-select"
-
-                                        value={state}
-                                        onChange={(e) => setState(e.target.value)}
-
+                                        id="disabledSelect"
+                                        name='state'
+                                        onChange={handlerInputChange}
                                         required
+                                        value={state}
                                     >
-                                        <option></option>
                                         <option>Activo</option>
                                         <option>Inactivo</option>
-
                                     </select>
+                                    <div className="invalid-feedback">
+                                        Elije una estado.
+                                    </div>
                                 </div>
+
                                 <div className="col">
-
-                                    <label htmlFor="disabledSelect" className="form-label">Categoria</label>
-                                    <select id="disabledSelect"
+                                    <label
+                                        htmlFor="disabledSelect"
+                                        className="form-label">
+                                        Categoria
+                                    </label>
+                                    <select
                                         className="form-select"
-
-                                        value={category}
-                                        onChange={(e) => setCategory(e.target.value)}
-
-                                        placeholder="Ingrese categoria"
+                                        id="disabledSelect"
+                                        name='category'
+                                        onChange={handlerInputChange}
+                                        placeholder="Seleccione categoria!!!"
                                         required
+                                        value={category}
                                     >
                                         <option></option>
                                         <option>Lacteos</option>
@@ -119,38 +157,64 @@ export const ProductCreatePage = () => {
                                         <option>Dulces</option>
                                         <option>Abarrotes</option>
                                     </select>
+                                    <div className="invalid-feedback">
+                                        Elije una categoria.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="row  mb-3">
+
+                                <div className="col-md-3">
+                                    <label
+                                        htmlFor="validationCustom05"
+                                        className="form-label">
+                                        Precio
+                                    </label>
+                                    <input
+                                        className="form-control"
+                                        id="validationCustom05"
+                                        min={1}
+                                        name='price'
+                                        onChange={handlerInputChange}
+                                        required
+                                        type="number"
+                                        value={price}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Precio es requerido.
+                                    </div>
                                 </div>
 
-                            </div>
-                            <div className="row  mb-3">
                                 <div className="col">
-                                    <label htmlFor="disabledTextInput" className="form-label">Link de imagen</label>
+                                    <label
+                                        htmlFor="disabledTextInput"
+                                        className="form-label">
+                                        Link de imagen
+                                    </label>
                                     <input
+                                        className="form-control"
+                                        id="disabledSelect"
+                                        minLength={7}
+                                        name='imageUrl'
+                                        onChange={handlerInputChange}
+                                        required
                                         type="text"
                                         value={imageUrl}
-                                        onChange={(e) => setImageUrl(e.target.value)}
-                                        className="form-control"
-                                        id="exampleInputEmail1"
-                                        placeholder=""
-                                        required
-                                        autoFocus
                                     />
+                                    <div className="invalid-feedback">
+                                        Ingresa una imagen.
+                                    </div>
                                 </div>
                             </div>
-
 
                             <button type="submit" className="btn btn-primary">
                                 REGISTER
                             </button>
-
                         </form>
-                        <div>
-                            <h1></h1>
-                        </div>
-
                     </div>
                 </div>
-            </Content>
-        </AdminLayout>
+            </Content >
+        </AdminLayout >
     )
 }
