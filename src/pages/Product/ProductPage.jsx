@@ -7,21 +7,17 @@ import { Layout, theme, Button, Modal } from 'antd'
 import ModalUpdateProduct from './ModalUpdateProduct.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
+import { useSnackbar } from 'notistack'
 
 export const ProductPage = () => {
-    // const url = 'http://localhost:8080/api/v1/product/get-product'
     const { Content } = Layout
-
-    const {
-        token: { colorBgContainer }
-    } = theme.useToken()
+    const { token: { colorBgContainer } } = theme.useToken()
     const [categories, setCategories] = useState([])
     const [visible, setVisible] = useState(false)
-    const [selected, setSelected] = useState(null)
-    const [updatedName, setUpdatedName] = useState('')
     const [showModal, setShowModal] = useState(false)
     const [productToEdit, setProductToEdit] = useState({})
-    // get all cat
+    const { enqueueSnackbar } = useSnackbar()
+
     const getAllCategory = async () => {
         try {
             const { data } = await axios.get(`${BACKENDURL}/api/productLG/get-productLG`)
@@ -30,7 +26,7 @@ export const ProductPage = () => {
             }
         } catch (error) {
             console.log(error)
-            toast.error('Something wwent wrong in getting catgeory')
+            enqueueSnackbar('Something wwent wrong in getting catgeory')
         }
     }
 
@@ -38,7 +34,6 @@ export const ProductPage = () => {
         getAllCategory()
     }, [])
 
-    // delete product
     const handleDelete = async (pId) => {
         try {
             const { data } = await axios.delete(
@@ -46,7 +41,6 @@ export const ProductPage = () => {
             )
             if (data.success) {
                 toast.success('category is deleted')
-
                 getAllCategory()
             } else {
                 toast.error(data.message)
@@ -54,8 +48,17 @@ export const ProductPage = () => {
         } catch (error) {
             toast.error('Somtihing went wrong')
         }
+        toast.success('category is deleted')
+        enqueueSnackbar('Producto Eliminado', {
+            variant: 'error',
+            autoHideDuration: 1500,
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right'
+            }
+        })
     }
-    // End Delete
+
     const handleGetProduct = async (pid) => {
         try {
             const { data } = await axios.get(`${BACKENDURL}/api/productLG/get-productLG/${pid}`)
@@ -75,14 +78,12 @@ export const ProductPage = () => {
                 description: product.description,
                 state: product.state,
                 category: product.category,
-                imageUrl: product.imageUrl,
-                
+                imageUrl: product.imageUrl
             }
             const { data } = await axios.put(`${BACKENDURL}/api/productLG/update-productLG/${product._id}`,
                 productUpdated
             )
             if (data.success) {
-                toast.success(`${updatedName} is updated`)
                 getAllCategory()
             } else {
                 toast.error(data.message)
@@ -113,7 +114,7 @@ export const ProductPage = () => {
                                     width: 80,
                                     height: 35
                                 }}>
-                                Agregar
+                                    Agregar
                                 </Button>
                             </a>
                         </div>
@@ -141,7 +142,7 @@ export const ProductPage = () => {
                                                 <td>{v.category}</td>
                                                 <td>{v.state}</td>
                                                 <td>0</td>
-                                                <td><img src={v.imageUrl} width="100" height="100"/></td>
+                                                <td><img src={v.imageUrl} width="100" height="100" /></td>
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"
@@ -154,19 +155,19 @@ export const ProductPage = () => {
 
                                                         }}
                                                     >
-                                                    Editar
+                                                        Editar
                                                     </button>
                                                     <button
                                                         className="btn btn-danger"
                                                         onClick={() => {
                                                             handleDelete(v._id)
-                                                        }}style={{
+                                                        }} style={{
                                                             padding: 1,
                                                             width: 80,
                                                             margin: 2
                                                         }}
                                                     >
-                                                    Eliminar
+                                                        Eliminar
                                                     </button>
 
                                                 </td>
