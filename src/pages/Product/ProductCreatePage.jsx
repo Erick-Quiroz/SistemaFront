@@ -1,13 +1,12 @@
 import { enqueueSnackbar } from 'notistack'
 import { Layout, theme } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { shopAPI } from '../../services'
 import { useForm } from '../../hooks'
 import axios from 'axios'
-import BACKENDURL from '../../utils/backendUrl.js'
-import toast from 'react-hot-toast'
+
 const initialState = {
     name: '',
     description: '',
@@ -23,22 +22,7 @@ export const ProductCreatePage = () => {
     const [formValues, handlerInputChange] = useForm(initialState)
     const { name, description, state, category, price, imageUrl } = formValues
     const { Content } = Layout
-    const [categories, setCategories] = useState([])
-    const getAllCategory = async () => {
-        try {
-            const { data } = await axios.get(`${BACKENDURL}/api/category/get-category`)
-            if (data.success) {
-                setCategories(data.category)
-            }
-        } catch (error) {
-            console.log(error)
-            toast.error('Something wwent wrong in getting catgeory')
-        }
-    }
 
-    useEffect(() => {
-        getAllCategory()
-    }, [])
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -167,14 +151,11 @@ export const ProductCreatePage = () => {
                                         required
                                         value={category}
                                     >
-                                        {categories?.map((v) =>
-                                            <>
-                                                <option className="">
-                                                    {v.name}
-                                                </option>
-                                            </>
-                                        )}
-
+                                        <option></option>
+                                        <option>Lacteos</option>
+                                        <option>Gaseosa</option>
+                                        <option>Dulces</option>
+                                        <option>Abarrotes</option>
                                     </select>
                                     <div className="invalid-feedback">
                                         Elije una categoria.
