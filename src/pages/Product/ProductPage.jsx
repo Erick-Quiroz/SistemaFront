@@ -127,7 +127,6 @@ export const ProductPage = () => {
                                         <th scope="col">ID</th>
                                         <th scope="col">Producto</th>
                                         <th scope="col">Categoria</th>
-                                        <th scope="col">Precio</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Existencia</th>
                                         <th scope="col">Imagen</th>
@@ -141,7 +140,6 @@ export const ProductPage = () => {
                                                 <td>{v._id}</td>
                                                 <td>{v.name}</td>
                                                 <td>{v.category}</td>
-                                                <td>{v.price}</td>
                                                 <td>{v.state}</td>
                                                 <td>0</td>
                                                 <td><img src={v.imageUrl} width="100" height="100" /></td>
