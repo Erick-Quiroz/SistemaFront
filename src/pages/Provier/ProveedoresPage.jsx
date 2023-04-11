@@ -131,7 +131,7 @@ export const ProveedoresPage = () => {
                                                 <td>{v.address}</td>
                                                 <td>{v.phonenumber1}</td>
                                                 <td>{v.phonenumber2}</td>
-                                                <td>{v.email}</td>
+                                                <td>{v.email1}</td>
                                                 <td>{v.email2}</td>
 
                                                 <td>
