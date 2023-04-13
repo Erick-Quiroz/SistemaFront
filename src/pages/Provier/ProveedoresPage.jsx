@@ -102,7 +102,7 @@ export const ProveedoresPage = () => {
                                     width: 80,
                                     height: 35
                                 }}>
-                                    Agregar
+                                    Registrar
                                 </Button>
                             </Link>
                         </div>
