@@ -99,7 +99,7 @@ export const ProveedoresPage = () => {
                             <Link to={'/admin/registro/proveedor'}>
                                 <Button className=" btn btn-success" type="primary" htmlType="submit" style={{
                                     padding: 10,
-                                    width: 80,
+                                    width: 100,
                                     height: 35
                                 }}>
                                     Registrar
