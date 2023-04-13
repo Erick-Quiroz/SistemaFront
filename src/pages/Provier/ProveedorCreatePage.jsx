@@ -33,7 +33,7 @@ export const ProveedorCreatePage = () => {
         const phoneRegex = /^[0-9]{7,8}$/
         const regex = /^[a-zA-Z ]*$/
         const mail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const addr = /^[a-zA-Z0-9\s,'-]{7,20}$/
+        const addr = /^{7,20}$/
 
         if (!addr.test(address)) {
             enqueueSnackbar('La Dirección no es valida', {
@@ -265,11 +265,11 @@ export const ProveedorCreatePage = () => {
                             <table>
 
                                 <td>
-                                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Cancelar</button> 
+                                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>CANCELAR</button> 
                                 </td>
                                 <td>
                                 <button type="submit" className="btn btn-primary">
-                                Guardar
+                                GUARDAR
                             </button>  
                                 </td>
                             </table>
