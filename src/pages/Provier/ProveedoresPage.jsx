@@ -97,7 +97,9 @@ export const ProveedoresPage = () => {
                         <div className="col-10"></div>
                         <div className="col-2">
                             <Link to={'/admin/registro/proveedor'}>
+
                                 <Button className=" btn btn-success btn-sm" type="primary" htmlType="submit" style={{
+
                                     width: 100,
                                     height: 35
                                 }}>
