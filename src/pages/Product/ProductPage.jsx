@@ -79,13 +79,8 @@ export const ProductPage = () => {
                 price: price,
                 state: product.state,
                 category: product.category,
-<<<<<<< HEAD
                 //imageUrl: product.imageUrl,
                 imageUrl: imageUrl,
-=======
-                imageUrl: product.imageUrl,
-                
->>>>>>> origin/marinsebas
             }
             const { data } = await axios.put(`${BACKENDURL}/api/productLG/update-productLG/${product._id}`,
                 productUpdated
