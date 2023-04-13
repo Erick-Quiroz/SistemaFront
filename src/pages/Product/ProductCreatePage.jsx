@@ -17,20 +17,6 @@ const initialState = {
 }
 
 export const ProductCreatePage = () => {
-<<<<<<< HEAD
-=======
-    const { Content } = Layout
-    const {
-        token: { colorBgContainer }
-    } = theme.useToken()
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [imageUrl, setImageUrl] = useState('')
-    const [state, setState] = useState('')
-    const [category, setCategory] = useState('')
-    
-
->>>>>>> origin/marinsebas
     const navigate = useNavigate()
     const { token: { colorBgContainer } } = theme.useToken()
     const [formValues, handlerInputChange] = useForm(initialState)
