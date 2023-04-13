@@ -9,6 +9,7 @@ const initialState = {
   state: "",
   category: "",
   price: "",
+
 };
 
 const ModalUpdateProduct = ({
@@ -109,7 +110,7 @@ const ModalUpdateProduct = ({
     <Modal show={show} centered>
       <Modal.Header>Editar Producto</Modal.Header>
       <Modal.Body>
-        <InputGroup className="mb-3">
+        {/*<InputGroup className="mb-3">
           <InputGroup.Text >Nombre Producto</InputGroup.Text>
           <Form.Control
             style={{ border: name.valid ? '1px solid green': '1px solid red'}}
@@ -118,17 +119,37 @@ const ModalUpdateProduct = ({
             name="value"
             value={name.value}
           />
-        </InputGroup>
-        
+        </InputGroup>*/}
+        <InputGroup className="mb-3">
+          <InputGroup.Text>Nombre Producto</InputGroup.Text>
+          <Form.Control
+            placeholder="Nombre de Producto"
+            onChange={handleOnChange}
+            onKeyDown={handleKeyDown}
+            name="name"
+            value={product.name}
+            required
+            minLength={3}
+            maxLength={20}
+          />
+          <Form.Control.Feedback type="invalid">
+            Debe ingresar un nombre válido.
+          </Form.Control.Feedback>
+        </InputGroup>      
+
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1">Descripcion</InputGroup.Text>
           <Form.Control
-           style={{ border: description.valid ? '1px solid green': '1px solid red'}}
             placeholder="Descripcion del producto"
-            name="value"
-            value={description.value}
-            onChange={(e) => handleOnChangeValidation(e.target.value, 3, 20, setDescription)}
+            name="description"
+            value={product.description}
+            onChange={handleOnChange}
+            onKeyDown={handleKeyDown}
+            required
           />
+          <Form.Control.Feedback type="invalid">
+            Debes añadir una descripcion
+          </Form.Control.Feedback>
         </InputGroup>
 
 {/*
