@@ -208,9 +208,18 @@ export const ProductCreatePage = () => {
                                 </div>
                             </div>
 
-                            <button type="submit" className="btn btn-primary">
+                            
+                            <table>
+
+                                <td>
+                                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Cancelar</button> 
+                                </td>
+                                <td>
+                                <button type="submit" className="btn btn-primary">
                                 REGISTER
-                            </button>
+                            </button>  
+                                </td>
+                            </table>
                         </form>
                     </div>
                 </div>
