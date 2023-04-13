@@ -7,11 +7,11 @@ export const AdminSidebar = () => {
     const [collapsed, setCollapsed] = useState(false)
 
     return (
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Sider breakpoint="md" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
             <div
                 style={{
-                    height: 102,
-                    margin: 16,
+                    height: '10vh',
+                    margin: '2vh',
                     background: 'url(/public/logo.png)'
                 }}
             >
