@@ -217,6 +217,6 @@ const ModalUpdateProduct = ({
     </Form>
   );
 };
-
+ 
 export default ModalUpdateProduct;
 
