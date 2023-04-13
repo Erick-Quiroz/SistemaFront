@@ -79,8 +79,10 @@ export const ProductPage = () => {
                 price: price,
                 state: product.state,
                 category: product.category,
+
                 //imageUrl: product.imageUrl,
                 imageUrl: imageUrl,
+
             }
             const { data } = await axios.put(`${BACKENDURL}/api/productLG/update-productLG/${product._id}`,
                 productUpdated
@@ -107,16 +109,18 @@ export const ProductPage = () => {
                 >
 
                     <div className="row">
-                        <div className="text-center"><h1>PRODUCTO</h1></div>
+                        <div className="text-center"><h1>MIS PRODUCTOS</h1></div>
                         <div className="col-10"></div>
                         <div className="col-2" >
                             <a href="/admin/registro/producto" >
+
                                 <Button className=" btn btn-success" type="primary" htmlType="submit" style={{
                                     padding: 5,
                                     width: 85,
                                     height: 35
                                 }}>
                                     Registrar
+
                                 </Button>
                             </a>
                         </div>
@@ -128,12 +132,14 @@ export const ProductPage = () => {
                                     <tr className="text-center">
                                         <th scope="col">ID</th>
                                         <th scope="col">Producto</th>
-                                        <th scope="col">Categoria</th>
-                                        <th scope="col">Precio(Bs)</th>
+
+                                        <th scope="col">Categoría</th>
+                                        <th scope="col">Precio</th>
+
                                         <th scope="col">Estado</th>
                                         <th scope="col">Existencia</th>
                                         <th scope="col">Imagen</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
