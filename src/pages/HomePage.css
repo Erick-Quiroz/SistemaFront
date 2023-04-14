@@ -1,17 +1,30 @@
 .textoBien{
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    border-radius: 9px;
     backdrop-filter:blur(3px);
-    font-weight: 600;
-    font-Size: 7rem;
+    font-weight: bold;
+    font-Size: 7vw;
+    min-height: 3vh;
+    min-width: 3vw;
     color: white;
     position: absolute;
-    top: 80%;
-    left: 25%;
+    top: 40vh;
+    left: 22vw;
     transform: translate(-50%, -50%); 
 }
-.fondoPantalla{
-    height: auto;
-    width: auto;
-    max-width: 100%;
+
+.contenedorPantalla {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 20vh);
+}
+  
+.fondoPantalla {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 20vh);/*Aqui se cambio*/
+    object-fit: cover;
+    object-position: center 90%;
 }

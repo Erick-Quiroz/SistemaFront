@@ -8,24 +8,21 @@ export const Header = () => {
     return (
         <Header
             style={{
-                paddingRight: 15,
+                paddingRight:'2vw',
                 textAlign: 'right',
                 color: 'white',
-                fontSize: '30px',
-                height: 90
+                fontSize:'3vh',               
+                height: '12vh',
+                maxheight: '12vh'
             }}>
             <Link to={'/'} >
-
                 <HomeFilled />
                 <h1 style={{
-
                     textAlign: 'right',
                     color: 'white',
-                    fontSize: '15px'
-
+                    fontSize: '2vh'
                 }}>Salir</h1>
             </Link>
-
         </Header>
     )
 }

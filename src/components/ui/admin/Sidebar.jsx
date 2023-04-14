@@ -10,8 +10,8 @@ export const Sidebar = () => {
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
             <div
                 style={{
-                    height: 102,
-                    margin: 16,
+                    height: '100vh',
+                    margin: '9vh',
                     background: 'url(/public/logo.png)'
                 }}
             >
