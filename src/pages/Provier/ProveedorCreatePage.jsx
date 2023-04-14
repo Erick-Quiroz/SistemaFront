@@ -33,19 +33,9 @@ export const ProveedorCreatePage = () => {
         const phoneRegex = /^[0-9]{7,8}$/
         const regex = /^[a-zA-Z ]*$/
         const mail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const addr = /^{7,20}$/
+       
 
-        if (!addr.test(address)) {
-            enqueueSnackbar('La Dirección no es valida', {
-                variant: 'error',
-                autoHideDuration: 5000,
-                anchorOrigin: {
-                    vertical: 'top',
-                    horizontal: 'right'
-                }
-            })
-            return
-        }
+        
 
         if (!mail.test(email1)|| !mail.test(email2)) {
             enqueueSnackbar('El Email1 o Email2 no valido', {
@@ -97,9 +87,7 @@ export const ProveedorCreatePage = () => {
                         horizontal: 'right'
                     }
                 })
-            } else {
-                toast.error(res.data.message)
-            }
+            } 
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 return {
