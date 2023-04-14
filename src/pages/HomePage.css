@@ -24,7 +24,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 20vh);/*Aqui se cambio*/
+    height: calc(100vh - 20vh);
     object-fit: cover;
     object-position: center 90%;
 }

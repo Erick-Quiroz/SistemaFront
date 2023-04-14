@@ -9,7 +9,7 @@ export const HomePage = () => {
     return (
         <>
             <ShopLayout>
-                <Content style={{ margin: '0 8px' }}>
+                <Content >
                     <div className="contenedorTodo">
                         <seccion className='imagenSuperMercado'> 
                             <div className="contenedorPantalla">
