@@ -33,10 +33,10 @@ export const ProveedorCreatePage = () => {
         const phoneRegex = /^[0-9]{7,8}$/
         const regex = /^[a-zA-Z ]*$/
         const mail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const addr = /^{7,20}$/
+        const direc = /^[0-9a-zA-Z\s.#\/]+$/;
 
-        if (!addr.test(address)) {
-            enqueueSnackbar('La Dirección no es valida', {
+        if (!direc.test(address)) {
+            enqueueSnackbar('Direccion no valida', {
                 variant: 'error',
                 autoHideDuration: 5000,
                 anchorOrigin: {
@@ -97,9 +97,7 @@ export const ProveedorCreatePage = () => {
                         horizontal: 'right'
                     }
                 })
-            } else {
-                toast.error(res.data.message)
-            }
+            } 
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 return {
@@ -164,7 +162,7 @@ export const ProveedorCreatePage = () => {
                                         className="form-control"
                                         id="address"
                                         maxLength={20}
-                                        minLength={3}
+                                        minLength={7}
                                         name='address'
                                         onChange={handlerInputChange}
                                         required
@@ -182,7 +180,7 @@ export const ProveedorCreatePage = () => {
                                     <label
                                         htmlFor="validationCustom05"
                                         className="form-label">
-                                        telefono 1
+                                        Telefono 1
                                     </label>
                                     <input
                                         className="form-control"
@@ -191,8 +189,9 @@ export const ProveedorCreatePage = () => {
                                         minLength={7}
                                         name='phonenumber1'
                                         onChange={handlerInputChange}
+                                        pattern="^[0-9]+$"
                                         required
-                                        type="number"
+                                        type="tel"
                                         value={phonenumber1}
                                     />
                                     <div className="invalid-feedback">
@@ -204,7 +203,7 @@ export const ProveedorCreatePage = () => {
                                 <label
                                         htmlFor="validationCustom05"
                                         className="form-label">
-                                        telefono 2
+                                        Telefono 2
                                     </label>
                                     <input
                                         className="form-control"
@@ -213,8 +212,9 @@ export const ProveedorCreatePage = () => {
                                         minLength={7}
                                         name='phonenumber2'
                                         onChange={handlerInputChange}
+                                        pattern="^[0-9]+$"
                                         required
-                                        type="number"
+                                        type="tel"
                                         value={phonenumber2}
                                     />
                                     <div className="invalid-feedback">
@@ -262,17 +262,23 @@ export const ProveedorCreatePage = () => {
                                 </div>
                             </div>
 
-                            <table>
-
-                                <td>
-                                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>CANCELAR</button> 
-                                </td>
-                                <td>
-                                <button type="submit" className="btn btn-primary">
+                            <div className="container text-end">
+                                <div className="">
+                                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)} tyle={{
+                                        padding: 8,
+                                        width: 100,
+                                        height: 35
+                                    }}>CANCELAR</button> 
+                                
+                                <button type="submit" className="btn btn-primary" tyle={{
+                                        padding: 8,
+                                        width: 100,
+                                        height: 35
+                                    }}>
                                 GUARDAR
-                            </button>  
-                                </td>
-                            </table>
+                                </button>  
+                                </div>
+                            </div>  
                         </form>
                         <div>
                             <h1></h1>
