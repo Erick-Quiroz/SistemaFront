@@ -129,7 +129,7 @@ export const ProductPage = () => {
                                         <th scope="col">ID</th>
                                         <th scope="col">Producto</th>
                                         <th scope="col">Categoria</th>
-                                        <th scope="col">Precio(Bs)</th>
+                                        <th scope="col">Precio (Bs)</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Existencia</th>
                                         <th scope="col">Imagen</th>
