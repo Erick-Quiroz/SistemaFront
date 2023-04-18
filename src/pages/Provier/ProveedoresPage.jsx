@@ -93,13 +93,16 @@ export const ProveedoresPage = () => {
                 >
 
                     <div className="row">
-                        <div className="text-center"><h1>Proveedor</h1></div>
+                        <div className="text-center"><h1>Mis Proveedores</h1></div>
                         <div className="col-10"></div>
                         <div className="col-2">
                             <Link to={'/admin/registro/proveedor'}>
-                                <Button className=" btn btn-success" type="primary" htmlType="submit" style={{
-                                    padding: 10,
-                                    width: 80,
+
+
+                                <Button className=" btn btn-success btn-sm" type="primary" htmlType="submit" style={{
+
+                                    width: 100,
+
                                     height: 35
                                 }}>
                                     Agregar
@@ -113,12 +116,12 @@ export const ProveedoresPage = () => {
                                 <thead className="thead-dark">
                                     <tr className="text-center">
                                         <th scope="col">ID</th>
-                                        <th scope="col">Proveedor</th>
+                                        <th scope="col">Nombre</th>
                                         <th scope="col">Direccion</th>
-                                        <th scope="col">Telefono1</th>
-                                        <th scope="col">Telefono2</th>
-                                        <th scope="col">Email 1</th>
-                                        <th scope="col">Email 2</th>
+                                        <th scope="col">Telefono</th>
+                                        <th scope="col">Telefono</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Correo</th>
 
                                     </tr>
                                 </thead>
@@ -148,7 +151,7 @@ export const ProveedoresPage = () => {
 
                                                         }}
                                                     >
-                                                    Edit
+                                                    Editar
                                                     </button>
                                                     <button
                                                         className="btn btn-danger"

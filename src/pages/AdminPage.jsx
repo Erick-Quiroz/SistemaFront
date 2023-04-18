@@ -1,5 +1,6 @@
 import { Layout, theme, Progress } from 'antd'
 import { AdminLayout } from '../components/layouts/AdminLayout'
+import './AdminPage.css'
 
 export const AdminPage = () => {
     const { Content } = Layout
@@ -8,17 +9,15 @@ export const AdminPage = () => {
     return (
         <>
             <AdminLayout >
-                <Content style={{ margin: '0 8px' }}>
-                    <div
+                <Content>
+                    <div className='contenedorPantalla'
                         style={{
-                            padding: 14,
-                            minHeight: '86vh',
                             background: colorBgContainer
                         }}
                     >
                     </div>
                 </Content>
-            </AdminLayout >
+            </AdminLayout>
         </>
     )
 }

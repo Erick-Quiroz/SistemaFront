@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, InputGroup, Form, Button } from "react-bootstrap";
+import validUrl from 'valid-url';
 
 const initialState = {
   name: '',
@@ -7,7 +8,7 @@ const initialState = {
   imageUrl: "",
   state: "",
   category: "",
-
+  price: "",
 };
 
 const ModalUpdateProduct = ({
@@ -18,26 +19,60 @@ const ModalUpdateProduct = ({
   updateProduct
 }) => {
   const [product, setProduct] = useState(initialState);
+  const [name, setName] = useState({value: '', valid: true})
+  const [description, setDescription] = useState({value: '', valid: true})
+  const [price, setPrice]= useState({value:'', valid: true})
+  const [imageUrl, setImageUrl]= useState({value:'', valid: true})
 
   useEffect(() => {
     if(productToEdit && Object.keys(productToEdit).length !== 0){
         setProduct(productToEdit) 
+        setName({value: productToEdit.name, valid: true})
+        setDescription({value: productToEdit.description, valid: true})
+        setPrice({value: productToEdit.price, valid:true})
+        setImageUrl({value: productToEdit.imageUrl, valid:true})
       }else{
         setProduct(initialState)
       }
   }, [show]);
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e) => { 
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
+
+  const rules =  /^[a-zA-Z\s]+$/;
+
+  const handleOnChangeValidation = (value, min, max, callback ) => {
+    if( value.length < min || value.length > max || !rules.test(value) ){
+       callback({value: value, valid: false})
+      }else{
+        callback({value: value, valid: true})
+    }
+  }
+  const handleOnChangeValidationNumber = (value, min, max, callback) => {
+    if (value === null || value === undefined || !/^\d*\.?\d+$/.test(value) || value < 0 || value.length < min || value.length > max) {
+      callback({ value: value, valid: false });
+    } else {
+      callback({ value: value, valid: true });
+    }
+  }
+  const handleOnChangeValidationLink = (value, min, max, callback) => {
+    const length = value.trim().length;
+    const validFormat = /\.(jpg|jpeg|png|gif)\b/i;
+    const valid = validUrl.isWebUri(value) && validFormat.test(value) && length >= min && length <= max;
+    callback({ value: value, valid: valid });
+  }
+
 
   const handleCancel = () => {
     setShowModal(false);
     };
 
   const handleUpdateProduct = () => {
-    updateProduct(product);
-    setShowModal(false);
+    if(name.valid && description.valid && price.valid && imageUrl.valid){
+      updateProduct(product, name.value, description.value, price.value, imageUrl.value);
+      setShowModal(false);
+    }
   };
   const stateOptions = [
     { value: "Activo", label: "Activo" },
@@ -62,77 +97,51 @@ const ModalUpdateProduct = ({
     <Modal show={show} centered>
       <Modal.Header>Editar Producto</Modal.Header>
       <Modal.Body>
-        {/*<InputGroup className="mb-3">
+        <InputGroup className="mb-3">
           <InputGroup.Text >Nombre Producto</InputGroup.Text>
           <Form.Control
+            style={{ border: name.valid ? '1px solid green': '1px solid red'}}
             placeholder="Nombre de Producto"
-            onChange={handleOnChange}
-            name="name"
-            value={product.name}
+            onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 20, setName)}
+            name="value"
+            value={name.value}
           />
-        </InputGroup>*/}
-        <InputGroup className="mb-3">
-          <InputGroup.Text>Nombre Producto</InputGroup.Text>
-          <Form.Control
-            placeholder="Nombre de Producto"
-            onChange={handleOnChange}
-            onKeyDown={handleKeyDown}
-            name="name"
-            value={product.name}
-            required
-            minLength={3}
-            maxLength={20}
-          />
-          <Form.Control.Feedback type="invalid">
-            Debe ingresar un nombre válido.
-          </Form.Control.Feedback>
         </InputGroup>
-        {/*
+        
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1">Descripcion</InputGroup.Text>
           <Form.Control
+           style={{ border: description.valid ? '1px solid green': '1px solid red'}}
             placeholder="Descripcion del producto"
-            name="description"
-            value={product.description}
-            onChange={handleOnChange}
+            name="value"
+            value={description.value}
+            onChange={(e) => handleOnChangeValidation(e.target.value, 3, 20, setDescription)}
           />
-        </InputGroup> */}
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Descripcion</InputGroup.Text>
-          <Form.Control
-            placeholder="Descripcion del producto"
-            name="description"
-            value={product.description}
-            onChange={handleOnChange}
-            onKeyDown={handleKeyDown}
-            required
-          />
-          <Form.Control.Feedback type="invalid">
-            Debes añadir una descripcion
-          </Form.Control.Feedback>
         </InputGroup>
 
         <InputGroup className="mb-3">
           <InputGroup.Text >Url de imagen</InputGroup.Text>
           <Form.Control
+            style={{ border: imageUrl.valid ? '1px solid green': '1px solid red'}}
             placeholder="Imagen de Producto"
-            onChange={handleOnChange}
-            name="imageUrl"
-            value={product.imageUrl}
+            onChange={( e ) => handleOnChangeValidationLink(e.target.value, 1, 200, setImageUrl)}
+            name="value"
+            value={imageUrl.value}
           />
         </InputGroup>
-        {/*  
-        <Form.Select
-          value={product.state}
-          name="state"
-          aria-label="Default select example"
-          onChange={handleOnChange}
-        >
-          <option>Selecione un estado</option>
-          <option value="Activo">Activo</option>
-          <option value="Inactivo">Inactivo</option>
-        </Form.Select>
-        */}
+
+
+        <InputGroup className="mb-3">
+          <InputGroup.Text >Precio</InputGroup.Text>
+          <Form.Control
+            style={{ border: price.valid ? '1px solid green': '1px solid red'}}
+            placeholder="Precio de Producto"
+            onChange={( e ) => handleOnChangeValidationNumber(e.target.value, 1, 5, setPrice)}
+            name="value"
+            value={price.value}
+          />
+        </InputGroup>
+
         <Form.Select
           value={
             product.state === "Activo" || product.state === "Inactivo"
@@ -164,20 +173,6 @@ const ModalUpdateProduct = ({
           })}
         </Form.Select>
 
-        {/*
-        <Form.Select
-          value={product.category}
-          name="category"
-          aria-label="Default select example"
-          onChange={handleOnChange}
-        >
-          <option>Seleccione una categoria</option>
-          <option>Lacteos</option>
-          <option>Gaseosa</option>
-          <option>Dulces</option>
-          <option>Abarrotes</option>
-        </Form.Select>
-        */}
         <Form.Select
         value={
           product.category
@@ -222,5 +217,6 @@ const ModalUpdateProduct = ({
     </Form>
   );
 };
-
+ 
 export default ModalUpdateProduct;
+
