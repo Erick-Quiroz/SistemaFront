@@ -14,17 +14,14 @@ export const Navbar = () => {
                     <Link to={'/admin'} className='text-center'>
                         <button type="summit" className="btn btn-outline-success "
                             style={{
+                                height: '10hv',
                                 width: 100,
-                                height: 40,
-                                padding: 5,
                                 margin: 6
                             }}
-
                         >Ingresar</button>
                     </Link>
                 </ul>
                 {
-
                 }
                 <button className='mobile-menu-icon ' onClick={() => setMobile(!Mobile)}>
                     {Mobile ? <ImCross /> : <FaBars />}

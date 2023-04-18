@@ -9,22 +9,19 @@ export const HomePage = () => {
     return (
         <>
             <ShopLayout>
-                <Content style={{ margin: '0 8px' }}>
-                    <div>
-                        <div className="contenedorTodo">
-                            <seccion className='imagenSuperMercado'> 
-                                <div className="contenedorPantalla">
-                                    <img className= "fondoPantalla"
-                                        src="../../public/Fondo.png" 
-                                        alt="Foto_de_fondo"/>
-                                    <p className='textoBien'>Bienvenido</p>   
-                                </div>                  
-                            </seccion>
-                        </div>
+                <Content >
+                    <div className="contenedorTodo">
+                        <seccion className='imagenSuperMercado'> 
+                            <div className="contenedorPantalla">
+                                <img className= "fondoPantalla"
+                                    src="../../public/Fondo.png" 
+                                    alt="Foto_de_fondo"/>
+                                <p className='textoBien'>Bienvenido</p>   
+                            </div>                  
+                        </seccion>
                     </div>
                 </Content >
             </ShopLayout>
-
         </>
     )
 }

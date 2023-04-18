@@ -1,6 +1,6 @@
 import { enqueueSnackbar } from 'notistack'
 import { Layout, theme } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { shopAPI } from '../../services'
@@ -55,7 +55,7 @@ export const ProductCreatePage = () => {
                 <div
                     style={{
                         padding: 14,
-                        minHeight: '86vh',
+                        minHeight: '84vh',
                         background: colorBgContainer
                     }}
                 >
@@ -71,7 +71,7 @@ export const ProductCreatePage = () => {
                                     <label
                                         htmlFor="validationCustom01"
                                         className="form-label">
-                                        Nombre
+                                        <strong>Nombre</strong>
                                     </label>
                                     <input
                                         autoFocus
@@ -86,7 +86,7 @@ export const ProductCreatePage = () => {
                                         value={name}
                                     />
                                     <div className="invalid-feedback">
-                                        Nombre es requerido.
+                                        Completa este campo.
                                     </div>
                                 </div>
 
@@ -94,7 +94,7 @@ export const ProductCreatePage = () => {
                                     <label
                                         htmlFor="disabledTextInput"
                                         className="form-label">
-                                        Descripcion
+                                        <strong>Descripcion</strong>
                                     </label>
                                     <input
                                         className="form-control"
@@ -108,7 +108,7 @@ export const ProductCreatePage = () => {
                                         value={description}
                                     />
                                     <div className="invalid-feedback">
-                                        Descripcion es requerido.
+                                        Completa este campo.
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@ export const ProductCreatePage = () => {
                                     <label
                                         htmlFor="disabledSelect1"
                                         className="form-label">
-                                        Estado
+                                        <strong>Estado del producto</strong>
                                     </label>
                                     <select
                                         className="form-select"
@@ -140,7 +140,7 @@ export const ProductCreatePage = () => {
                                     <label
                                         htmlFor="disabledSelect"
                                         className="form-label">
-                                        Categoria
+                                        <strong>Categoria</strong>
                                     </label>
                                     <select
                                         className="form-select"
@@ -158,7 +158,7 @@ export const ProductCreatePage = () => {
                                         <option>Abarrotes</option>
                                     </select>
                                     <div className="invalid-feedback">
-                                        Elije una categoria.
+                                        Completa este campo.
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@ export const ProductCreatePage = () => {
                                     <label
                                         htmlFor="validationCustom05"
                                         className="form-label">
-                                        Precio
+                                        <strong>Precio</strong>
                                     </label>
                                     <input
                                         className="form-control"
@@ -178,11 +178,12 @@ export const ProductCreatePage = () => {
                                         name='price'
                                         onChange={handlerInputChange}
                                         required
+                                        step={'any'}
                                         type="number"
                                         value={price}
                                     />
                                     <div className="invalid-feedback">
-                                        Precio es requerido.
+                                        Completa este campo.
                                     </div>
                                 </div>
 
@@ -190,7 +191,7 @@ export const ProductCreatePage = () => {
                                     <label
                                         htmlFor="disabledTextInput"
                                         className="form-label">
-                                        Link de imagen
+                                        <strong>Imagen(Url)</strong>
                                     </label>
                                     <input
                                         className="form-control"
@@ -203,14 +204,31 @@ export const ProductCreatePage = () => {
                                         value={imageUrl}
                                     />
                                     <div className="invalid-feedback">
-                                        Ingresa una imagen.
+                                        Completa este campo.
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="submit" className="btn btn-primary">
-                                REGISTER
-                            </button>
+                            <div className="container text-end">
+                                <div className="">
+                                    <Link to={'/admin/productos'}>
+                                        <button className=" btn btn-primary" type="primary" style={{
+                                            padding: 8,
+                                            width: 100,
+                                            height: 35
+                                        }}>
+                                            CANCELAR
+                                        </button>
+                                    </Link>
+                                    <button className="btn btn-primary m-2" type="submit" style={{
+                                        padding: 8,
+                                        width: 100,
+                                        height: 35
+                                    }}>
+                                        REGISTRAR
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
