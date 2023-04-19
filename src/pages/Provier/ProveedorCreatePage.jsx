@@ -33,12 +33,12 @@ export const ProveedorCreatePage = () => {
         const phoneRegex = /^[0-9]{7,8}$/
         const regex = /^[a-zA-Z ]*$/
         const mail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-       
 
-        
+        const direc = /^[0-9a-zA-Z\s.#\/]+$/;
 
-        if (!mail.test(email1)|| !mail.test(email2)) {
-            enqueueSnackbar('El Email1 o Email2 no valido', {
+        if (!direc.test(address)) {
+            enqueueSnackbar('Direccion no valida', {
+
                 variant: 'error',
                 autoHideDuration: 5000,
                 anchorOrigin: {
@@ -48,6 +48,21 @@ export const ProveedorCreatePage = () => {
             })
             return
         }
+
+
+        if (!mail.test(email1)|| !mail.test(email2)) {
+            enqueueSnackbar('El Email1 o Email2 no valido', {
+
+                variant: 'error',
+                autoHideDuration: 5000,
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right'
+                }
+            })
+            return
+        }
+
 
         if (!regex.test(name)) {
             enqueueSnackbar('El nombre no es válido', {
@@ -60,6 +75,7 @@ export const ProveedorCreatePage = () => {
             })
             return
         }
+
     if (!phoneRegex.test(phonenumber1) || !phoneRegex.test(phonenumber2)) {
         enqueueSnackbar('Los números de teléfono deben ser enteros y tener de 7 a 8 caracteres', {
             variant: 'error',
@@ -152,7 +168,9 @@ export const ProveedorCreatePage = () => {
                                         className="form-control"
                                         id="address"
                                         maxLength={20}
-                                        minLength={3}
+
+                                        minLength={7}
+
                                         name='address'
                                         onChange={handlerInputChange}
                                         required
@@ -170,7 +188,9 @@ export const ProveedorCreatePage = () => {
                                     <label
                                         htmlFor="validationCustom05"
                                         className="form-label">
-                                        telefono 1
+
+                                        Telefono 1
+
                                     </label>
                                     <input
                                         className="form-control"
@@ -179,8 +199,11 @@ export const ProveedorCreatePage = () => {
                                         minLength={7}
                                         name='phonenumber1'
                                         onChange={handlerInputChange}
+
+                                        pattern="^[0-9]+$"
                                         required
-                                        type="number"
+                                        type="tel"
+
                                         value={phonenumber1}
                                     />
                                     <div className="invalid-feedback">
@@ -192,7 +215,9 @@ export const ProveedorCreatePage = () => {
                                 <label
                                         htmlFor="validationCustom05"
                                         className="form-label">
-                                        telefono 2
+
+                                        Telefono 2
+
                                     </label>
                                     <input
                                         className="form-control"
@@ -201,8 +226,11 @@ export const ProveedorCreatePage = () => {
                                         minLength={7}
                                         name='phonenumber2'
                                         onChange={handlerInputChange}
+
+                                        pattern="^[0-9]+$"
                                         required
-                                        type="number"
+                                        type="tel"
+
                                         value={phonenumber2}
                                     />
                                     <div className="invalid-feedback">
@@ -250,17 +278,25 @@ export const ProveedorCreatePage = () => {
                                 </div>
                             </div>
 
-                            <table>
 
-                                <td>
-                                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>CANCELAR</button> 
-                                </td>
-                                <td>
-                                <button type="submit" className="btn btn-primary">
+                            <div className="container text-end">
+                                <div className="">
+                                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)} tyle={{
+                                        padding: 8,
+                                        width: 100,
+                                        height: 35
+                                    }}>CANCELAR</button> 
+                                
+                                <button type="submit" className="btn btn-primary" tyle={{
+                                        padding: 8,
+                                        width: 100,
+                                        height: 35
+                                    }}>
                                 GUARDAR
-                            </button>  
-                                </td>
-                            </table>
+                                </button>  
+                                </div>
+                            </div>  
+
                         </form>
                         <div>
                             <h1></h1>
