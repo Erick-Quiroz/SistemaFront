@@ -1,27 +1,25 @@
-import { Layout, theme } from 'antd'
+import { Layout } from 'antd'
 import { ShopLayout } from '../components/layouts/ShopLayout'
+import { CarouselAdds, CarouselProducts } from '../components/ui/user'
 import './HomePage.css'
 
 export const HomePage = () => {
     const { Content } = Layout
-    const { token: { colorBgContainer } } = theme.useToken()
 
     return (
-        <>
-            <ShopLayout>
-                <Content >
-                    <div className="contenedorTodo">
-                        <seccion className='imagenSuperMercado'> 
-                            <div className="contenedorPantalla">
-                                <img className= "fondoPantalla"
-                                    src="../../public/Fondo.png" 
-                                    alt="Foto_de_fondo"/>
-                                <p className='textoBien'>Bienvenido</p>   
-                            </div>                  
-                        </seccion>
-                    </div>
-                </Content >
-            </ShopLayout>
-        </>
+        <ShopLayout>
+            <Content className='fondo'
+                style={{
+                    height: '100%',
+                    minHeight: '84vh',
+                    lineHeight: '100vh',
+                    textAlign: 'center'
+                }}
+            >
+                <CarouselAdds />
+
+                <CarouselProducts />
+            </Content >
+        </ShopLayout>
     )
 }
