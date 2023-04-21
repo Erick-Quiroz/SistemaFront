@@ -120,7 +120,6 @@ export const ProductPage = () => {
                                     height: 35
                                 }}>
                                     Registrar
-
                                 </Button>
                             </a>
                         </div>
@@ -132,10 +131,8 @@ export const ProductPage = () => {
                                     <tr className="text-center">
                                         <th scope="col">ID</th>
                                         <th scope="col">Producto</th>
-
                                         <th scope="col">Categoría</th>
-                                        <th scope="col">Precio</th>
-
+                                        <th scope="col">Precio(Bs)</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Existencia</th>
                                         <th scope="col">Imagen</th>
@@ -207,3 +204,4 @@ export const ProductPage = () => {
         </AdminLayout>
     )
 }
+ 
