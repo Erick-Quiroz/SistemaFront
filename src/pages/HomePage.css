@@ -1,7 +1,6 @@
-.textoBien{
-    background: rgba(255, 255, 255, 0.2);
+.textoBien {
     border-radius: 9px;
-    backdrop-filter:blur(3px);
+
     font-weight: bold;
     font-Size: 7vw;
     min-height: 3vh;
@@ -10,20 +9,25 @@
     position: absolute;
     top: 40vh;
     left: 22vw;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
 }
+
 .contenedorPantalla {
     position: relative;
-    width: 100%;
-    height: calc(100vh - 20vh);
+    height: calc(100vh - 70vh);
 }
-  
+
 .fondoPantalla {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 20vh);
     object-fit: cover;
-    object-position: center 90%;
+}
+
+.fondo {
+    position: absolute;
+    width: 99.5%;
+    background: rgb(46, 27, 91);
+    background: linear-gradient(148deg, rgba(46, 27, 91, 1) 0%, rgba(46, 27, 91, 1) 47%, rgba(13, 175, 208, 1) 100%);
 }
