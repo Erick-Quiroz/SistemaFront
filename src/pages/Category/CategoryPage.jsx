@@ -91,7 +91,7 @@ export const CategoryPage = () => {
                     >
 
                         <div className="row">
-                            <div className="text-center"><h1>Mis Categorias</h1></div>
+                            <div className="text-center"><h1>Mis Categorias </h1></div>
                             <div className="col-10"></div>
                             <div className="col-2">
                                 <Link to={'/admin/registro/categoria'}>
