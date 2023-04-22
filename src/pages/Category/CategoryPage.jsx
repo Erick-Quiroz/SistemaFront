@@ -43,7 +43,7 @@ export const CategoryPage = () => {
         e.preventDefault()
         try {
             const { data } = await axios.put(
-                `/api/productLG/update-productLG/${selected._id}`,
+                `/api/category/update-category/${selected._id}`,
                 { name: updatedName }
             )
 
@@ -91,7 +91,7 @@ export const CategoryPage = () => {
                     >
 
                         <div className="row">
-                            <div className="text-center"><h1>Categoria</h1></div>
+                            <div className="text-center"><h1>Mis Categorias</h1></div>
                             <div className="col-10"></div>
                             <div className="col-2">
                                 <Link to={'/admin/registro/categoria'}>
@@ -112,8 +112,8 @@ export const CategoryPage = () => {
                                         <tr className="text-center">
                                             <th scope="col">ID</th>
                                             <th scope="col">Categoria</th>
-                                            <th scope="col"> </th>
-                                            <th scope="col"> </th>
+                                            <th scope="col">Descripcion</th>
+                                            <th scope="col">Estado</th>
                                             <th scope="col"> </th>
                                             <th scope="col">Actions</th>
                                         </tr>
@@ -124,7 +124,7 @@ export const CategoryPage = () => {
                                                 <tr className="text-center">
                                                     <td>{v._id}</td>
                                                     <td>{v.name}</td>
-                                                    <td>{v.category}</td>
+                                                    <td>{v.description}</td>
                                                     <td>{v.state}</td>
                                                     <td></td>
                                                     <td>
@@ -133,7 +133,7 @@ export const CategoryPage = () => {
                                                             className="btn btn-primary"
                                                             onClick={() => {
                                                                 setVisible(true)
-                                                                setUpdatedName(v.name)
+                                                                setUpdatedName(v._id)
                                                                 setSelected(v)
                                                             }} style={{
                                                                 padding: 2,

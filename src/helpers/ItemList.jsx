@@ -15,7 +15,7 @@ export const admin = [
         <AppstoreOutlined />
         , [
             getItem('Producto', '3', <Link to={'/admin/productos'} />),
-            /*getItem('Categoria', '4', <Link to={'/admin/categorias'} />),*/
+            getItem('Categoria', '4', <Link to={'/admin/categorias'} />),
             getItem('Proveedor', '5', <Link to={'/admin/proveedors'} />)
         ]
     )
