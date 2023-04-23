@@ -74,14 +74,14 @@ export const ProductPage = () => {
     const updateProduct = async (product, name, description, price, imageUrl) => {
         try {
             const productUpdated = {
-                name: name,
-                description: description,
-                price: price,
+                name,
+                description,
+                price,
                 state: product.state,
                 category: product.category,
 
-                //imageUrl: product.imageUrl,
-                imageUrl: imageUrl,
+                // imageUrl: product.imageUrl,
+                imageUrl
 
             }
             const { data } = await axios.put(`${BACKENDURL}/api/productLG/update-productLG/${product._id}`,
@@ -204,4 +204,3 @@ export const ProductPage = () => {
         </AdminLayout>
     )
 }
- 
