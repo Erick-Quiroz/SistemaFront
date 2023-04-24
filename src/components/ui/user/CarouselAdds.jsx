@@ -8,37 +8,37 @@ export const CarouselAdds = () => {
                 minHeight: '84vh'
             }}>
                 <div className="contenedorTodo">
-                    <seccion className='imagenSuperMercado'>
+                    <section className='imagenSuperMercado'>
                         <div className="contenedorPantalla">
                             <img className="fondoPantalla"
                                 src="../../public/img1.png"
                                 alt="Foto_de_fondo" />
                         </div>
-                    </seccion>
+                    </section>
                 </div>
             </div>
 
             <div>
                 <div className="contenedorTodo">
-                    <seccion className='imagenSuperMercado'>
+                    <section className='imagenSuperMercado'>
                         <div className="contenedorPantalla">
                             <img className="fondoPantalla"
                                 src="../../public/img2.png"
                                 alt="Foto_de_fondo" />
                         </div>
-                    </seccion>
+                    </section>
                 </div>
             </div>
 
             <div>
                 <div className="contenedorTodo">
-                    <seccion className='imagenSuperMercado'>
+                    <section className='imagenSuperMercado'>
                         <div className="contenedorPantalla">
                             <img className="fondoPantalla"
                                 src="../../public/img3.png"
                                 alt="Foto_de_fondo" />
                         </div>
-                    </seccion>
+                    </section>
                 </div>
             </div>
         </Carousel>
