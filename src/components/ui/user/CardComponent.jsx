@@ -9,6 +9,8 @@ export const CardComponent = (props) => {
 
     return (
         <Row
+            span={24}
+            justify="start"
             align={'top'}
             gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
             style={{
@@ -19,49 +21,7 @@ export const CardComponent = (props) => {
                 textAlign: 'center'
             }}
         >
-            <Col span={6} className="gutter-row">
-                <Card
-                    className={styles.card}
-                    style={{
-                        marginBottom: 50,
-                        marginLeft: 80,
-                        marginTop: 50,
-                        width: 200
-                    }}
-                    cover={
-                        <img alt={name} src={imageUrl} />
-                    }
-                >
-                    <Meta
-                        style={{ color: 'yellowgreen' }}
-                        title={name}
-                        description={description}
-                    />
-                </Card>
-            </Col>
-
-            <Col span={6} className="gutter-row">
-                <Card
-                    className={styles.card}
-                    style={{
-                        marginBottom: 50,
-                        marginLeft: 80,
-                        marginTop: 50,
-                        width: 200
-                    }}
-                    cover={
-                        <img alt={name} src={imageUrl} />
-                    }
-                >
-                    <Meta
-                        style={{ color: 'yellowgreen' }}
-                        title={name}
-                        description={description}
-                    />
-                </Card>
-            </Col>
-
-            <Col span={6} className="gutter-row">
+            <Col span={4} className="gutter-row">
                 <Card
                     className={styles.card}
                     style={{
