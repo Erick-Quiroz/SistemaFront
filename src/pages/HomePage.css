@@ -26,8 +26,10 @@
 }
 
 .fondo {
-    position: absolute;
-    width: 99.5%;
-    background: rgb(46, 27, 91);
+    place-items: center;
+    min-width: 320px;
+    /* position: absolute; */
+    /* width: 99.1%; */
+    width: 100%;
     background: linear-gradient(148deg, rgba(46, 27, 91, 1) 0%, rgba(46, 27, 91, 1) 47%, rgba(13, 175, 208, 1) 100%);
 }
