@@ -157,7 +157,6 @@ export const ProveedoresPage = () => {
                         <div className="col-2">
                             <Link to={'/admin/registro/proveedor'}>
 
-
                                 <Button className=" btn btn-success btn-sm" type="primary" htmlType="submit" style={{
 
                                     width: 100,
@@ -197,6 +196,7 @@ export const ProveedoresPage = () => {
                                                 <td>{v.email2}</td>
 
                                                 <td>
+
                                                     
                                                     <button
                                                         className="btn btn-primary"
@@ -228,7 +228,9 @@ export const ProveedoresPage = () => {
                                                     Eliminar
                                                     </button>
                                                     
+
                                                 </td>
+
                                             </tr>
                                         </>
                                     )}

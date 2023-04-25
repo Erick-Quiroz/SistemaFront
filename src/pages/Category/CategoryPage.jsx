@@ -43,8 +43,10 @@ export const CategoryPage = () => {
     //  delete category
     const handleDelete = async (pId) => {
         try {
+
             const { data } = await axios.delete(
                 `${BACKENDURL}/api/category/delete-category/${pId}`
+
             )
             if (data.success) {
                 toast.success('category is deleted')
@@ -111,7 +113,9 @@ export const CategoryPage = () => {
                     >
 
                         <div className="row">
+
                             <div className="text-center"><h1>Mis Categorías</h1></div>
+
                             <div className="col-10"></div>
                             <div className="col-2">
                                 <Link to={'/admin/registro/categoria'}>
@@ -137,6 +141,7 @@ export const CategoryPage = () => {
                                             <th scope="col">Estado</th>
                                             
                                             <th scope="col">Acciones</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -160,6 +165,7 @@ export const CategoryPage = () => {
                                                                 
                                                             setSelected(v)*/}
                                                                 handleGetCategory(v._id)
+
                                                             }} style={{
                                                                 padding: 2,
                                                                 width: 80,
