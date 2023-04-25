@@ -124,7 +124,7 @@ const ModalUpdateProduct = ({
           <Form.Control
             style={{ border: imageUrl.valid ? '1px solid green': '1px solid red'}}
             placeholder="Imagen de Producto"
-            onChange={( e ) => handleOnChangeValidationLink(e.target.value, 1, 200, setImageUrl)}
+            onChange={( e ) => handleOnChangeValidationLink(e.target.value, 1, 1000, setImageUrl)}
             name="value"
             value={imageUrl.value}
           />
