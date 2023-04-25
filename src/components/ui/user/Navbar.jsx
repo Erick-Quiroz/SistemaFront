@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './navbar.css'
 import { Link } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
@@ -8,7 +8,11 @@ export const Navbar = () => {
     return (
         <>
             <nav className='navbar'>
-                <h3 className='logo'>LG</h3>
+                <img
+                    className='logo'
+                    alt="logo"
+                    src="../../public/logo1.png"
+                />
 
                 <ul className={Mobile ? 'nav-links-mobile' : 'nav-links'} onClick={() => setMobile(false)}>
                     <Link to={'/admin'} className='text-center'>

@@ -1,0 +1,40 @@
+.item {
+    min-height: 40rem;
+    min-width: 30rem;
+    padding: 40px;
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    pointer-events: none;
+}
+
+.inner-carousel {
+    /* display: flex; */
+    background: lightblue;
+}
+
+/* tamanio que no muestra del carousel */
+.carousel {
+
+    cursor: grab;
+    overflow: hidden;
+    background: rgb(230, 173, 173);
+}
+
+/* default */
+#root {
+    /* max-width: 1280px; */
+    max-width: 120vh;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
+}
