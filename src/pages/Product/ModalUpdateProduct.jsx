@@ -91,66 +91,70 @@ const ModalUpdateProduct = ({
             return false
         }
     }
-    return (
-        <Form noValidate >
-            <Modal show={show} centered>
-                <Modal.Header>Editar Producto</Modal.Header>
-                <Modal.Body>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text >Nombre Producto</InputGroup.Text>
-                        <Form.Control
-                            style={{ border: name.valid ? '1px solid green' : '1px solid red' }}
-                            placeholder="Nombre de Producto"
-                            onChange={(e) => handleOnChangeValidation(e.target.value, 3, 20, setName)}
-                            name="value"
-                            value={name.value}
-                        />
-                    </InputGroup>
 
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Descripcion</InputGroup.Text>
-                        <Form.Control
-                            style={{ border: description.valid ? '1px solid green' : '1px solid red' }}
-                            placeholder="Descripcion del producto"
-                            name="value"
-                            value={description.value}
-                            onChange={(e) => handleOnChangeValidation(e.target.value, 3, 20, setDescription)}
-                        />
-                    </InputGroup>
+  }
+  return (
+    <Form noValidate >
+    <Modal show={show} centered>
+      <Modal.Header>Editar Producto</Modal.Header>
+      <Modal.Body>
+        <InputGroup className="mb-3">
+          <InputGroup.Text >Nombre Producto</InputGroup.Text>
+          <Form.Control
+            style={{ border: name.valid ? '1px solid green': '1px solid red'}}
+            placeholder="Nombre de Producto"
+            onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 20, setName)}
+            name="value"
+            value={name.value}
+          />
+        </InputGroup>
+        
+        <InputGroup className="mb-3">
+          <InputGroup.Text id="basic-addon1">Descripcion</InputGroup.Text>
+          <Form.Control
+           style={{ border: description.valid ? '1px solid green': '1px solid red'}}
+            placeholder="Descripcion del producto"
+            name="value"
+            value={description.value}
+            onChange={(e) => handleOnChangeValidation(e.target.value, 3, 20, setDescription)}
+          />
+        </InputGroup>
 
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text >Url de imagen</InputGroup.Text>
-                        <Form.Control
-                            style={{ border: imageUrl.valid ? '1px solid green' : '1px solid red' }}
-                            placeholder="Imagen de Producto"
-                            onChange={(e) => handleOnChangeValidationLink(e.target.value, 1, 200, setImageUrl)}
-                            name="value"
-                            value={imageUrl.value}
-                        />
-                    </InputGroup>
+        <InputGroup className="mb-3">
+          <InputGroup.Text >Url de imagen</InputGroup.Text>
+          <Form.Control
+            style={{ border: imageUrl.valid ? '1px solid green': '1px solid red'}}
+            placeholder="Imagen de Producto"
+            onChange={( e ) => handleOnChangeValidationLink(e.target.value, 1, 1000, setImageUrl)}
+            name="value"
+            value={imageUrl.value}
+          />
+        </InputGroup>
 
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text >Precio</InputGroup.Text>
-                        <Form.Control
-                            style={{ border: price.valid ? '1px solid green' : '1px solid red' }}
-                            placeholder="Precio de Producto"
-                            onChange={(e) => handleOnChangeValidationNumber(e.target.value, 1, 5, setPrice)}
-                            name="value"
-                            value={price.value}
-                        />
-                    </InputGroup>
 
-                    <Form.Select
-                        value={
-                            product.state === 'Activo' || product.state === 'Inactivo'
-                                ? product.state
-                                : 'Estado anterior'
-                        }
-                        name="state"
-                        aria-label="Default select example"
-                        onChange={handleOnChange}
-                    >
-                        <option key="default" disabled>
+        <InputGroup className="mb-3">
+          <InputGroup.Text >Precio</InputGroup.Text>
+          <Form.Control
+            style={{ border: price.valid ? '1px solid green': '1px solid red'}}
+            placeholder="Precio de Producto"
+            onChange={( e ) => handleOnChangeValidationNumber(e.target.value, 1, 5, setPrice)}
+            name="value"
+            value={price.value}
+          />
+        </InputGroup>
+
+        <Form.Select
+          value={
+            product.state === "Activo" || product.state === "Inactivo"
+              ? product.state
+              : "Estado anterior"
+          }
+          name="state"
+          aria-label="Default select example"
+          onChange={handleOnChange}
+        >
+          <option key="default" disabled>
+
           Seleccione una estado
                         </option>
                         {stateOptions.map((option) => {

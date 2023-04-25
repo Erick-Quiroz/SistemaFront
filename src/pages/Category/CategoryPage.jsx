@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import CategoryForm from '../../components/Form/ProductForm.jsx'
 import { Layout, theme, Button, Modal } from 'antd'
+import ModalUpdateCategory from './ModalUpdateCategory.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { Link } from 'react-router-dom'
@@ -13,12 +14,12 @@ export const CategoryPage = () => {
     // const url = 'http://localhost:8080/api/category/get-category'
     const { Content } = Layout
 
-    const {
-        token: { colorBgContainer }
-    } = theme.useToken()
+    const {token: { colorBgContainer }} = theme.useToken()
     const [categories, setCategories] = useState([])
     const [visible, setVisible] = useState(false)
     const [selected, setSelected] = useState(null)
+    const [categoryToEdit, setCategoryToEdit] = useState({})
+    const [showModal, setShowModal] = useState(false)
     const [updatedName, setUpdatedName] = useState('')
 
     // get all cat
@@ -30,7 +31,7 @@ export const CategoryPage = () => {
             }
         } catch (error) {
             console.log(error)
-            toast.error('Something wwent wrong in getting catgeory')
+            toast.error('Something went wrong in getting category')
         }
     }
 
@@ -38,33 +39,14 @@ export const CategoryPage = () => {
         getAllCategory()
     }, [])
 
-    // update category
-    const handleUpdate = async (e) => {
-        e.preventDefault()
-        try {
-            const { data } = await axios.put(
-                `/api/category/update-category/${selected._id}`,
-                { name: updatedName }
-            )
-
-            if (data.success) {
-                toast.success(`${updatedName} is updated`)
-                setSelected(null)
-                setUpdatedName('')
-                setVisible(false)
-                getAllCategory()
-            } else {
-                toast.error(data.message)
-            }
-        } catch (error) {
-            toast.error('Somtihing went wrong')
-        }
-    }
+    
     //  delete category
     const handleDelete = async (pId) => {
         try {
+
             const { data } = await axios.delete(
                 `${BACKENDURL}/api/category/delete-category/${pId}`
+
             )
             if (data.success) {
                 toast.success('category is deleted')
@@ -74,10 +56,50 @@ export const CategoryPage = () => {
                 toast.error(data.message)
             }
         } catch (error) {
-            toast.error('Somtihing went wrong')
+            toast.error('Something went wrong')
         }
     }
+    const handleGetCategory = async (categoryId) => {
+        try {
+            const { data } = await axios.get(`${BACKENDURL}/api/category/single-category/${categoryId}`)
+            //console.log(data); // Agregado
+            if (data.success) {
+                setCategoryToEdit(data.category)
+                console.log(data.category)
 
+            }
+        } catch (error) {
+            toast.error('Something wwent wrong in getting catgeory')
+        }
+        setShowModal(true)
+    }
+    //update category new
+    const  updateCategory = async (category,name,description,state) => {
+        try {
+            const categoryUpdated = {
+                name: name,         
+                description: description,     
+                state: category.state,  
+                
+
+            }
+            const { data } = await axios.put(`${BACKENDURL}/api/category/update-category/${category._id}`,
+                categoryUpdated
+            )
+            console.log(data)
+            if (data.success) {
+                getAllCategory()
+                //const updatedCategoryIndex = categories.findIndex(c => c._id === categoryId);
+                //const updatedCategories = [...categories];
+                //updatedCategories[updatedCategoryIndex] = {...updatedCategories[updatedCategoryIndex], name};
+                //setCategories(updatedCategories); // actualizar el estado categories
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error('Something went wrong')
+        }
+    }
     return (
         <>
             <AdminLayout>
@@ -91,7 +113,9 @@ export const CategoryPage = () => {
                     >
 
                         <div className="row">
-                            <div className="text-center"><h1>Mis Categorias </h1></div>
+
+                            <div className="text-center"><h1>Mis Categorías</h1></div>
+
                             <div className="col-10"></div>
                             <div className="col-2">
                                 <Link to={'/admin/registro/categoria'}>
@@ -112,10 +136,12 @@ export const CategoryPage = () => {
                                         <tr className="text-center">
                                             <th scope="col">ID</th>
                                             <th scope="col">Categoria</th>
-                                            <th scope="col">Descripcion</th>
+                                           
+                                            <th scope="col">Descripción</th>
                                             <th scope="col">Estado</th>
-                                            <th scope="col"> </th>
-                                            <th scope="col">Actions</th>
+                                            
+                                            <th scope="col">Acciones</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -126,15 +152,20 @@ export const CategoryPage = () => {
                                                     <td>{v.name}</td>
                                                     <td>{v.description}</td>
                                                     <td>{v.state}</td>
-                                                    <td></td>
+                                                    {/*<td>{v.category}</td>
+                                                    <td>{v.state}</td>*/}
+                                                    
                                                     <td>
 
                                                         <button
                                                             className="btn btn-primary"
                                                             onClick={() => {
-                                                                setVisible(true)
-                                                                setUpdatedName(v._id)
-                                                                setSelected(v)
+                                                                {/*setVisible(true)
+                                                                setUpdatedName(v.name)
+                                                                
+                                                            setSelected(v)*/}
+                                                                handleGetCategory(v._id)
+
                                                             }} style={{
                                                                 padding: 2,
                                                                 width: 80,
@@ -142,7 +173,7 @@ export const CategoryPage = () => {
 
                                                             }}
                                                         >
-                                                    Edit
+                                                    Editar
                                                         </button>
                                                         <button
                                                             className="btn btn-danger"
@@ -168,15 +199,18 @@ export const CategoryPage = () => {
                                     footer={null}
                                     open={visible}
                                 >
-                                    <CategoryForm
-                                        value={updatedName}
-                                        setValue={setUpdatedName}
-                                        handleSubmit={handleUpdate}
-                                    />
+
                                 </Modal>
-                            </div >
-                        </div >
-                    </div >
+                            </div>
+                        </div>
+                    </div>
+                    <ModalUpdateCategory
+                    show={showModal}
+                    categoryToEdit={categoryToEdit}
+                    setShowModal={setShowModal}
+                    setCategoryToEdit={setCategoryToEdit}
+                    updateCategory={updateCategory}
+                />
                 </Content >
             </AdminLayout >
         </>
