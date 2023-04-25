@@ -30,10 +30,10 @@ export const SliderMotion = () => {
                 dragConstraints={{ right: 0, left: -width }}
                 className='inner-carousel'
             >
-                <Row justify="space-evenly" gutter={16} >
+                <Row justify="space-evenly" gutter={16} style={{ minHeight: '40rem', minWidth: '20rem', display: 'flex', alignItems: 'center' }}>
                     {data.map((data) => {
                         return (
-                            <motion.div className='item' key={data.name}>
+                            <motion.div className='item' key={data.name} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.9 }}>
                                 <CardComponent {...data} />
                             </motion.div>
                         )

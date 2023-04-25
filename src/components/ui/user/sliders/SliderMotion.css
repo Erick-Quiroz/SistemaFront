@@ -12,7 +12,7 @@
 }
 
 .inner-carousel {
-    display: flex;
+    /* display: flex; */
     background: lightblue;
 }
 
