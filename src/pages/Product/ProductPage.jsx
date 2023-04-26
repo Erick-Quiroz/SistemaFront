@@ -109,7 +109,7 @@ export const ProductPage = () => {
                         <div className="text-center"><h1>MIS PRODUCTOS</h1></div>
                         <div className="col-10"></div>
                         <div className="col-2" >
-                            <Link href="/admin/registro/producto" >
+                            <Link to="/admin/registro/producto" >
                                 <Button className=" btn btn-success" type="primary" htmlType="submit" style={{
                                     padding: 5,
                                     width: 85,
