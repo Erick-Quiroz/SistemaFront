@@ -8,6 +8,7 @@ import { Layout, theme, Button, Modal } from 'antd'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import { AdminLayout } from '../components/layouts/AdminLayout.jsx'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
+import ModalUpdateCategory from './ModalUpdateCategory.jsx'
 import { Link } from 'react-router-dom'
 import CategoryForm from '../../components/Form/CategoryForm.jsx'
 
@@ -15,13 +16,14 @@ export const ProveedoresPage = () => {
     // const url = 'http://localhost:8080/api/supplierLG/get-supplierLG'
     const { Content } = Layout
 
-    const {
-        token: { colorBgContainer }
-    } = theme.useToken()
+    const {token: { colorBgContainer }} = theme.useToken()
     const [categories, setCategories] = useState([])
     const [visible, setVisible] = useState(false)
     const [selected, setSelected] = useState(null)
     const [updatedName, setUpdatedName] = useState('')
+    //cambios
+    const [supplierToEdit, setSupplierToEdit] = useState({})
+    const [showModal, setShowModal] = useState(false)    
 
     // get all cat
     const getAllCategory = async () => {
@@ -41,6 +43,7 @@ export const ProveedoresPage = () => {
     }, [])
 
     // update category
+    /*
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
@@ -62,15 +65,56 @@ export const ProveedoresPage = () => {
             toast.error('Somtihing went wrong')
         }
     }
+    */
+//name, 
+//address,
+//phonenumber1,
+//phonenumber2,
+//email1,
+//email2, 
 
-    // delete category
+
+    //update supplier new
+    const  updateSupplier = async (supplier,name,address,phonenumber1,phonenumber2,email1,email2,) => {
+        try {
+            const supplierUpdated = {
+                name: name,         
+                address: address,     
+                phonenumber1: phonenumber1,
+                phonenumber2: phonenumber2,
+                email1: email1,
+                email2: email2,  
+                
+
+            }
+            const { data } = await axios.put(`${BACKENDURL}/api/supplierLG/update-supplierLG/${supplier._id}`,
+                supplierUpdated
+            )
+            console.log(data)
+            if (data.success) {
+                getAllCategory()
+                //const updatedCategoryIndex = categories.findIndex(c => c._id === categoryId);
+                //const updatedCategories = [...categories];
+                //updatedCategories[updatedCategoryIndex] = {...updatedCategories[updatedCategoryIndex], name};
+                //setCategories(updatedCategories); // actualizar el estado categories
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error('Something went wrong')
+        }
+    }
+
+
+
+    // delete supplier
     const handleDelete = async (pId) => {
         try {
             const { data } = await axios.delete(
                 `${BACKENDURL}/api/supplierLG/supplierLG/${pId}`
             )
             if (data.success) {
-                toast.success('category is deleted')
+                toast.success('supplier is deleted')
 
                 getAllCategory()
             } else {
@@ -80,6 +124,21 @@ export const ProveedoresPage = () => {
             toast.error('Somtihing went wrong')
         }
     }
+    const handleGetSupplier = async(supplierId) => {
+        try{
+            const {data}= await axios.get(`${BACKENDURL}/api/supplierLG/get-supplierLG/${supplierId}`)
+            console.log(data)
+            if(data.success){
+                setSupplierToEdit(data.provider)
+                console.log(data.provider)
+            }
+        }catch(error){
+            toast.error('Something went wrong in getting supplier')
+        }
+        setShowModal(true)
+    }
+
+
     return (
         <AdminLayout >
             <Content style={{ margin: '0 8px' }}>
@@ -97,7 +156,6 @@ export const ProveedoresPage = () => {
                         <div className="col-10"></div>
                         <div className="col-2">
                             <Link to={'/admin/registro/proveedor'}>
-
 
                                 <Button className=" btn btn-success btn-sm" type="primary" htmlType="submit" style={{
 
@@ -138,12 +196,15 @@ export const ProveedoresPage = () => {
                                                 <td>{v.email2}</td>
 
                                                 <td>
+
+                                                    
                                                     <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
-                                                            setVisible(true)
+                                                            {/*setVisible(true)
                                                             setUpdatedName(v.name)
-                                                            setSelected(v)
+                                                            setSelected(v)*/}
+                                                            handleGetSupplier(v._id)
                                                         }} style={{
                                                             padding: 2,
                                                             width: 80,
@@ -153,6 +214,7 @@ export const ProveedoresPage = () => {
                                                     >
                                                     Editar
                                                     </button>
+                                                    
                                                     <button
                                                         className="btn btn-danger"
                                                         onClick={() => {
@@ -165,8 +227,10 @@ export const ProveedoresPage = () => {
                                                     >
                                                     Eliminar
                                                     </button>
+                                                    
 
                                                 </td>
+
                                             </tr>
                                         </>
                                     )}
@@ -177,15 +241,18 @@ export const ProveedoresPage = () => {
                                 footer={null}
                                 open={visible}
                             >
-                                <CategoryForm
-                                    value={updatedName}
-                                    setValue={setUpdatedName}
-                                    handleSubmit={handleUpdate}
-                                />
+                                
                             </Modal>
                         </div>
                     </div>
                 </div>
+                <ModalUpdateCategory
+                    show={showModal}
+                    supplierToEdit={supplierToEdit}
+                    setShowModal={setShowModal}
+                    setSupplierToEdit={setSupplierToEdit}
+                    updateSupplier={updateSupplier}
+                />
             </Content>
         </AdminLayout>
     )
