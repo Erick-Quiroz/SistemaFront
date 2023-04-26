@@ -14,16 +14,15 @@ const initialState = {
     address: '',
     phonenumber1: '',
     phonenumber2: '',
-    email2: '',
-    
+    email2: ''
+
 }
 // import "../../styles/AuthStyles.css";
 export const ProveedorCreatePage = () => {
     const { Content } = Layout
-    const {token: { colorBgContainer } } = theme.useToken()
+    const { token: { colorBgContainer } } = theme.useToken()
     const [formValues, handlerInputChange] = useForm(initialState)
     const { name, address, phonenumber1, phonenumber2, email1, email2 } = formValues
-    
 
     const navigate = useNavigate()
 
@@ -32,9 +31,9 @@ export const ProveedorCreatePage = () => {
         e.preventDefault()
         const phoneRegex = /^[0-9]{7,8}$/
         const regex = /^[a-zA-Z ]*$/
-        const mail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const mail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-        const direc = /^[0-9a-zA-Z\s.#\/]+$/;
+        const direc = /^[0-9a-zA-Z\s.#\/]+$/
 
         if (!direc.test(address)) {
             enqueueSnackbar('Direccion no valida', {
@@ -49,8 +48,7 @@ export const ProveedorCreatePage = () => {
             return
         }
 
-
-        if (!mail.test(email1)|| !mail.test(email2)) {
+        if (!mail.test(email1) || !mail.test(email2)) {
             enqueueSnackbar('El Email1 o Email2 no valido', {
 
                 variant: 'error',
@@ -62,7 +60,6 @@ export const ProveedorCreatePage = () => {
             })
             return
         }
-
 
         if (!regex.test(name)) {
             enqueueSnackbar('El nombre no es válido', {
@@ -76,24 +73,22 @@ export const ProveedorCreatePage = () => {
             return
         }
 
-    if (!phoneRegex.test(phonenumber1) || !phoneRegex.test(phonenumber2)) {
-        enqueueSnackbar('Los números de teléfono deben ser enteros y tener de 7 a 8 caracteres', {
-            variant: 'error',
-            autoHideDuration: 5000,
-            anchorOrigin: {
-                vertical: 'top',
-                horizontal: 'right'
-            }
-        })
-        return
-    }
+        if (!phoneRegex.test(phonenumber1) || !phoneRegex.test(phonenumber2)) {
+            enqueueSnackbar('Los números de teléfono deben ser enteros y tener de 7 a 8 caracteres', {
+                variant: 'error',
+                autoHideDuration: 5000,
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right'
+                }
+            })
+            return
+        }
         try {
-            const {data} = await shopAPI.post(`${BACKENDURL}/api/supplierLG/create-supplierLG`, {
+            const { data } = await shopAPI.post(`${BACKENDURL}/api/supplierLG/create-supplierLG`, {
                 name, address, phonenumber1, phonenumber2, email1, email2
             })
             if (data.success) {
-                
-
                 navigate('/admin/proveedors')
                 enqueueSnackbar('Proveedor agregado', {
                     variant: 'success',
@@ -103,7 +98,7 @@ export const ProveedorCreatePage = () => {
                         horizontal: 'right'
                     }
                 })
-            } 
+            }
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 return {
@@ -134,7 +129,7 @@ export const ProveedorCreatePage = () => {
                             <h4 className="title" >Registrar Proveedor</h4>
                             <div className="row  mb-3">
                                 <div className="col-md-6">
-                                <label
+                                    <label
                                         htmlFor="validationCustom01"
                                         className="form-label">
                                         Nombre
@@ -154,8 +149,7 @@ export const ProveedorCreatePage = () => {
                                     <div className="invalid-feedback">
                                         Nombre es requerido.
                                     </div>
-                                    
-                                    
+
                                 </div>
 
                                 <div className="col">
@@ -182,9 +176,9 @@ export const ProveedorCreatePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            
-                                <div className="row  mb-3">
-                                    <div className="col">
+
+                            <div className="row  mb-3">
+                                <div className="col">
                                     <label
                                         htmlFor="validationCustom05"
                                         className="form-label">
@@ -212,7 +206,7 @@ export const ProveedorCreatePage = () => {
                                 </div>
 
                                 <div className="col">
-                                <label
+                                    <label
                                         htmlFor="validationCustom05"
                                         className="form-label">
 
@@ -251,8 +245,7 @@ export const ProveedorCreatePage = () => {
                                         required
                                         type="text"
                                         value={email1}
-                                        
-                                
+
                                     />
                                     <div className="invalid-feedback">
                                         Email es requerido.
@@ -278,24 +271,23 @@ export const ProveedorCreatePage = () => {
                                 </div>
                             </div>
 
-
                             <div className="container text-end">
                                 <div className="">
-                                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)} tyle={{
+                                    <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)} tyle={{
                                         padding: 8,
                                         width: 100,
                                         height: 35
-                                    }}>CANCELAR</button> 
-                                
-                                <button type="submit" className="btn btn-primary" tyle={{
+                                    }}>CANCELAR</button>
+
+                                    <button type="submit" className="btn btn-primary" tyle={{
                                         padding: 8,
                                         width: 100,
                                         height: 35
                                     }}>
                                 GUARDAR
-                                </button>  
+                                    </button>
                                 </div>
-                            </div>  
+                            </div>
 
                         </form>
                         <div>
