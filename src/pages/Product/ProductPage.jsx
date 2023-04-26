@@ -8,6 +8,7 @@ import ModalUpdateProduct from './ModalUpdateProduct.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
+import { Link } from 'react-router-dom'
 
 export const ProductPage = () => {
     const { Content } = Layout
@@ -74,15 +75,12 @@ export const ProductPage = () => {
     const updateProduct = async (product, name, description, price, imageUrl) => {
         try {
             const productUpdated = {
-                name: name,
-                description: description,
-                price: price,
+                name,
+                description,
+                price,
                 state: product.state,
                 category: product.category,
-
-                //imageUrl: product.imageUrl,
-                imageUrl: imageUrl,
-
+                imageUrl
             }
             const { data } = await axios.put(`${BACKENDURL}/api/productLG/update-productLG/${product._id}`,
                 productUpdated
@@ -107,13 +105,11 @@ export const ProductPage = () => {
                         background: colorBgContainer
                     }}
                 >
-
                     <div className="row">
                         <div className="text-center"><h1>MIS PRODUCTOS</h1></div>
                         <div className="col-10"></div>
                         <div className="col-2" >
-                            <a href="/admin/registro/producto" >
-
+                            <Link href="/admin/registro/producto" >
                                 <Button className=" btn btn-success" type="primary" htmlType="submit" style={{
                                     padding: 5,
                                     width: 85,
@@ -121,7 +117,7 @@ export const ProductPage = () => {
                                 }}>
                                     Registrar
                                 </Button>
-                            </a>
+                            </Link>
                         </div>
                     </div><br></br>
                     <div className="container">
@@ -159,7 +155,6 @@ export const ProductPage = () => {
                                                             padding: 2,
                                                             width: 80,
                                                             margin: 2
-
                                                         }}
                                                     >
                                                         Editar
@@ -176,7 +171,6 @@ export const ProductPage = () => {
                                                     >
                                                         Eliminar
                                                     </button>
-
                                                 </td>
                                             </tr>
                                         </>
@@ -188,7 +182,6 @@ export const ProductPage = () => {
                                 footer={null}
                                 open={visible}
                             >
-
                             </Modal>
                         </div>
                     </div>
@@ -204,4 +197,3 @@ export const ProductPage = () => {
         </AdminLayout>
     )
 }
- 
