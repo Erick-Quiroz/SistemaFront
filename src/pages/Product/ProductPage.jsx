@@ -145,7 +145,7 @@ export const ProductPage = () => {
                                                 <td>{v.price}</td>
                                                 <td>{v.state}</td>
                                                 <td>0</td>
-                                                <td><img src={v.imageUrl} width="100" height="100" /></td>
+                                                <td><img src={v.imageUrl} width="100px" height="100px" /></td>
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"
