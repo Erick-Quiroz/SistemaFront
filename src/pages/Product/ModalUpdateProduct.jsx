@@ -92,7 +92,7 @@ const ModalUpdateProduct = ({
         }
     }
 
-  }
+  
   return (
     <Form noValidate >
     <Modal show={show} centered>
@@ -216,6 +216,6 @@ const ModalUpdateProduct = ({
             </Modal>
         </Form>
     )
-
+}
 
 export default ModalUpdateProduct
