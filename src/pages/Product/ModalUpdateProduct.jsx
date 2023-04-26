@@ -216,6 +216,6 @@ const ModalUpdateProduct = ({
             </Modal>
         </Form>
     )
-}
+
 
 export default ModalUpdateProduct
