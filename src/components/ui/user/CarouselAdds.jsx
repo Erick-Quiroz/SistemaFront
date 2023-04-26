@@ -1,4 +1,5 @@
 import { Carousel } from 'antd'
+import { image1, image2, image3 } from '../../../helpers/imageAdds'
 
 export const CarouselAdds = () => {
     return (
@@ -11,7 +12,7 @@ export const CarouselAdds = () => {
                     <section className='imagenSuperMercado'>
                         <div className="contenedorPantalla">
                             <img className="fondoPantalla"
-                                src="../../public/img1.png"
+                                src={image1}
                                 alt="Foto_de_fondo" />
                         </div>
                     </section>
@@ -23,7 +24,7 @@ export const CarouselAdds = () => {
                     <section className='imagenSuperMercado'>
                         <div className="contenedorPantalla">
                             <img className="fondoPantalla"
-                                src="../../public/img2.png"
+                                src={image2}
                                 alt="Foto_de_fondo" />
                         </div>
                     </section>
@@ -35,7 +36,7 @@ export const CarouselAdds = () => {
                     <section className='imagenSuperMercado'>
                         <div className="contenedorPantalla">
                             <img className="fondoPantalla"
-                                src="../../public/img3.png"
+                                src={image3}
                                 alt="Foto_de_fondo" />
                         </div>
                     </section>
