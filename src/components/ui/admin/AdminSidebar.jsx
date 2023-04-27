@@ -12,8 +12,10 @@ export const AdminSidebar = () => {
             <div
                 style={{
                     height: '10vh',
+
                     margin: '1vh',
                     witch: '30vh'
+
                 }}
             >
                 <img

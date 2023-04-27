@@ -196,10 +196,10 @@ export const ProveedoresPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {categories?.map((v) =>
+                                    {categories?.map((v, index) =>
                                         <>
                                             <tr className="text-center">
-                                                <td>{v._id}</td>
+                                                <td>{index+1}</td>
                                                 <td>{v.name}</td>
                                                 <td>{v.address}</td>
                                                 <td>{v.phonenumber1}</td>
