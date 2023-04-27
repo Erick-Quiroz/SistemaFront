@@ -5,16 +5,18 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import CategoryForm from '../../components/Form/ProductForm.jsx'
 import { Layout, theme, Button, Modal } from 'antd'
+import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
 import ModalUpdateCategory from './ModalUpdateCategory.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { Link } from 'react-router-dom'
-
+import Swal from 'sweetalert2'
+import { color } from 'framer-motion'
 export const CategoryPage = () => {
     // const url = 'http://localhost:8080/api/category/get-category'
     const { Content } = Layout
 
-    const {token: { colorBgContainer }} = theme.useToken()
+    const { token: { colorBgContainer } } = theme.useToken()
     const [categories, setCategories] = useState([])
     const [visible, setVisible] = useState(false)
     const [selected, setSelected] = useState(null)
@@ -40,11 +42,9 @@ export const CategoryPage = () => {
         getAllCategory()
     }, [])
 
-    
     //  delete category
     const handleDelete = async (pId) => {
         try {
-
             const { data } = await axios.delete(
                 `${BACKENDURL}/api/category/delete-category/${pId}`
 
@@ -63,25 +63,23 @@ export const CategoryPage = () => {
     const handleGetCategory = async (categoryId) => {
         try {
             const { data } = await axios.get(`${BACKENDURL}/api/category/single-category/${categoryId}`)
-            //console.log(data); // Agregado
+            // console.log(data); // Agregado
             if (data.success) {
                 setCategoryToEdit(data.category)
                 console.log(data.category)
-
             }
         } catch (error) {
             toast.error('Something wwent wrong in getting catgeory')
         }
         setShowModal(true)
     }
-    //update category new
-    const  updateCategory = async (category,name,description,state) => {
+    // update category new
+    const updateCategory = async (category, name, description, state) => {
         try {
             const categoryUpdated = {
-                name: name,         
-                description: description,     
-                state: category.state,  
-                
+                name,
+                description,
+                state: category.state
 
             }
             const { data } = await axios.put(`${BACKENDURL}/api/category/update-category/${category._id}`,
@@ -90,10 +88,10 @@ export const CategoryPage = () => {
             console.log(data)
             if (data.success) {
                 getAllCategory()
-                //const updatedCategoryIndex = categories.findIndex(c => c._id === categoryId);
-                //const updatedCategories = [...categories];
-                //updatedCategories[updatedCategoryIndex] = {...updatedCategories[updatedCategoryIndex], name};
-                //setCategories(updatedCategories); // actualizar el estado categories
+                // const updatedCategoryIndex = categories.findIndex(c => c._id === categoryId);
+                // const updatedCategories = [...categories];
+                // updatedCategories[updatedCategoryIndex] = {...updatedCategories[updatedCategoryIndex], name};
+                // setCategories(updatedCategories); // actualizar el estado categories
             } else {
                 toast.error(data.message)
             }
@@ -101,6 +99,24 @@ export const CategoryPage = () => {
             toast.error('Something went wrong')
         }
     }
+
+    const mostrarAlerta = async (pId) => {
+        Swal.fire({
+            icon: 'warning',
+            title: '¿Seguro que quiere eliminar la categoria?',
+            showDenyButton: true,
+            denyButtonText: 'No',
+            confirmButtonText: 'Si'
+
+        }).then(response => {
+            if (response.isConfirmed) {
+                handleDelete(pId)
+            } else if (response.isDenied) {
+                getAllCategory()
+            }
+        })
+    }
+
     return (
         <>
             <AdminLayout>
@@ -137,10 +153,10 @@ export const CategoryPage = () => {
                                         <tr className="text-center">
                                             <th scope="col">ID</th>
                                             <th scope="col">Categoria</th>
-                                           
+
                                             <th scope="col">Descripción</th>
                                             <th scope="col">Estado</th>
-                                            
+
                                             <th scope="col">Acciones</th>
 
                                         </tr>
@@ -153,40 +169,46 @@ export const CategoryPage = () => {
                                                     <td>{v.name}</td>
                                                     <td>{v.description}</td>
                                                     <td>{v.state}</td>
-                                                    {/*<td>{v.category}</td>
-                                                    <td>{v.state}</td>*/}
-                                                    
+
+                                                    {/* <td>{v.category}</td>
+                                                    <td>{v.state}</td> */}
+
                                                     <td>
 
                                                         <button
                                                             className="btn btn-primary"
                                                             onClick={() => {
-                                                                {/*setVisible(true)
+                                                                setVisible(true)
                                                                 setUpdatedName(v.name)
-                                                                
-                                                            setSelected(v)*/}
-                                                                handleGetCategory(v._id)
 
+                                                                setSelected(v)
+                                                                handleGetCategory(v._id)
                                                             }} style={{
                                                                 padding: 2,
-                                                                width: 80,
+                                                                width: 30,
                                                                 margin: 2
 
                                                             }}
+                                                            placeholder='Editar'
+                                                            title="Editar"
                                                         >
-                                                    Editar
+                                                            <EditOutlined />
+
                                                         </button>
                                                         <button
                                                             className="btn btn-danger"
                                                             onClick={() => {
-                                                                handleDelete(v._id)
+                                                                mostrarAlerta(v._id)
                                                             }}style={{
                                                                 padding: 1,
-                                                                width: 80,
+                                                                width: 30,
                                                                 margin: 2
                                                             }}
+                                                            placeholder='Eliminar'
+                                                            title="Eliminar"
                                                         >
-                                                    Eliminar
+
+                                                            <DeleteOutlined />
                                                         </button>
 
                                                     </td >
@@ -205,13 +227,7 @@ export const CategoryPage = () => {
                             </div>
                         </div>
                     </div>
-                    <ModalUpdateCategory
-                    show={showModal}
-                    categoryToEdit={categoryToEdit}
-                    setShowModal={setShowModal}
-                    setCategoryToEdit={setCategoryToEdit}
-                    updateCategory={updateCategory}
-                />
+
                 </Content >
             </AdminLayout >
         </>

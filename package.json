@@ -21,6 +21,7 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.9.0",
+    "sweetalert2": "^11.7.3",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {

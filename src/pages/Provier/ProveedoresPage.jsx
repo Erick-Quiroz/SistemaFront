@@ -11,19 +11,20 @@ import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import ModalUpdateCategory from './ModalUpdateCategory.jsx'
 import { Link } from 'react-router-dom'
 import CategoryForm from '../../components/Form/CategoryForm.jsx'
-
+import Swal from 'sweetalert2'
+import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
 export const ProveedoresPage = () => {
     // const url = 'http://localhost:8080/api/supplierLG/get-supplierLG'
     const { Content } = Layout
 
-    const {token: { colorBgContainer }} = theme.useToken()
+    const { token: { colorBgContainer } } = theme.useToken()
     const [categories, setCategories] = useState([])
     const [visible, setVisible] = useState(false)
     const [selected, setSelected] = useState(null)
     const [updatedName, setUpdatedName] = useState('')
-    //cambios
+    // cambios
     const [supplierToEdit, setSupplierToEdit] = useState({})
-    const [showModal, setShowModal] = useState(false)    
+    const [showModal, setShowModal] = useState(false)
 
     // get all cat
     const getAllCategory = async () => {
@@ -66,25 +67,39 @@ export const ProveedoresPage = () => {
         }
     }
     */
-//name, 
-//address,
-//phonenumber1,
-//phonenumber2,
-//email1,
-//email2, 
+    // name,
+    // address,
+    // phonenumber1,
+    // phonenumber2,
+    // email1,
+    // email2,
 
+    // update supplier new
+    const mostrarAlerta = async (pId) => {
+        Swal.fire({
+            icon: 'warning',
+            title: '¿Seguro que quiere eliminar la categoria?',
+            showDenyButton: true,
+            denyButtonText: 'No',
+            confirmButtonText: 'Si'
 
-    //update supplier new
-    const  updateSupplier = async (supplier,name,address,phonenumber1,phonenumber2,email1,email2,) => {
+        }).then(response => {
+            if (response.isConfirmed) {
+                handleDelete(pId)
+            } else if (response.isDenied) {
+                getAllCategory()
+            }
+        })
+    }
+    const updateSupplier = async (supplier, name, address, phonenumber1, phonenumber2, email1, email2) => {
         try {
             const supplierUpdated = {
-                name: name,         
-                address: address,     
-                phonenumber1: phonenumber1,
-                phonenumber2: phonenumber2,
-                email1: email1,
-                email2: email2,  
-                
+                name,
+                address,
+                phonenumber1,
+                phonenumber2,
+                email1,
+                email2
 
             }
             const { data } = await axios.put(`${BACKENDURL}/api/supplierLG/update-supplierLG/${supplier._id}`,
@@ -93,10 +108,10 @@ export const ProveedoresPage = () => {
             console.log(data)
             if (data.success) {
                 getAllCategory()
-                //const updatedCategoryIndex = categories.findIndex(c => c._id === categoryId);
-                //const updatedCategories = [...categories];
-                //updatedCategories[updatedCategoryIndex] = {...updatedCategories[updatedCategoryIndex], name};
-                //setCategories(updatedCategories); // actualizar el estado categories
+                // const updatedCategoryIndex = categories.findIndex(c => c._id === categoryId);
+                // const updatedCategories = [...categories];
+                // updatedCategories[updatedCategoryIndex] = {...updatedCategories[updatedCategoryIndex], name};
+                // setCategories(updatedCategories); // actualizar el estado categories
             } else {
                 toast.error(data.message)
             }
@@ -104,8 +119,6 @@ export const ProveedoresPage = () => {
             toast.error('Something went wrong')
         }
     }
-
-
 
     // delete supplier
     const handleDelete = async (pId) => {
@@ -124,20 +137,19 @@ export const ProveedoresPage = () => {
             toast.error('Somtihing went wrong')
         }
     }
-    const handleGetSupplier = async(supplierId) => {
-        try{
-            const {data}= await axios.get(`${BACKENDURL}/api/supplierLG/get-supplierLG/${supplierId}`)
+    const handleGetSupplier = async (supplierId) => {
+        try {
+            const { data } = await axios.get(`${BACKENDURL}/api/supplierLG/get-supplierLG/${supplierId}`)
             console.log(data)
-            if(data.success){
+            if (data.success) {
                 setSupplierToEdit(data.provider)
                 console.log(data.provider)
             }
-        }catch(error){
+        } catch (error) {
             toast.error('Something went wrong in getting supplier')
         }
         setShowModal(true)
     }
-
 
     return (
         <AdminLayout >
@@ -180,7 +192,7 @@ export const ProveedoresPage = () => {
                                         <th scope="col">Telefono</th>
                                         <th scope="col">Correo</th>
                                         <th scope="col">Correo</th>
-
+                                        <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -197,37 +209,35 @@ export const ProveedoresPage = () => {
 
                                                 <td>
 
-                                                    
                                                     <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
-                                                            {/*setVisible(true)
-                                                            setUpdatedName(v.name)
-                                                            setSelected(v)*/}
                                                             handleGetSupplier(v._id)
                                                         }} style={{
                                                             padding: 2,
-                                                            width: 80,
+                                                            width: 30,
                                                             margin: 2
 
                                                         }}
+                                                        title='Editar'
                                                     >
-                                                    Editar
+                                                        <EditOutlined/>
+
                                                     </button>
-                                                    
+
                                                     <button
                                                         className="btn btn-danger"
                                                         onClick={() => {
-                                                            handleDelete(v._id)
+                                                            mostrarAlerta(v._id)
                                                         }}style={{
                                                             padding: 1,
-                                                            width: 80,
+                                                            width: 30,
                                                             margin: 2
                                                         }}
+                                                        title='Eliminar'
                                                     >
-                                                    Eliminar
+                                                        <DeleteOutlined/>
                                                     </button>
-                                                    
 
                                                 </td>
 
@@ -241,7 +251,7 @@ export const ProveedoresPage = () => {
                                 footer={null}
                                 open={visible}
                             >
-                                
+
                             </Modal>
                         </div>
                     </div>
