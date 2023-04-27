@@ -1,7 +1,7 @@
 import { enqueueSnackbar } from 'notistack'
 import { Layout, theme } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
-
+import { useEffect, useState } from 'react'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { shopAPI } from '../../services'
 import { useForm } from '../../hooks'
@@ -48,6 +48,21 @@ export const ProductCreatePage = () => {
             }
         }
     }
+    const [categories, setCategories] = useState([])
+    const getAllCategory = async () => {
+        try {
+            const { data } = await shopAPI.get('/category/get-category')
+            if (data.success) {
+                setCategories(data.category)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getAllCategory()
+    }, [])
 
     return (
         <AdminLayout>
@@ -151,11 +166,13 @@ export const ProductCreatePage = () => {
                                         required
                                         value={category}
                                     >
-                                        <option></option>
-                                        <option>Lacteos</option>
-                                        <option>Gaseosa</option>
-                                        <option>Dulces</option>
-                                        <option>Abarrotes</option>
+                                        {categories?.map((v) =>
+                                            <>
+                                                <option className="">
+                                                    {v.name}
+                                                </option>
+                                            </>
+                                        )}
                                     </select>
                                     <div className="invalid-feedback">
                                         Completa este campo.
