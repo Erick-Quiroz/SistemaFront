@@ -38,6 +38,12 @@ const router = createBrowserRouter([
         errorElement: <h1>error</h1>
     },
     {
+        path: '/admin/ofertas',
+        element: <OfferPage />,
+        errorElement: <h1>error</h1>
+    },
+
+    {
         path: '/admin/registro/proveedor',
         element: <ProveedorCreatePage />,
         errorElement: <h1>error</h1>
