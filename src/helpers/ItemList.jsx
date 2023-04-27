@@ -1,4 +1,4 @@
-import { AppstoreOutlined, PieChartOutlined } from '@ant-design/icons'
+import { AppstoreOutlined, PieChartOutlined, CarryOutOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 
 const getItem = (label, key, icon, children) => {
@@ -18,11 +18,19 @@ export const admin = [
             getItem('Categoria', '4', <Link to={'/admin/categorias'} />),
             getItem('Proveedor', '5', <Link to={'/admin/proveedors'} />)
         ]
+    ),
+    getItem('Operaciones', 'sub3',
+        <CarryOutOutlined />
+        , [
+            getItem('Ofertas', '6', <Link to={''} />),
+            getItem('Compras', '7', <Link to={''} />),
+            getItem('Ventas', '8', <Link to={''} />)
+        ]
     )
 ]
 
 export const user = [
-    getItem('Inicio', '1',
+    getItem('Inicio', '15',
         <Link to={'/'}>
             <PieChartOutlined />
         </Link>

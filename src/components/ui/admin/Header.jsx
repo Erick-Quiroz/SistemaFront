@@ -1,17 +1,17 @@
 import { Layout } from 'antd'
 import { HomeFilled, EditFilled } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
-
+import { imageLogo } from '../../../helpers/imageAdds'
 export const Header = () => {
     const { Header } = Layout
 
     return (
         <Header
             style={{
-                paddingRight:'2vw',
+                paddingRight: '2vw',
                 textAlign: 'right',
                 color: 'white',
-                fontSize:'3vh',               
+                fontSize: '3vh',
                 height: '12vh',
                 maxheight: '12vh'
             }}>
