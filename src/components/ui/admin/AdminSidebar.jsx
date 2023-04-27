@@ -12,20 +12,15 @@ export const AdminSidebar = () => {
             <div
                 style={{
                     height: '10vh',
-                    margin: '2vh',
-                    Container: 'center'
+                    margin: '1vh',
+                    witch: '30vh'
                 }}
             >
                 <img
                     className='logo'
                     alt="logo"
                     src={imageLogo2}
-                    style={{
 
-                        width: '25vh',
-                        height: '13vh'
-
-                    }}
                 />
             </div>
             <Menu

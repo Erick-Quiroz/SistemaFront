@@ -8,7 +8,10 @@ export const Sidebar = () => {
 
     return (
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+            <div
 
+            >
+            </div>
             <Menu
                 theme="dark"
                 defaultSelectedKeys={['1']}
