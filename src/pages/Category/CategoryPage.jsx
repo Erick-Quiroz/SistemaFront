@@ -226,13 +226,7 @@ export const CategoryPage = () => {
                             </div>
                         </div>
                     </div>
-                    <ModalUpdateCategory
-                        show={showModal}
-                        categoryToEdit={categoryToEdit}
-                        setShowModal={setShowModal}
-                        setCategoryToEdit={setCategoryToEdit}
-                        updateCategory={updateCategory}
-                    />
+
                 </Content >
             </AdminLayout >
         </>
