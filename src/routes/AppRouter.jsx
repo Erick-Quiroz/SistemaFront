@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+
 import { AdminPage, CategoryCreatePage, CategoryPage, HomePage, ProductCreatePage, ProductPage, ProveedorCreatePage, ProveedoresPage, OfferPage } from '../pages'
 
 const router = createBrowserRouter([
