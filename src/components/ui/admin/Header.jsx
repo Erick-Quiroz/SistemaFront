@@ -1,7 +1,7 @@
 import { Layout } from 'antd'
 import { HomeFilled, EditFilled } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
-import { imageLogo } from '../../../helpers/imageAdds'
+
 export const Header = () => {
     const { Header } = Layout
 

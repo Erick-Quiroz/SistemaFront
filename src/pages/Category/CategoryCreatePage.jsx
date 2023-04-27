@@ -65,7 +65,7 @@ export const CategoryCreatePage = () => {
                             <h4 className="title" >Registrar Categoria</h4>
                             <div className="row  mb-3">
 
-                                <div className="col-md-6">
+                                <div className="col col-sm-6">
                                     <label
                                         htmlFor="validationCustom01"
                                         className="form-label">
@@ -88,7 +88,7 @@ export const CategoryCreatePage = () => {
                                     </div>
                                 </div>
 
-                                <div className="col">
+                                <div className="col col-sm-6">
                                     <label
                                         htmlFor="disabledTextInput"
                                         className="form-label">
@@ -112,11 +112,11 @@ export const CategoryCreatePage = () => {
                             </div>
 
                             <div className="row mb-3">
-                                <div className="col">
+                                <div className="col-6 col-sm-6">
                                     <label
                                         htmlFor="disabledSelect1"
                                         className="form-label">
-                                        <strong>Estado del producto</strong>
+                                        <strong>Estado</strong>
                                     </label>
                                     <select
                                         className="form-select"
