@@ -136,10 +136,12 @@ export const ProductPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {categories?.map((v) =>
+                                    {categories?.map((v, index) =>
                                         <>
                                             <tr className="text-center">
-                                                <td>{v._id}</td>
+                                                {/*<td>{v._id}</td>*/}
+                                                <td>{index + 1}</td>
+                                                {/*cambios en la linea 139 y 143 */}
                                                 <td>{v.name}</td>
                                                 <td>{v.category}</td>
                                                 <td>{v.price}</td>

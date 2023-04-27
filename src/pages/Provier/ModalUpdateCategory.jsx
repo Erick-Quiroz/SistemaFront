@@ -58,6 +58,13 @@ const ModalUpdateCategory = ({
         callback({value: value, valid: true})
     }
   }
+  const handleOnChangeValidationNoRestrict = (value, min, max, callback ) => {
+    if( value.length < min || value.length > max ){
+       callback({value: value, valid: false})
+      }else{
+        callback({value: value, valid: true})
+    }
+  }
   const handleOnChangeValidationNumber = (value, min, max, callback ) => {
     if( value.length < min || value.length > max || !/^\d+$/.test(value) ){
        callback({value: value, valid: false})
@@ -105,7 +112,7 @@ const ModalUpdateCategory = ({
           <Form.Control
             style={{ border: address.valid ? '1px solid green': '1px solid red'}}
             placeholder="Direccion de proveedor"
-            onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 100, setAddress)}
+            onChange={( e ) => handleOnChangeValidationNoRestrict(e.target.value, 3, 50, setAddress)}
             name="value"
             value={address.value}
           />
