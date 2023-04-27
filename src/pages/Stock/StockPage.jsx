@@ -1,0 +1,177 @@
+import BACKENDURL from '../../utils/backendUrl.js'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import axios from 'axios'
+import { Layout, theme, Button, Modal } from 'antd'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
+import { useSnackbar } from 'notistack'
+import ModalUpdateStock from './ModalUpdateStock.jsx' 
+//import ModalUpdateProduct from './ModalUpdateProduct.jsx'
+ 
+
+export const StockPage = () => {
+    const { Content } = Layout
+    const { token: { colorBgContainer } } = theme.useToken()
+    const [categories, setCategories] = useState([])
+    const [visible, setVisible] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const [productToEdit, setProductToEdit] = useState({})
+    const { enqueueSnackbar } = useSnackbar()
+    const getAllCategory = async () => {
+        try {
+            const { data } = await axios.get(`${BACKENDURL}/api/productLG/get-productLG`)
+            if (data.success) {
+                setCategories(data.product)
+            }
+        } catch (error) {
+            console.log(error)
+            enqueueSnackbar('Something wwent wrong in getting catgeory')
+        }
+    }
+
+    useEffect(() => {
+        getAllCategory()
+    }, [])
+
+    const handleDelete = async (pId) => {
+        try {
+            const { data } = await axios.delete(
+                `${BACKENDURL}/api/productLG/productLG/${pId}`
+            )
+            if (data.success) {
+                toast.success('category is deleted')
+                getAllCategory()
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error('Somtihing went wrong')
+        }
+        toast.success('category is deleted')
+        enqueueSnackbar('Producto Eliminado', {
+            variant: 'error',
+            autoHideDuration: 1500,
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right'
+            }
+        })
+    }
+
+    const handleGetProduct = async (pid) => {
+        try {
+            const { data } = await axios.get(`${BACKENDURL}/api/productLG/get-productLG/${pid}`)
+           console.log (data)
+            if (data.success) {
+                setProductToEdit(data.product)
+                console.log (product)
+            }
+        } catch (error) {
+            toast.error('Something wwent wrong in getting catgeory')
+        }
+        setShowModal(true)
+    }
+
+    const updateProduct = async (product, name,  expiration, existence) => {
+        try {
+            const productUpdated = {
+                name: name, 
+                existence: existence,
+                expiration: expiration, 
+            }//modificar desde la 73 y api
+            const { data } = await axios.put(`${BACKENDURL}/api/stock/update-stock/${product._id}`,
+                productUpdated
+            )
+            if (data.success) {
+                getAllCategory()
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error('Somtihing went wrong')
+        }
+    }
+
+    return(
+        <AdminLayout > 
+        <Content >
+        <div
+                    style={{
+                        padding: 14,
+                        minHeight: '86vh',
+                        background: colorBgContainer
+                    }}
+                    >
+                      <div className="row">
+                        <div className="text-center"><h1>Mi Stock</h1></div>
+                        <div className="col-10"></div>
+                        <div className="col-2" >
+                            
+                        </div>
+              
+                        </div><br></br>
+              <div className="container">
+              <div className="table-responsive">
+                            <table border="1" className="table table-hover">
+                                <thead className="thead-dark">
+                                    <tr className="text-center">
+                                        <th scope="col">Producto</th>
+                                        <th scope="col">Categoría</th>
+                                        <th scope="col">Fecha de entrega</th>
+                                        <th scope="col">Existencia</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {categories?.map((v) =>
+                                        <>
+                                            <tr className="text-center">
+                                                
+                                                <td>{v.name}</td>
+                                                <td>{v.category}</td>
+                                                <td>{v.expiration}</td>
+                                                <td>{v.existence}</td>
+                                                <td>
+                                                <button
+                                                        className="btn btn-primary"
+                                                        onClick={() => {
+                                                            handleGetProduct(v._id)
+                                                        }} style={{
+                                                            padding: 2,
+                                                            width: 80,
+                                                            margin: 2
+
+                                                        }}
+                                                    >
+                                                        Añadir
+                                                    </button>
+                                                   
+                                                </td>
+                                            </tr>
+                                        </>
+                                    )}
+                                </tbody>
+                            </table>  
+                            <Modal
+                                onCancel={() => setVisible(false)}
+                                footer={null}
+                                open={visible}
+                            >
+
+                            </Modal> 
+              </div>
+              </div>
+              </div>
+              <ModalUpdateStock
+                    show={showModal}
+                    productToEdit={productToEdit}
+                    setShowModal={setShowModal}
+                    setProductToEdit={setProductToEdit}
+                    updateProduct={updateProduct}
+                />
+                
+        </Content>
+    </AdminLayout>
+    )
+}
