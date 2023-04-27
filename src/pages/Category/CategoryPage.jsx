@@ -21,6 +21,7 @@ export const CategoryPage = () => {
     const [categoryToEdit, setCategoryToEdit] = useState({})
     const [showModal, setShowModal] = useState(false)
     const [updatedName, setUpdatedName] = useState('')
+    
 
     // get all cat
     const getAllCategory = async () => {
@@ -145,10 +146,10 @@ export const CategoryPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {categories?.map((v) =>
+                                        {categories?.map((v, index) =>
                                             <>
                                                 <tr className="text-center">
-                                                    <td>{v._id}</td>
+                                                    <td>{index+1}</td>  
                                                     <td>{v.name}</td>
                                                     <td>{v.description}</td>
                                                     <td>{v.state}</td>
