@@ -20,12 +20,7 @@ export const AdminSidebar = () => {
                     className='logo'
                     alt="logo"
                     src={imageLogo2}
-                    style={{
-
-                        width: '25vh',
-                        height: '13vh'
-
-                    }}
+                    
                 />
             </div>
             <Menu
