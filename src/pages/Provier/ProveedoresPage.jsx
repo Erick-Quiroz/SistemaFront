@@ -192,7 +192,7 @@ export const ProveedoresPage = () => {
                                         <th scope="col">Telefono</th>
                                         <th scope="col">Correo</th>
                                         <th scope="col">Correo</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col">Acciones </th>
                                     </tr>
                                 </thead>
                                 <tbody>
