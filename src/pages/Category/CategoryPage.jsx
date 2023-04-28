@@ -23,7 +23,6 @@ export const CategoryPage = () => {
     const [categoryToEdit, setCategoryToEdit] = useState({})
     const [showModal, setShowModal] = useState(false)
     const [updatedName, setUpdatedName] = useState('')
-    
 
     // get all cat
     const getAllCategory = async () => {
@@ -165,7 +164,7 @@ export const CategoryPage = () => {
                                         {categories?.map((v, index) =>
                                             <>
                                                 <tr className="text-center">
-                                                    <td>{index+1}</td>  
+                                                    <td>{index + 1}</td>
                                                     <td>{v.name}</td>
                                                     <td>{v.description}</td>
                                                     <td>{v.state}</td>
@@ -178,7 +177,6 @@ export const CategoryPage = () => {
                                                         <button
                                                             className="btn btn-primary"
                                                             onClick={() => {
-                                                                setVisible(true)
                                                                 setUpdatedName(v.name)
 
                                                                 setSelected(v)
@@ -227,7 +225,13 @@ export const CategoryPage = () => {
                             </div>
                         </div>
                     </div>
-
+                    <ModalUpdateCategory
+                        show={showModal}
+                        categoryToEdit={categoryToEdit}
+                        setShowModal={setShowModal}
+                        setCategoryToEdit={setCategoryToEdit}
+                        updateCategory={updateCategory}
+                    />
                 </Content >
             </AdminLayout >
         </>
