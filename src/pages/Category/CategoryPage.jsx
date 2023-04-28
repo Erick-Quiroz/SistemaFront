@@ -102,7 +102,7 @@ export const CategoryPage = () => {
     const mostrarAlerta = async (pId) => {
         Swal.fire({
             icon: 'warning',
-            title: '¿Seguro que quiere eliminar la categoria?',
+            title: '¿Está seguro de eliminar esta categoría?',
             showDenyButton: true,
             denyButtonText: 'No',
             confirmButtonText: 'Si'

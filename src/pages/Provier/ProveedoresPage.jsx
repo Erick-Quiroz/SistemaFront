@@ -199,7 +199,7 @@ export const ProveedoresPage = () => {
                                     {categories?.map((v, index) =>
                                         <>
                                             <tr className="text-center">
-                                                <td>{index+1}</td>
+                                                <td>{index + 1}</td>
                                                 <td>{v.name}</td>
                                                 <td>{v.address}</td>
                                                 <td>{v.phonenumber1}</td>
