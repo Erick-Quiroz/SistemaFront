@@ -102,7 +102,7 @@ export const CategoryPage = () => {
     const mostrarAlerta = async (pId) => {
         Swal.fire({
             icon: 'warning',
-            title: '¿Seguro que quiere eliminar la categoria?',
+            title: '¿Está seguro de eliminar esta categoría?',
             showDenyButton: true,
             denyButtonText: 'No',
             confirmButtonText: 'Si'
@@ -177,7 +177,6 @@ export const CategoryPage = () => {
                                                         <button
                                                             className="btn btn-primary"
                                                             onClick={() => {
-                                                                setVisible(true)
                                                                 setUpdatedName(v.name)
 
                                                                 setSelected(v)
@@ -226,7 +225,13 @@ export const CategoryPage = () => {
                             </div>
                         </div>
                     </div>
-
+                    <ModalUpdateCategory
+                        show={showModal}
+                        categoryToEdit={categoryToEdit}
+                        setShowModal={setShowModal}
+                        setCategoryToEdit={setCategoryToEdit}
+                        updateCategory={updateCategory}
+                    />
                 </Content >
             </AdminLayout >
         </>
