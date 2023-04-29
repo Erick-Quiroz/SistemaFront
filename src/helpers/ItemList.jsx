@@ -18,7 +18,7 @@ export const admin = [
             getItem('Categoria', '4', <Link to={'/admin/categorias'} />),
             getItem('Proveedor', '5', <Link to={'/admin/proveedors'} />),
             getItem('Ofertas', '6', <Link to={'/admin/ofertas'} />),
-            getItem('Stock', '9', <Link to={'/admin/stock'} />)
+            
         ]
     ),
     getItem('Operaciones', 'sub3',
@@ -26,7 +26,8 @@ export const admin = [
         , [
             getItem('Ofertas', '6', <Link to={''} />),
             getItem('Compras', '7', <Link to={''} />),
-            getItem('Ventas', '8', <Link to={''} />)
+            getItem('Ventas', '8', <Link to={''} />),
+            getItem('Inventario', '9', <Link to={'/admin/stock'} />)
         ]
     )
 ]

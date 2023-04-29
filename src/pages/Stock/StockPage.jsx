@@ -21,6 +21,8 @@ export const StockPage = () => {
     const getAllCategory = async () => {
         try {
             const { data } = await axios.get(`${BACKENDURL}/api/productLG/get-productLG`)
+           
+            console.log(data)
             if (data.success) {
                 setCategories(data.product)
             }
@@ -73,12 +75,15 @@ export const StockPage = () => {
         setShowModal(true)
     }
 
-    const updateProduct = async (product, name,  expiration, existence) => {
+    const updateProduct = async (product, name, cost,  expiration, received, existence) => {
         try {
             const productUpdated = {
                 name: name, 
-                existence: existence,
+                received: received,
                 expiration: expiration, 
+                cost: cost,
+                existence: Number(received ) + Number( existence) 
+                
             }//modificar desde la 73 y api
             const { data } = await axios.put(`${BACKENDURL}/api/stock/update-stock/${product._id}`,
                 productUpdated
@@ -104,7 +109,7 @@ export const StockPage = () => {
                     }}
                     >
                       <div className="row">
-                        <div className="text-center"><h1>Mi Stock</h1></div>
+                        <div className="text-center"><h1>Inventario</h1></div>
                         <div className="col-10"></div>
                         <div className="col-2" >
                             
@@ -117,8 +122,11 @@ export const StockPage = () => {
                                 <thead className="thead-dark">
                                     <tr className="text-center">
                                         <th scope="col">Producto</th>
-                                        <th scope="col">Categoría</th>
+                                        <th scope="col">Precio de compra(Bs)</th>
+                                        <th scope="col">Precio de venta(Bs)</th>
+                                        <th scope="col">Utilidad(Bs)</th>
                                         <th scope="col">Fecha de entrega</th>
+                                        <th scope="col">Cantidad recibida</th>
                                         <th scope="col">Existencia</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
@@ -129,9 +137,12 @@ export const StockPage = () => {
                                             <tr className="text-center">
                                                 
                                                 <td>{v.name}</td>
-                                                <td>{v.category}</td>
+                                                <td>{v.cost}</td>
+                                                <td>{v.price}</td>
+                                                <td>{((v.price*100)-(v.cost*100))/100}</td>
                                                 <td>{v.expiration}</td>
-                                                <td>{v.existence}</td>
+                                                <td>{v.received}</td>
+                                                <td style={{backgroundColor: v.existence >= "15" ? "#9EF597" : "#FFB6C1"}}>{v.existence} </td>
                                                 <td>
                                                 <button
                                                         className="btn btn-primary"
@@ -144,7 +155,7 @@ export const StockPage = () => {
 
                                                         }}
                                                     >
-                                                        Añadir
+                                                        Editar
                                                     </button>
                                                    
                                                 </td>
