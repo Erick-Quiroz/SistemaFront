@@ -29,7 +29,7 @@ export const ComprasCreatePage = () => {
         try {
             const { data } = await shopAPI.post('/compras/create-compra', { name, supplier, quantity, total, state })
             if (data.success) {
-                navigate('/admin/compras')
+                <Link to={'/admin/compras'} />
                 enqueueSnackbar('Compra agregado', {
                     variant: 'success',
                     autoHideDuration: 1500,
@@ -110,6 +110,7 @@ export const ComprasCreatePage = () => {
                                         required
                                         value={name}
                                     >
+                                        <option value="" disabled>Seleccione un producto</option>
                                         {categories?.map((v) =>
                                             <>
                                                 <option className="">
@@ -138,6 +139,7 @@ export const ComprasCreatePage = () => {
                                         required
                                         value={supplier}
                                     >
+                                        <option value="" disabled>Seleccione un proveedor</option>
                                         {prove?.map((v) =>
                                             <>
                                                 <option className="">
@@ -224,7 +226,7 @@ export const ComprasCreatePage = () => {
 
                             <div className="container text-end">
                                 <div className="">
-                                    <Link to={'/admin/productos'}>
+                                    <Link to={'/admin/compras'}>
                                         <button className=" btn btn-primary" type="primary" style={{
                                             padding: 8,
                                             width: 100,
