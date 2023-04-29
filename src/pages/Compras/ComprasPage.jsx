@@ -20,7 +20,9 @@ export const ComprasPage = () => {
     // traer todos las compras
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get('https://sistema-back.onrender.com/api/compras/get-compras')
+
+            const { data } = await axios.get(`${BACKENDURL}/api/compras/get-compras`)
+
             if (data.success) {
                 setCategories(data.compras)
             }
