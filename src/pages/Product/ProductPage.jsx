@@ -9,7 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import { Link } from 'react-router-dom'
-
+import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+import Swal from 'sweetalert2'
 export const ProductPage = () => {
     const { Content } = Layout
     const { token: { colorBgContainer } } = theme.useToken()
@@ -94,6 +95,22 @@ export const ProductPage = () => {
             toast.error('Somtihing went wrong')
         }
     }
+    const mostrarAlerta = async (pId) => {
+        Swal.fire({
+            icon: 'warning',
+            title: '¿Seguro que quiere eliminar la categoria?',
+            showDenyButton: true,
+            denyButtonText: 'No',
+            confirmButtonText: 'Si'
+
+        }).then(response => {
+            if (response.isConfirmed) {
+                handleDelete(pId)
+            } else if (response.isDenied) {
+                getAllCategory()
+            }
+        })
+    }
     return (
         <AdminLayout >
             <Content style={{ margin: '0 8px' }}>
@@ -136,10 +153,12 @@ export const ProductPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {categories?.map((v) =>
+                                    {categories?.map((v, index) =>
                                         <>
                                             <tr className="text-center">
-                                                <td>{v._id}</td>
+                                                {/*<td>{v._id}</td>*/}
+                                                <td>{index + 1}</td>
+                                                {/*cambios en la linea 139 y 143 */}
                                                 <td>{v.name}</td>
                                                 <td>{v.category}</td>
                                                 <td>{v.price}</td>
@@ -153,23 +172,25 @@ export const ProductPage = () => {
                                                             handleGetProduct(v._id)
                                                         }} style={{
                                                             padding: 2,
-                                                            width: 80,
+                                                            width: 30,
                                                             margin: 2
                                                         }}
+                                                        title='Editar'
                                                     >
-                                                        Editar
+                                                        <EditOutlined/>
                                                     </button>
                                                     <button
                                                         className="btn btn-danger"
                                                         onClick={() => {
-                                                            handleDelete(v._id)
+                                                            mostrarAlerta(v._id)
                                                         }} style={{
                                                             padding: 1,
-                                                            width: 80,
+                                                            width: 30,
                                                             margin: 2
                                                         }}
+                                                        title='Eliminar'
                                                     >
-                                                        Eliminar
+                                                        <DeleteOutlined/>
                                                     </button>
                                                 </td>
                                             </tr>

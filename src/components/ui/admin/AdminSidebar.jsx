@@ -1,7 +1,8 @@
 import { Layout, Menu } from 'antd'
 import { useState } from 'react'
 import { items } from '../../../helpers'
-
+import { imageLogo2 } from '../../../helpers/imageAdds'
+import { Container } from 'react-bootstrap'
 export const AdminSidebar = () => {
     const { Sider } = Layout
     const [collapsed, setCollapsed] = useState(false)
@@ -11,10 +12,18 @@ export const AdminSidebar = () => {
             <div
                 style={{
                     height: '10vh',
-                    margin: '2vh',
-                    background: 'url(/public/logo.png)'
+
+                    margin: '1vh',
+                    witch: '30vh'
+
                 }}
             >
+                <img
+                    className='logo'
+                    alt="logo"
+                    src={imageLogo2}
+
+                />
             </div>
             <Menu
                 theme="dark"

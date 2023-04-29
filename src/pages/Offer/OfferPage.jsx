@@ -18,12 +18,21 @@ export const OfferPage = () => {
     const [showModal, setShowModal] = useState(false)
     const [productToEdit, setProductToEdit] = useState({})
     const { enqueueSnackbar } = useSnackbar()
+<<<<<<< HEAD
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [productId, setProductId] = useState(null);
     const showModals = (productId) => {
         setProductId(productId);
         setIsModalVisible(true);
       };
+=======
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [productId, setProductId] = useState(null)
+    const showModals = (productId) => {
+        setProductId(productId)
+        setIsModalVisible(true)
+    }
+>>>>>>> bef635569cba673bece59d27f32ae0edc495fc93
 
     const getAllCategory = async () => {
         try {
@@ -78,6 +87,7 @@ export const OfferPage = () => {
         setShowModal(true)
     }
 
+<<<<<<< HEAD
     const updateProduct = async (product, name, description, price,porcentage, imageUrl) => {
         try {
             const productUpdated = {
@@ -89,6 +99,19 @@ export const OfferPage = () => {
                 porcentage: porcentage,
                 //imageUrl: product.imageUrl,
                 imageUrl: imageUrl,
+=======
+    const updateProduct = async (product, name, description, price, porcentage, imageUrl) => {
+        try {
+            const productUpdated = {
+                name,
+                description,
+                price,
+                state: product.state,
+                category: product.category,
+                porcentage,
+                // imageUrl: product.imageUrl,
+                imageUrl
+>>>>>>> bef635569cba673bece59d27f32ae0edc495fc93
 
             }
             const { data } = await axios.put(`${BACKENDURL}/api/productLG/update-offerLG/${product._id}`,
@@ -118,13 +141,18 @@ export const OfferPage = () => {
                     <div className="row">
                         <div className="text-center"><h1>Registar ofertas</h1></div>
                         <div className="col-10"></div>
+<<<<<<< HEAD
                         
+=======
+
+>>>>>>> bef635569cba673bece59d27f32ae0edc495fc93
                     </div><br></br>
                     <div className="container">
                         <div className="table-responsive">
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center">
+<<<<<<< HEAD
                                        
                                         <th scope="col">Producto</th>
                                         
@@ -133,12 +161,22 @@ export const OfferPage = () => {
                                         <th scope="col">Precio Ofertas(Bs)</th>
                                        
                                         
+=======
+
+                                        <th scope="col">Producto</th>
+
+                                        <th scope="col">Precio(Bs)</th>
+                                        <th scope="col">Ofertas%</th>
+                                        <th scope="col">Precio Ofertas(Bs)</th>
+
+>>>>>>> bef635569cba673bece59d27f32ae0edc495fc93
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {categories?.map((v) =>
                                         <>
                                             <tr className="text-center">
+<<<<<<< HEAD
                                                 
                                                 <td>{v.name}</td>
                                                 <td>{v.price}</td>
@@ -146,6 +184,14 @@ export const OfferPage = () => {
                                                 <td>{(v.price)-((v.price)*((v.porcentage)/100))}</td>
                                                 
                                                 
+=======
+
+                                                <td>{v.name}</td>
+                                                <td>{v.price}</td>
+                                                <td>{v.porcentage}</td>
+                                                <td>{(v.price) - ((v.price) * ((v.porcentage) / 100))}</td>
+
+>>>>>>> bef635569cba673bece59d27f32ae0edc495fc93
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"
@@ -161,13 +207,20 @@ export const OfferPage = () => {
                                                         REGISTRAR OFERTAS
                                                     </button>
                                                     <button
+<<<<<<< HEAD
                                                       className="btn btn-danger"
                                                       onClick={() => showModals(v._id)}
                                                       style={{ padding: 13, width: 100, margin: 3 }}
+=======
+                                                        className="btn btn-danger"
+                                                        onClick={() => showModals(v._id)}
+                                                        style={{ padding: 13, width: 100, margin: 3 }}
+>>>>>>> bef635569cba673bece59d27f32ae0edc495fc93
                                                     >
                                                      Eliminar
                                                     </button>
 
+<<<<<<< HEAD
                                                      <Modal
                                                       title="Eliminar oferta"
                                                       visible={isModalVisible}
@@ -179,6 +232,19 @@ export const OfferPage = () => {
                                                     >
                                                      <p>¿Está seguro que desea eliminar la oferta?</p>
                                                      </Modal>
+=======
+                                                    <Modal
+                                                        title="Eliminar oferta"
+                                                        visible={isModalVisible}
+                                                        onOk={() => {
+                                                            handleDelete(productId)
+                                                            setIsModalVisible(false)
+                                                        }}
+                                                        onCancel={() => setIsModalVisible(false)}
+                                                    >
+                                                        <p>¿Está seguro que desea eliminar la oferta?</p>
+                                                    </Modal>
+>>>>>>> bef635569cba673bece59d27f32ae0edc495fc93
 
                                                 </td>
                                             </tr>
@@ -207,4 +273,7 @@ export const OfferPage = () => {
         </AdminLayout>
     )
 }
+<<<<<<< HEAD
  
+=======
+>>>>>>> bef635569cba673bece59d27f32ae0edc495fc93
