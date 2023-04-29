@@ -125,7 +125,9 @@ export const CategoryCreatePage = () => {
                                         onChange={handlerInputChange}
                                         required
                                         value={state}
+
                                     >
+
                                         <option>Activo</option>
                                         <option>Inactivo</option>
                                     </select>
