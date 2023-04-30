@@ -98,7 +98,7 @@ export const ProductPage = () => {
     const mostrarAlerta = async (pId) => {
         Swal.fire({
             icon: 'warning',
-            title: '¿Seguro que quiere eliminar la categoria?',
+            title: '¿Seguro que quiere eliminar el Producto?',
             showDenyButton: true,
             denyButtonText: 'No',
             confirmButtonText: 'Si'
@@ -141,30 +141,30 @@ export const ProductPage = () => {
                         <div className="table-responsive">
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
-                                    <tr className="text-center">
-                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>ID</th>
-                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Producto</th>
-                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Categoría</th>
-                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Precio(Bs)</th>
-                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Estado</th>
-                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Existencia</th>
-                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Imagen</th>
-                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Acciones</th>
+                                    <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
+                                        <th scope="col" >ID</th>
+                                        <th scope="col" >Producto</th>
+                                        <th scope="col" >Categoría</th>
+                                        <th scope="col" >Precio(Bs)</th>
+                                        <th scope="col" >Estado</th>
+                                        <th scope="col" >Existencia</th>
+                                        <th scope="col" >Imagen</th>
+                                        <th scope="col" >Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {categories?.map((v, index) =>
                                         <>
-                                            <tr className="text-center">
-                                                {/*<td>{v._id}</td>*/}
+                                            <tr className="text-center" style={{ backgroundColor: index % 2 === 0 ? '' : '#F0F8FF' }}>
+                                                {/* <td>{v._id}</td> */}
                                                 <td>{index + 1}</td>
-                                                {/*cambios en la linea 139 y 143 */}
+                                                {/* cambios en la linea 139 y 143 */}
                                                 <td>{v.name}</td>
                                                 <td>{v.category}</td>
                                                 <td>{v.price}</td>
-                                                <td style={{backgroundColor: v.state === "Activo" ? "#9EF597" : "#FFB6C1"}}>{v.state}</td>
-                                                <td>0</td>
-                                                <td><img src={v.imageUrl} style={{ width: 100, height: 100 }} alt={v.name} /></td>
+                                                <td style={{ backgroundColor: v.state === 'Activo' ? '#9EF597' : '#FFB6C1' }}>{v.state}</td>
+                                                <td>{v.existence}</td>
+                                                <td><img src={v.imageUrl} style={{ width: 40, height: 40 }} alt={v.name} /></td>
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"

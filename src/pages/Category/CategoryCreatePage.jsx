@@ -28,7 +28,7 @@ export const CategoryCreatePage = () => {
             const { data } = await shopAPI.post('/category/create-category', { name, description, state })
             if (data.success) {
                 navigate('/admin/categorias')
-                enqueueSnackbar('Producto agregado', {
+                enqueueSnackbar('Categoría creada', {
                     variant: 'success',
                     autoHideDuration: 1500,
                     anchorOrigin: {
