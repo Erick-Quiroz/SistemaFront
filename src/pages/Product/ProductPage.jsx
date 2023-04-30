@@ -142,14 +142,14 @@ export const ProductPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center">
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Producto</th>
-                                        <th scope="col">Categoría</th>
-                                        <th scope="col">Precio(Bs)</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Existencia</th>
-                                        <th scope="col">Imagen</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>ID</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Producto</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Categoría</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Precio(Bs)</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Estado</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Existencia</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Imagen</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -162,7 +162,7 @@ export const ProductPage = () => {
                                                 <td>{v.name}</td>
                                                 <td>{v.category}</td>
                                                 <td>{v.price}</td>
-                                                <td>{v.state}</td>
+                                                <td style={{backgroundColor: v.state === "Activo" ? "#9EF597" : "#FFB6C1"}}>{v.state}</td>
                                                 <td>0</td>
                                                 <td><img src={v.imageUrl} style={{ width: 100, height: 100 }} alt={v.name} /></td>
                                                 <td>
