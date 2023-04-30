@@ -121,14 +121,14 @@ export const StockPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center">
-                                        <th scope="col">Producto</th>
-                                        <th scope="col">Precio de compra(Bs)</th>
-                                        <th scope="col">Precio de venta(Bs)</th>
-                                        <th scope="col">Utilidad(Bs)</th>
-                                        <th scope="col">Fecha de entrega</th>
-                                        <th scope="col">Cantidad recibida</th>
-                                        <th scope="col">Existencia</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Producto</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Precio de compra(Bs)</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Precio de venta(Bs)</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Utilidad(Bs)</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Fecha de entrega</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Cantidad recibida</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Existencia</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
