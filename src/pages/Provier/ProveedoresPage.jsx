@@ -185,14 +185,14 @@ export const ProveedoresPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center">
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Direccion</th>
-                                        <th scope="col">Telefono</th>
-                                        <th scope="col">Telefono</th>
-                                        <th scope="col">Correo</th>
-                                        <th scope="col">Correo</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>ID</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Nombre</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Direccion</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Telefono</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Telefono</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Correo</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Correo</th>
+                                        <th scope="col" style={{backgroundColor: '#94B0BA'}}>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
