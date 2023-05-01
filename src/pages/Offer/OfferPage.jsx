@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import ModalAddOffer from './ModalAddOffer.jsx'
-
+import Swal from 'sweetalert2'
 export const OfferPage = () => {
     const { Content } = Layout
     const { token: { colorBgContainer } } = theme.useToken()
@@ -40,7 +40,22 @@ export const OfferPage = () => {
     useEffect(() => {
         getAllCategory()
     }, [])
+    const mostrarAlerta = async (pId) => {
+        Swal.fire({
+            icon: 'warning',
+            title: '¿Seguro que quiere eliminar la Oferta?',
+            showDenyButton: true,
+            denyButtonText: 'No',
+            confirmButtonText: 'Si'
 
+        }).then(response => {
+            if (response.isConfirmed) {
+                handleDelete(pId)
+            } else if (response.isDenied) {
+                getAllCategory()
+            }
+        })
+    }
     const handleDelete = async (pId) => {
         try {
             const { data } = await axios.delete(
@@ -162,23 +177,15 @@ export const OfferPage = () => {
                                                     </button>
                                                     <button
                                                         className="btn btn-danger"
-                                                        onClick={() => showModals(v._id)}
+                                                        onClick={() => {
+                                                            mostrarAlerta(v._id)
+                                                        }}
                                                         style={{ padding: 13, width: 100, margin: 3 }}
                                                     >
                                                      Eliminar
                                                     </button>
 
-                                                    <Modal
-                                                        title="Eliminar oferta"
-                                                        visible={isModalVisible}
-                                                        onOk={() => {
-                                                            handleDelete(productId)
-                                                            setIsModalVisible(false)
-                                                        }}
-                                                        onCancel={() => setIsModalVisible(false)}
-                                                    >
-                                                        <p>¿Está seguro que desea eliminar la oferta?</p>
-                                                    </Modal>
+                                                    
 
                                                 </td>
                                             </tr>
