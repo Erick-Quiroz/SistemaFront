@@ -85,16 +85,7 @@ const [product, setProduct] = useState(initialState);
     <Modal show={show} centered>
       <Modal.Header>Añadir inventario</Modal.Header>
       <Modal.Body>
-        <InputGroup className="mb-3">
-          <InputGroup.Text >Producto</InputGroup.Text>
-          <Form.Control
-            style={{ border: name.valid ? '1px solid green': '1px solid red'}}
-            placeholder="Producto"
-            onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 20, setName)}
-            name="value"
-            value={name.value}
-          />
-        </InputGroup>
+        
         <InputGroup className="mb-3">
           <InputGroup.Text >Precio de compra</InputGroup.Text>
           <Form.Control
