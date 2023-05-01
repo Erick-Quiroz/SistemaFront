@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, InputGroup, Form, Button } from "react-bootstrap";
 import validUrl from 'valid-url';
-
+import { useSnackbar } from 'notistack'
 const initialState = {
   name: '',
   description: "",
@@ -54,8 +54,10 @@ const ModalAddOffer = ({
     }
   }
   const handleOnChangeValidationNumber = (value, min, max, callback) => {
-    if (value === null || value === undefined || !/^\d*\.?\d+$/.test(value) || value < 0 || value.length < min || value.length > max) {
+    if (value === null || value === undefined || !/^[0-9]+$/.test(value) || value < 1 || value > 100 || value.length < min || value.length > max) {
+      
       callback({ value: value, valid: false });
+      
     } else {
       callback({ value: value, valid: true });
     }

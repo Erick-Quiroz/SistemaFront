@@ -8,6 +8,7 @@ import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import ModalUpdateStock from './ModalUpdateStock.jsx'
 // import ModalUpdateProduct from './ModalUpdateProduct.jsx'
+import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
 
 export const StockPage = () => {
     const { Content } = Layout
@@ -125,7 +126,7 @@ export const StockPage = () => {
                                         <th scope="col">Precio de venta(Bs)</th>
                                         <th scope="col">Utilidad(Bs)</th>
                                         <th scope="col">Fecha de entrega</th>
-                                        <th scope="col">Cantidad recibida(ud)</th>
+                                        <th scope="col">Cantidad recibida</th>
                                         
                                         <th scope="col">Acciones</th>
                                     </tr>
@@ -143,20 +144,19 @@ export const StockPage = () => {
                                                 <td>{v.received}</td>
                                                
                                                 <td>
-                                                    <button
+                                                <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
                                                             handleGetProduct(v._id)
                                                         }} style={{
                                                             padding: 2,
-                                                            width: 80,
+                                                            width: 30,
                                                             margin: 2
-
                                                         }}
+                                                        title='Editar'
                                                     >
-                                                        Editar
+                                                        <EditOutlined/>
                                                     </button>
-
                                                 </td>
                                             </tr>
                                         </>
