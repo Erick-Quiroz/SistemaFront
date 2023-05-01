@@ -6,7 +6,9 @@ export * from './Product/ProductPage'
 export * from './Provier/ProveedorCreatePage'
 export * from './Provier/ProveedoresPage'
 export * from './HomePage'
+
 export * from './Offer/OfferPage'
+
 export * from './Stock/StockPage'
 
 
