@@ -124,26 +124,28 @@ export const OfferPage = () => {
                         <div className="table-responsive">
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
-                                    <tr className="text-center">
-
+                                    <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
+                                    <th scope="col" >ID</th>
                                         <th scope="col">Producto</th>
 
                                         <th scope="col">Precio(Bs)</th>
                                         <th scope="col">Ofertas%</th>
                                         <th scope="col">Precio Ofertas(Bs)</th>
-
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Acciones</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {categories?.map((v) =>
+                                    {categories?.map((v, index) =>
                                         <>
                                             <tr className="text-center">
-
+                                            <td>{index + 1}</td>
                                                 <td>{v.name}</td>
-                                                <td>{v.price}</td>
-                                                <td>{v.porcentage}</td>
+                                                <td >{v.price}</td>
+                                                <td >{v.porcentage}</td>
                                                 <td>{(v.price) - ((v.price) * ((v.porcentage) / 100))}</td>
-
+                                                <td><img src={v.imageUrl} style={{ width: 70, height: 70 }} alt={v.name} /></td>
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"

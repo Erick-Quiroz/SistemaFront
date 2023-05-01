@@ -28,7 +28,7 @@ export const admin = [
         , [
 
 
-            getItem('Ofertas', '6', <Link to={''} />),
+            getItem('Ofertas', '6', <Link to={'/admin/ofertas'} />),
             getItem('Compras', '7', <Link to={'/admin/compras'} />),
             getItem('Inventario', '9', <Link to={'/admin/stock'} />)
             // getItem('Ventas', '8', <Link to={''} />)
