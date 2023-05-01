@@ -7,7 +7,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import ModalUpdateStock from './ModalUpdateStock.jsx'
-// import ModalUpdateProduct from './ModalUpdateProduct.jsx'
+
+
+import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+
+
+
 
 export const StockPage = () => {
     const { Content } = Layout
@@ -126,7 +131,6 @@ export const StockPage = () => {
                                         <th scope="col">Utilidad(Bs)</th>
                                         <th scope="col">Fecha de entrega</th>
                                         <th scope="col">Cantidad recibida</th>
-                                        <th scope="col">Existencia</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -141,6 +145,8 @@ export const StockPage = () => {
                                                 <td>{((v.price * 100) - (v.cost * 100)) / 100}</td>
                                                 <td>{v.expiration}</td>
                                                 <td>{v.received}</td>
+                                                <td>
+                                                <button
                                                 <td style={{ backgroundColor: v.existence >= '15' ? '#9EF597' : '#FFB6C1' }}>{v.existence} </td>
                                                 <td>
                                                     <button
@@ -149,6 +155,8 @@ export const StockPage = () => {
                                                             handleGetProduct(v._id)
                                                         }} style={{
                                                             padding: 2,
+
+
                                                             width: 80,
                                                             margin: 2
 
@@ -156,6 +164,7 @@ export const StockPage = () => {
                                                     >
                                                         Editar
                                                     </button>
+
 
                                                 </td>
                                             </tr>
