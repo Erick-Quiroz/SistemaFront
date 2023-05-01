@@ -85,7 +85,6 @@ const [product, setProduct] = useState(initialState);
     <Modal show={show} centered>
       <Modal.Header>Añadir inventario</Modal.Header>
       <Modal.Body>
-        
         <InputGroup className="mb-3">
           <InputGroup.Text >Precio de compra</InputGroup.Text>
           <Form.Control
