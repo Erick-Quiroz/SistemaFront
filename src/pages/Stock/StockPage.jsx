@@ -7,13 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import ModalUpdateStock from './ModalUpdateStock.jsx'
-
-
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
-
-
-
-
+// import ModalUpdateProduct from './ModalUpdateProduct.jsx'
+import { EditOutlined } from '@ant-design/icons'
 export const StockPage = () => {
     const { Content } = Layout
     const { token: { colorBgContainer } } = theme.useToken()
@@ -131,6 +126,7 @@ export const StockPage = () => {
                                         <th scope="col">Utilidad(Bs)</th>
                                         <th scope="col">Fecha de entrega</th>
                                         <th scope="col">Cantidad recibida</th>
+                                      
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -138,34 +134,29 @@ export const StockPage = () => {
                                     {categories?.map((v, index) =>
                                         <>
                                             <tr className="text-center" style={{ backgroundColor: index % 2 === 0 ? '' : '#F0F8FF' }}>
-                                                <td><td>{index + 1}</td></td>
+                                                
                                                 <td>{v.name}</td>
                                                 <td>{v.cost}</td>
                                                 <td>{v.price}</td>
                                                 <td>{((v.price * 100) - (v.cost * 100)) / 100}</td>
                                                 <td>{v.expiration}</td>
                                                 <td>{v.received}</td>
+                                                
                                                 <td>
                                                 <button
-                                                <td style={{ backgroundColor: v.existence >= '15' ? '#9EF597' : '#FFB6C1' }}>{v.existence} </td>
-                                                <td>
-                                                    <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
                                                             handleGetProduct(v._id)
                                                         }} style={{
                                                             padding: 2,
-
-
-                                                            width: 80,
+                                                            width: 30,
                                                             margin: 2
-
                                                         }}
+                                                        title='Editar'
                                                     >
-                                                        Editar
+                                                        <EditOutlined/>
                                                     </button>
-
-
+                                                  
                                                 </td>
                                             </tr>
                                         </>
@@ -194,3 +185,4 @@ export const StockPage = () => {
         </AdminLayout>
     )
 }
+
