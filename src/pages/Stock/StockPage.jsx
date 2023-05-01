@@ -8,7 +8,11 @@ import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import ModalUpdateStock from './ModalUpdateStock.jsx'
 
+
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+
+
+
 
 export const StockPage = () => {
     const { Content } = Layout
@@ -143,18 +147,25 @@ export const StockPage = () => {
                                                 <td>{v.received}</td>
                                                 <td>
                                                 <button
+                                                <td style={{ backgroundColor: v.existence >= '15' ? '#9EF597' : '#FFB6C1' }}>{v.existence} </td>
+                                                <td>
+                                                    <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
                                                             handleGetProduct(v._id)
                                                         }} style={{
                                                             padding: 2,
-                                                            width: 30,
+
+
+                                                            width: 80,
                                                             margin: 2
+
                                                         }}
-                                                        title='Editar'
                                                     >
-                                                        <EditOutlined/>
+                                                        Editar
                                                     </button>
+
+
                                                 </td>
                                             </tr>
                                         </>
