@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import ModalUpdateStock from './ModalUpdateStock.jsx'
-// import ModalUpdateProduct from './ModalUpdateProduct.jsx'
+
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
 
 export const StockPage = () => {
