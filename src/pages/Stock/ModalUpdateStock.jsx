@@ -107,7 +107,7 @@ const [product, setProduct] = useState(initialState);
           />
         </InputGroup>
         <InputGroup className="mb-3">
-          <InputGroup.Text >Cantidad recibida</InputGroup.Text>
+          <InputGroup.Text >Cantidad recibida(Ud)</InputGroup.Text>
           <Form.Control
             style={{ border: received.valid ? '1px solid green': '1px solid red'}}
             placeholder="Cantidad recibida"
