@@ -8,6 +8,7 @@ export * from './Provier/ProveedoresPage'
 export * from './HomePage'
 
 export * from './Offer/OfferPage'
-export * from './Compras/ComprasPage'
-export * from './Compras/ComprasCreatePage'
+
+export * from './Stock/StockPage'
+
 

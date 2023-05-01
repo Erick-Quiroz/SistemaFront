@@ -8,8 +8,8 @@ import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import ModalUpdateStock from './ModalUpdateStock.jsx'
 // import ModalUpdateProduct from './ModalUpdateProduct.jsx'
-import { Link } from 'react-router-dom'
-export const ComprasPage = () => {
+
+export const StockPage = () => {
     const { Content } = Layout
     const { token: { colorBgContainer } } = theme.useToken()
     const [categories, setCategories] = useState([])
@@ -17,12 +17,13 @@ export const ComprasPage = () => {
     const [showModal, setShowModal] = useState(false)
     const [productToEdit, setProductToEdit] = useState({})
     const { enqueueSnackbar } = useSnackbar()
-    // traer todos las compras
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get(`${BACKENDURL}/api/compras/get-compras`)
+            const { data } = await axios.get(`${BACKENDURL}/api/productLG/get-productLG`)
+
+            console.log(data)
             if (data.success) {
-                setCategories(data.compras)
+                setCategories(data.product)
             }
         } catch (error) {
             console.log(error)
@@ -34,12 +35,54 @@ export const ComprasPage = () => {
         getAllCategory()
     }, [])
 
-    const updateProduct = async (product, name, expiration, existence) => {
+    const handleDelete = async (pId) => {
+        try {
+            const { data } = await axios.delete(
+                `${BACKENDURL}/api/productLG/productLG/${pId}`
+            )
+            if (data.success) {
+                toast.success('category is deleted')
+                getAllCategory()
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error('Somtihing went wrong')
+        }
+        toast.success('category is deleted')
+        enqueueSnackbar('Producto Eliminado', {
+            variant: 'error',
+            autoHideDuration: 1500,
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right'
+            }
+        })
+    }
+
+    const handleGetProduct = async (pid) => {
+        try {
+            const { data } = await axios.get(`${BACKENDURL}/api/productLG/get-productLG/${pid}`)
+            console.log(data)
+            if (data.success) {
+                setProductToEdit(data.product)
+                console.log(product)
+            }
+        } catch (error) {
+            toast.error('Something wwent wrong in getting catgeory')
+        }
+        setShowModal(true)
+    }
+
+    const updateProduct = async (product, name, cost, expiration, received, existence) => {
         try {
             const productUpdated = {
                 name,
-                existence,
-                expiration
+                received,
+                expiration,
+                cost,
+                existence: Number(received) + Number(existence)
+
             }// modificar desde la 73 y api
             const { data } = await axios.put(`${BACKENDURL}/api/stock/update-stock/${product._id}`,
                 productUpdated
@@ -65,18 +108,10 @@ export const ComprasPage = () => {
                     }}
                 >
                     <div className="row">
-                        <div className="text-center"><h1>Mis Compras</h1></div>
+                        <div className="text-center"><h1>Inventario</h1></div>
                         <div className="col-10"></div>
                         <div className="col-2" >
-                            <Link to={'/admin/registro/compras'}>
-                                <Button className=" btn btn-success" type="primary" htmlType="submit" style={{
-                                    padding: 10,
-                                    width: 80,
-                                    height: 35
-                                }}>
-                                        Agregar
-                                </Button>
-                            </Link>
+
                         </div>
 
                     </div><br></br>
@@ -84,35 +119,34 @@ export const ComprasPage = () => {
                         <div className="table-responsive">
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
-                                    <tr className="text-center">
-                                        <th scope="col">ID</th>
+                                    <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
                                         <th scope="col">Producto</th>
-                                        <th scope="col">Proveedor</th>
-                                        <th scope="col">Fecha Compra</th>
-                                        <th scope="col">Cantidad</th>
-
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Estado</th>
+                                        <th scope="col">Precio de compra(Bs)</th>
+                                        <th scope="col">Precio de venta(Bs)</th>
+                                        <th scope="col">Utilidad(Bs)</th>
+                                        <th scope="col">Fecha de entrega</th>
+                                        <th scope="col">Cantidad recibida</th>
+                                        <th scope="col">Existencia</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {categories?.map((v) =>
+                                    {categories?.map((v, index) =>
                                         <>
-                                            <tr className="text-center">
-                                                <td>0</td>
+                                            <tr className="text-center" style={{ backgroundColor: index % 2 === 0 ? '' : '#F0F8FF' }}>
+                                                <td><td>{index + 1}</td></td>
                                                 <td>{v.name}</td>
-                                                <td>{v.supplier}</td>
-                                                <td>0</td>
-                                                <td>{v.quantity}</td>
-                                                <td>{v.total}</td>
-                                                <td>{v.state}</td>
-
+                                                <td>{v.cost}</td>
+                                                <td>{v.price}</td>
+                                                <td>{((v.price * 100) - (v.cost * 100)) / 100}</td>
+                                                <td>{v.expiration}</td>
+                                                <td>{v.received}</td>
+                                                <td style={{ backgroundColor: v.existence >= '15' ? '#9EF597' : '#FFB6C1' }}>{v.existence} </td>
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
-                                                            // handleGetProduct(v._id)
+                                                            handleGetProduct(v._id)
                                                         }} style={{
                                                             padding: 2,
                                                             width: 80,
@@ -120,7 +154,7 @@ export const ComprasPage = () => {
 
                                                         }}
                                                     >
-                                                        Añadir
+                                                        Editar
                                                     </button>
 
                                                 </td>

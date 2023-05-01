@@ -150,21 +150,21 @@ export const CategoryPage = () => {
                                 <table border="1" className="table table-hover">
                                     <thead className="thead-dark">
                                         <tr className="text-center">
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Categoria</th>
+                                            <th scope="col" style={{ backgroundColor: '#94B0BA' }}>ID</th>
+                                            <th scope="col" style={{ backgroundColor: '#94B0BA' }}>Categoria</th>
 
-                                            <th scope="col">Descripción</th>
-                                            <th scope="col">Estado</th>
+                                            <th scope="col" style={{ backgroundColor: '#94B0BA' }}>Descripción</th>
+                                            <th scope="col" style={{ backgroundColor: '#94B0BA' }}>Estado</th>
 
-                                            <th scope="col">Acciones</th>
+                                            <th scope="col" style={{ backgroundColor: '#94B0BA' }}>Acciones</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {categories?.map((v, index) =>
                                             <>
-                                                <tr className="text-center">
-                                                    <td>{index + 1}</td>
+                                                <tr className="text-center" style={{ backgroundColor: index % 2 === 0 ? '' : '#F0F8FF' }}>
+                                                    <td >{index + 1}</td>
                                                     <td>{v.name}</td>
                                                     <td>{v.description}</td>
                                                     <td>{v.state}</td>

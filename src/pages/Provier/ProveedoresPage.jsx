@@ -78,7 +78,7 @@ export const ProveedoresPage = () => {
     const mostrarAlerta = async (pId) => {
         Swal.fire({
             icon: 'warning',
-            title: '¿Seguro que quiere eliminar la categoria?',
+            title: '¿Seguro que quiere eliminar añ Proveedor?',
             showDenyButton: true,
             denyButtonText: 'No',
             confirmButtonText: 'Si'
@@ -184,22 +184,22 @@ export const ProveedoresPage = () => {
                         <div className="table-responsive">
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
-                                    <tr className="text-center">
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Direccion</th>
-                                        <th scope="col">Telefono</th>
-                                        <th scope="col">Telefono</th>
-                                        <th scope="col">Correo</th>
-                                        <th scope="col">Correo</th>
-                                        <th scope="col">Acciones</th>
+                                    <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
+                                        <th scope="col" >ID</th>
+                                        <th scope="col" >Nombre</th>
+                                        <th scope="col" >Direccion</th>
+                                        <th scope="col" >Telefono</th>
+                                        <th scope="col" >Telefono</th>
+                                        <th scope="col" >Correo</th>
+                                        <th scope="col" >Correo</th>
+                                        <th scope="col" >Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {categories?.map((v, index) =>
                                         <>
-                                            <tr className="text-center">
-                                                <td>{index + 1}</td>
+                                            <tr className="text-center" style={{ backgroundColor: index % 2 === 0 ? '' : '#F0F8FF' }}>
+                                                <td >{index + 1}</td>
                                                 <td>{v.name}</td>
                                                 <td>{v.address}</td>
                                                 <td>{v.phonenumber1}</td>
