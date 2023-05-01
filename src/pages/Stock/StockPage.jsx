@@ -127,7 +127,6 @@ export const StockPage = () => {
                                         <th scope="col">Utilidad(Bs)</th>
                                         <th scope="col">Fecha de entrega</th>
                                         <th scope="col">Cantidad recibida</th>
-                                        
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -142,7 +141,6 @@ export const StockPage = () => {
                                                 <td>{((v.price * 100) - (v.cost * 100)) / 100}</td>
                                                 <td>{v.expiration}</td>
                                                 <td>{v.received}</td>
-                                               
                                                 <td>
                                                 <button
                                                         className="btn btn-primary"
