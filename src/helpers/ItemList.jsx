@@ -26,8 +26,8 @@ export const admin = [
         <CarryOutOutlined />
         , [
 
-            getItem('Ofertas', '6', <Link to={''} />),
-            getItem('Compras', '7', <Link to={'/admin/compras'} />),
+            getItem('Ofertas', '6', <Link to={'/admin/ofertas'} />),
+           
             getItem('Inventario', '9', <Link to={'/admin/stock'} />)
             // getItem('Ventas', '8', <Link to={''} />)
 
