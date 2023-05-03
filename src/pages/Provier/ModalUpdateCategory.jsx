@@ -73,11 +73,11 @@ const ModalUpdateCategory = ({
     }
   }
   const handleOnChangeValidationEmail = (value, min, max, callback ) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[a-zA-Z0-9_.\-"]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/
     if( value.length < min || value.length > max || !emailRegex.test(value) ){
-       callback({value: value, valid: false})
-      }else{
-        callback({value: value, valid: true})
+      callback({value: value, valid: false})
+    }else{
+      callback({value: value, valid: true})
     }
   }
   const handleCancel = () => {
