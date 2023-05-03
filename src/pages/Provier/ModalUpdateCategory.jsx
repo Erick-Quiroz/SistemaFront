@@ -73,7 +73,7 @@ const ModalUpdateCategory = ({
     }
   }
   const handleOnChangeValidationEmail = (value, min, max, callback ) => {
-    const emailRegex = /^[a-zA-Z0-9_.\-"]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/
+    const emailRegex = /^[a-zA-Z0-9_.\-"]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/ 
     if( value.length < min || value.length > max || !emailRegex.test(value) ){
       callback({value: value, valid: false})
     }else{
@@ -84,6 +84,7 @@ const ModalUpdateCategory = ({
     setShowModal(false);
     }
 
+    
   const handleUpdateSupplier = () => {
     if(name.valid && address.valid && phonenumber1.valid && phonenumber2.valid && email1.valid && email2.valid){
       console.log(supplier._id, name.value, address.value, supplier, phonenumber1.value, phonenumber2.value, email1.value, email2.value); // Agregar el console.log aquí
