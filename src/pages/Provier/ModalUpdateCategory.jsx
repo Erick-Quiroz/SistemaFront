@@ -112,7 +112,7 @@ const ModalUpdateCategory = ({
           <Form.Control
             style={{ border: address.valid ? '1px solid green': '1px solid red'}}
             placeholder="Direccion de proveedor"
-            onChange={( e ) => handleOnChangeValidationNoRestrict(e.target.value, 3, 50, setAddress)}
+            onChange={( e ) => handleOnChangeValidationNoRestrict(e.target.value, 5, 50, setAddress)}
             name="value"
             value={address.value}
           />
