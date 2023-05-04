@@ -148,21 +148,21 @@ export const OfferPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
-                                    <th scope="col" >ID</th>
-                                        <th scope="col">Producto</th>
+                                    <th scope="col" style={{ backgroundColor: '#94B0BA' }}>ID</th>
+                                        <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Producto</th>
 
-                                        <th scope="col">Precio(Bs)</th>
-                                        <th scope="col">Ofertas%</th>
-                                        <th scope="col">Precio Ofertas(Bs)</th>
-                                        <th scope="col">Imagen</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Precio(Bs)</th>
+                                        <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Ofertas%</th>
+                                        <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Precio Ofertas(Bs)</th>
+                                        <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Imagen</th>
+                                        <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Acciones</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {categories?.map((v, index) =>
                                         <>
-                                            <tr className="text-center">
+                                            <tr className="text-center"style={{ backgroundColor: index % 2 === 0 ? '' : '#F0F8FF' }}>
                                             <td>{index + 1}</td>
                                                 <td>{v.name}</td>
                                                 <td >{v.price}</td>
