@@ -26,7 +26,7 @@ const ModalAddOffer = ({
   const [price, setPrice]= useState({value:'', valid: true})
   const [porcentage, setPorcentage]= useState({value:'', valid: true})
   const [imageUrl, setImageUrl]= useState({value:'', valid: true})
-  
+
   useEffect(() => {
     if(productToEdit && Object.keys(productToEdit).length !== 0){
         setProduct(productToEdit) 
@@ -55,11 +55,11 @@ const ModalAddOffer = ({
   }
   const handleOnChangeValidationNumber = (value, min, max, callback) => {
     if (value === null || value === undefined || !/^[0-9]+$/.test(value) || value < 1 || value > 100 || value.length < min || value.length > max) {
-      
+   
       callback({ value: value, valid: false });
       
     } else {
-      
+
       callback({ value: value, valid: true });
     }
   }
@@ -105,11 +105,13 @@ const ModalAddOffer = ({
             value={porcentage.value}
           />
         </InputGroup>
+
         {!porcentage.valid && (
             <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
               Dato incorrecto
             </div>
           )}
+
         
 
         

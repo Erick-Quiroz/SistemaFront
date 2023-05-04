@@ -72,11 +72,13 @@ const [product, setProduct] = useState(initialState);
       setShowModal(false);
     }
   }
-  const handleOnChangeValidationNumber = (value, min, max, callback ) => {
-    if( value.length < min || value.length > max || !/^\d+$/.test(value) ){
-       callback({value: value, valid: false})
-      }else{
-        callback({value: value, valid: true})
+  const handleOnChangeValidationNumber = (value, min, max, callback) => {
+    if (value === null || value === undefined || !/^[0-9]+$/.test(value) || value < 1 || value > 10000 || value.length < min || value.length > max) {
+      
+      callback({ value: value, valid: false });
+      
+    } else {
+      callback({ value: value, valid: true });
     }
   }
  
@@ -90,15 +92,21 @@ const [product, setProduct] = useState(initialState);
           <Form.Control
             style={{ border: cost.valid ? '1px solid green': '1px solid red'}}
             placeholder="Costo unitario"
-            onChange={( e ) => handleOnChangeValidationNumber(e.target.value, 1, 5, setCost)}
+            onChange={( e ) => handleOnChangeValidationNumber(e.target.value, 1, 6 ,  setCost)}
             name="value"
             value={cost.value}
-          />
+            />
+          {!cost.valid && (
+            <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+             Este campo no puede contener caracteres especiales y es obligatorio.
+            </div>
+          )}
+          
         </InputGroup>
         <InputGroup className="mb-3">
           <InputGroup.Text >Fecha de entrega</InputGroup.Text>
           <Form.Control
-           imput type= "date"   min="2023-01-01" max="2024-12-31"
+           imput type= "date"  min="2023-05-01" max="2023-12-31"
             style={{ border: expiration.valid ? '1px solid green': '1px solid red'}}
             placeholder="fecha de entrega"
             onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 25, setExpiration)}
@@ -111,11 +119,18 @@ const [product, setProduct] = useState(initialState);
           <Form.Control
             style={{ border: received.valid ? '1px solid green': '1px solid red'}}
             placeholder="Cantidad recibida"
-            onChange={( e ) => handleOnChangeValidationNumber(e.target.value, 1, 5, setReceived )}
+            onChange={( e ) => handleOnChangeValidationNumber(e.target.value, 1, 6, setReceived )}
             name="value"
             value={received.value}
-          />
-        </InputGroup>
+            />
+            {!received.valid && (
+              <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+                
+                Este campo no puede contener caracteres especiales y es obligatorio.
+              </div>
+            )}
+            
+          </InputGroup>
                
       </Modal.Body>
       <Modal.Footer>

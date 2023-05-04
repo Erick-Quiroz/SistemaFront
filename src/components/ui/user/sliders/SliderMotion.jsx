@@ -15,31 +15,49 @@ export const SliderMotion = () => {
     }
 
     useEffect(() => {
-        setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
         getAll()
     }, [])
 
+    useEffect(() => {
+        setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
+    }, [data])
+
     return (
         <motion.div
-            ref={carousel}
             className='carousel'
+            style={{ display: 'flex', overflow: 'hidden' }}
+            ref={carousel}
             whileTap={{ cursor: 'grabbing' }}
         >
             <motion.div
+                className='inner-carousel'
                 drag='x'
                 dragConstraints={{ right: 0, left: -width }}
-                className='inner-carousel'
             >
-                <Row justify="space-evenly" gutter={16} style={{ minHeight: '40rem', minWidth: '20rem', display: 'flex', alignItems: 'center' }}>
+                <Row
+                    justify="space-evenly"
+                    gutter={16}
+                    style={{
+                        minHeight: '40rem',
+                        minWidth: '20rem',
+                        display: 'flex',
+                        flexWrap: 'nowrap',
+                        alignItems: 'center'
+                    }}>
                     {data.map((data) => {
                         return (
-                            <motion.div className='item' key={data.name} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.9 }}>
+                            <motion.div
+                                className='item'
+                                key={data.name}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.9 }}
+                            >
                                 <CardComponent {...data} />
                             </motion.div>
                         )
                     })}
                 </Row>
-            </motion.div>
-        </motion.div>
+            </motion.div >
+        </motion.div >
     )
 }
