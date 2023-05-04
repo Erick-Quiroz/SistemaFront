@@ -94,6 +94,8 @@ const ModalUpdateCategory = ({
         </InputGroup>
 
 
+
+
         <Form.Select
           value={
             category.state === "Activo" || category.state === "Inactivo"
