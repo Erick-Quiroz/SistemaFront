@@ -62,7 +62,7 @@ export const CategoryCreatePage = () => {
                             noValidate=""
                             onSubmit={handleSubmit}
                         >
-                            <h4 className="title" >Registrar Categoria</h4>
+                            <h4 className="title" >Registrar Categoría</h4>
                             <div className="row  mb-3">
 
                                 <div className="col col-sm-6">
@@ -82,9 +82,16 @@ export const CategoryCreatePage = () => {
                                         required
                                         type="text"
                                         value={name}
+                                        pattern="[A-Za-z ]{3,20}"
                                     />
-                                    <div className="invalid-feedback">
-                                        Completa este campo.
+                                    <div className="invalid-feedback" style={{
+                                        padding: 1
+
+                                    }}>
+                                        <p style={{
+                                            padding: 1
+
+                                        }}>Completa este campo</p>
                                     </div>
                                 </div>
 
@@ -92,7 +99,7 @@ export const CategoryCreatePage = () => {
                                     <label
                                         htmlFor="disabledTextInput"
                                         className="form-label">
-                                        <strong>Descripcion</strong>
+                                        <strong>Descripción</strong>
                                     </label>
                                     <input
                                         className="form-control"
