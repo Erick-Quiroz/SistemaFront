@@ -28,7 +28,7 @@ export const CategoryCreatePage = () => {
             const { data } = await shopAPI.post('/category/create-category', { name, description, state })
             if (data.success) {
                 navigate('/admin/categorias')
-                enqueueSnackbar('Producto agregado', {
+                enqueueSnackbar('Categoría creada', {
                     variant: 'success',
                     autoHideDuration: 1500,
                     anchorOrigin: {
@@ -62,10 +62,10 @@ export const CategoryCreatePage = () => {
                             noValidate=""
                             onSubmit={handleSubmit}
                         >
-                            <h4 className="title" >Registrar Categoria</h4>
+                            <h4 className="title" >Registrar Categoría</h4>
                             <div className="row  mb-3">
 
-                                <div className="col-md-6">
+                                <div className="col col-sm-6">
                                     <label
                                         htmlFor="validationCustom01"
                                         className="form-label">
@@ -82,17 +82,24 @@ export const CategoryCreatePage = () => {
                                         required
                                         type="text"
                                         value={name}
+                                        pattern="[A-Za-z ]{3,20}"
                                     />
-                                    <div className="invalid-feedback">
-                                        Completa este campo.
+                                    <div className="invalid-feedback" style={{
+                                        padding: 1
+
+                                    }}>
+                                        <p style={{
+                                            padding: 1
+
+                                        }}>Completa este campo</p>
                                     </div>
                                 </div>
 
-                                <div className="col">
+                                <div className="col col-sm-6">
                                     <label
                                         htmlFor="disabledTextInput"
                                         className="form-label">
-                                        <strong>Descripcion</strong>
+                                        <strong>Descripción</strong>
                                     </label>
                                     <input
                                         className="form-control"
@@ -112,11 +119,11 @@ export const CategoryCreatePage = () => {
                             </div>
 
                             <div className="row mb-3">
-                                <div className="col">
+                                <div className="col-6 col-sm-6">
                                     <label
                                         htmlFor="disabledSelect1"
                                         className="form-label">
-                                        <strong>Estado del producto</strong>
+                                        <strong>Estado</strong>
                                     </label>
                                     <select
                                         className="form-select"
@@ -125,7 +132,9 @@ export const CategoryCreatePage = () => {
                                         onChange={handlerInputChange}
                                         required
                                         value={state}
+
                                     >
+
                                         <option>Activo</option>
                                         <option>Inactivo</option>
                                     </select>

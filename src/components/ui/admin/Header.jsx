@@ -8,10 +8,10 @@ export const Header = () => {
     return (
         <Header
             style={{
-                paddingRight:'2vw',
+                paddingRight: '2vw',
                 textAlign: 'right',
                 color: 'white',
-                fontSize:'3vh',               
+                fontSize: '3vh',
                 height: '12vh',
                 maxheight: '12vh'
             }}>

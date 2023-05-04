@@ -9,8 +9,6 @@ export const CardComponent = (props) => {
 
     return (
         <Row
-            span={24}
-            justify="start"
             align={'top'}
             gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
             style={{
@@ -20,12 +18,14 @@ export const CardComponent = (props) => {
                 textAlign: 'center'
             }}
         >
-            <Col span={4} className="gutter-row">
+            <Col span={8} className="gutter-row" style={{
+                maxHeight:'60vh'
+            }}>
                 <Card
                     className={styles.card}
                     style={{
                         marginBottom: 50,
-                        marginLeft: 80,
+                        marginLeft: 0,
                         marginTop: 50,
                         width: 200
                     }}
@@ -37,10 +37,12 @@ export const CardComponent = (props) => {
                     <Meta
                         style={{ color: 'yellowgreen' }}
                         title={name}
-                        description={description}
+                        description={description}                       
                     />
                 </Card>
             </Col>
+
+            
         </Row >
     )
 }
