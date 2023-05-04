@@ -71,17 +71,28 @@ const ModalUpdateCategory = ({
             name="value"
             value={name.value}
           />
+          {!name.valid && (
+            <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+              El nombre no puede tener caracteres especiales y debe tener entre 3 y 20 caracteres.
+            </div>
+          )}
         </InputGroup>
         <InputGroup className="mb-3">
-          <InputGroup.Text >Descripción</InputGroup.Text>
+          <InputGroup.Text>Descripción</InputGroup.Text>
           <Form.Control
             style={{ border: description.valid ? '1px solid green': '1px solid red'}}
-            placeholder="Description de Categoria"
-            onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 100, setDescription)}
+            placeholder="Descripción de Categoría"
+            onChange={(e) => handleOnChangeValidation(e.target.value, 3, 100, setDescription)}
             name="value"
             value={description.value}
           />
+          {!description.valid && (
+            <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+              La descripción no puede tener caracteres especiales y debe tener entre 3 y 100 caracteres.
+            </div>
+          )}
         </InputGroup>
+
         <Form.Select
           value={
             category.state === "Activo" || category.state === "Inactivo"

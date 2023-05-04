@@ -58,6 +58,13 @@ const ModalUpdateCategory = ({
         callback({value: value, valid: true})
     }
   }
+  const handleOnChangeValidationNoRestrict = (value, min, max, callback ) => {
+    if( value.length < min || value.length > max ){
+       callback({value: value, valid: false})
+      }else{
+        callback({value: value, valid: true})
+    }
+  }
   const handleOnChangeValidationNumber = (value, min, max, callback ) => {
     if( value.length < min || value.length > max || !/^\d+$/.test(value) ){
        callback({value: value, valid: false})
@@ -66,17 +73,18 @@ const ModalUpdateCategory = ({
     }
   }
   const handleOnChangeValidationEmail = (value, min, max, callback ) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[a-zA-Z0-9_.\-"]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/ 
     if( value.length < min || value.length > max || !emailRegex.test(value) ){
-       callback({value: value, valid: false})
-      }else{
-        callback({value: value, valid: true})
+      callback({value: value, valid: false})
+    }else{
+      callback({value: value, valid: true})
     }
   }
   const handleCancel = () => {
     setShowModal(false);
     }
 
+    
   const handleUpdateSupplier = () => {
     if(name.valid && address.valid && phonenumber1.valid && phonenumber2.valid && email1.valid && email2.valid){
       console.log(supplier._id, name.value, address.value, supplier, phonenumber1.value, phonenumber2.value, email1.value, email2.value); // Agregar el console.log aquí
@@ -95,7 +103,7 @@ const ModalUpdateCategory = ({
           <Form.Control
             style={{ border: name.valid ? '1px solid green': '1px solid red'}}
             placeholder="Nombre de proveedor"
-            onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 20, setName)}
+            onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 40, setName)}
             name="value"
             value={name.value}
           />
@@ -105,7 +113,7 @@ const ModalUpdateCategory = ({
           <Form.Control
             style={{ border: address.valid ? '1px solid green': '1px solid red'}}
             placeholder="Direccion de proveedor"
-            onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 100, setAddress)}
+            onChange={( e ) => handleOnChangeValidationNoRestrict(e.target.value, 5, 50, setAddress)}
             name="value"
             value={address.value}
           />

@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { AdminPage, CategoryCreatePage, CategoryPage, HomePage, ProductCreatePage, ProductPage, ProveedorCreatePage, ProveedoresPage } from '../pages'
+
+import { AdminPage, CategoryCreatePage, CategoryPage, HomePage, ProductCreatePage, ProductPage, ProveedorCreatePage, ProveedoresPage, OfferPage,StockPage } from '../pages'
 
 const router = createBrowserRouter([
     {
@@ -38,8 +39,20 @@ const router = createBrowserRouter([
         errorElement: <h1>error</h1>
     },
     {
+        path: '/admin/ofertas',
+        element: <OfferPage />,
+        errorElement: <h1>error</h1>
+    },
+
+    {
         path: '/admin/registro/proveedor',
         element: <ProveedorCreatePage />,
+        errorElement: <h1>error</h1>
+    },
+    
+    {
+        path: '/admin/Stock',
+        element: <StockPage />,
         errorElement: <h1>error</h1>
     }
 ])

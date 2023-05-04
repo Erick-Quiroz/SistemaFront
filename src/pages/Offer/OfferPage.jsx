@@ -4,14 +4,13 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { Layout, theme, Button, Modal } from 'antd'
-import ModalUpdateProduct from './ModalUpdateProduct.jsx'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
-import { Link } from 'react-router-dom'
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+import ModalAddOffer from './ModalAddOffer.jsx'
 import Swal from 'sweetalert2'
-export const ProductPage = () => {
+export const OfferPage = () => {
     const { Content } = Layout
     const { token: { colorBgContainer } } = theme.useToken()
     const [categories, setCategories] = useState([])
@@ -19,6 +18,12 @@ export const ProductPage = () => {
     const [showModal, setShowModal] = useState(false)
     const [productToEdit, setProductToEdit] = useState({})
     const { enqueueSnackbar } = useSnackbar()
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [productId, setProductId] = useState(null)
+    const showModals = (productId) => {
+        setProductId(productId)
+        setIsModalVisible(true)
+    }
 
     const getAllCategory = async () => {
         try {
@@ -35,11 +40,26 @@ export const ProductPage = () => {
     useEffect(() => {
         getAllCategory()
     }, [])
+    const mostrarAlerta = async (pId) => {
+        Swal.fire({
+            icon: 'warning',
+            title: '¿Seguro que quiere eliminar la Oferta?',
+            showDenyButton: true,
+            denyButtonText: 'No',
+            confirmButtonText: 'Si'
 
+        }).then(response => {
+            if (response.isConfirmed) {
+                handleDelete(pId)
+            } else if (response.isDenied) {
+                getAllCategory()
+            }
+        })
+    }
     const handleDelete = async (pId) => {
         try {
             const { data } = await axios.delete(
-                `${BACKENDURL}/api/productLG/productLG/${pId}`
+                `${BACKENDURL}/api/productLG/offerDproductLG/${pId}`
             )
             if (data.success) {
                 toast.success('category is deleted')
@@ -50,8 +70,8 @@ export const ProductPage = () => {
         } catch (error) {
             toast.error('Somtihing went wrong')
         }
-        toast.success('category is deleted')
-        enqueueSnackbar('Producto Eliminado', {
+        toast.success('ofert is deleted')
+        enqueueSnackbar('Oferta Eliminada', {
             variant: 'error',
             autoHideDuration: 1500,
             anchorOrigin: {
@@ -73,7 +93,7 @@ export const ProductPage = () => {
         setShowModal(true)
     }
 
-    const updateProduct = async (product, name, description, price, imageUrl) => {
+    const updateProduct = async (product, name, description, price, porcentage, imageUrl) => {
         try {
             const productUpdated = {
                 name,
@@ -81,9 +101,12 @@ export const ProductPage = () => {
                 price,
                 state: product.state,
                 category: product.category,
+                porcentage,
+                // imageUrl: product.imageUrl,
                 imageUrl
+
             }
-            const { data } = await axios.put(`${BACKENDURL}/api/productLG/update-productLG/${product._id}`,
+            const { data } = await axios.put(`${BACKENDURL}/api/productLG/update-offerLG/${product._id}`,
                 productUpdated
             )
             if (data.success) {
@@ -94,22 +117,6 @@ export const ProductPage = () => {
         } catch (error) {
             toast.error('Somtihing went wrong')
         }
-    }
-    const mostrarAlerta = async (pId) => {
-        Swal.fire({
-            icon: 'warning',
-            title: '¿Seguro que quiere eliminar el Producto?',
-            showDenyButton: true,
-            denyButtonText: 'No',
-            confirmButtonText: 'Si'
-
-        }).then(response => {
-            if (response.isConfirmed) {
-                handleDelete(pId)
-            } else if (response.isDenied) {
-                getAllCategory()
-            }
-        })
     }
     return (
         <AdminLayout >
@@ -122,76 +129,64 @@ export const ProductPage = () => {
                         background: colorBgContainer
                     }}
                 >
+
                     <div className="row">
-                        <div className="text-center"><h1>MIS PRODUCTOS</h1></div>
+                        <div className="text-center"><h1>Registar ofertas</h1></div>
                         <div className="col-10"></div>
-                        <div className="col-2" >
-                            <Link to="/admin/registro/producto" >
-                                <Button className=" btn btn-success" type="primary" htmlType="submit" style={{
-                                    padding: 5,
-                                    width: 85,
-                                    height: 35
-                                }}>
-                                    Registrar
-                                </Button>
-                            </Link>
-                        </div>
+
                     </div><br></br>
                     <div className="container">
                         <div className="table-responsive">
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
-                                        <th scope="col" >ID</th>
-                                        <th scope="col" >Producto</th>
-                                        <th scope="col" >Categoría</th>
-                                        <th scope="col" >Precio(Bs)</th>
-                                        <th scope="col" >Estado</th>
-                                        <th scope="col" >Existencia</th>
-                                        <th scope="col" >Imagen</th>
-                                        <th scope="col" >Acciones</th>
+                                    <th scope="col" >ID</th>
+                                        <th scope="col">Producto</th>
+
+                                        <th scope="col">Precio(Bs)</th>
+                                        <th scope="col">Ofertas%</th>
+                                        <th scope="col">Precio Ofertas(Bs)</th>
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Acciones</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {categories?.map((v, index) =>
                                         <>
-                                            <tr className="text-center" style={{ backgroundColor: index % 2 === 0 ? '' : '#F0F8FF' }}>
-                                                {/* <td>{v._id}</td> */}
-                                                <td>{index + 1}</td>
-                                                {/* cambios en la linea 139 y 143 */}
+                                            <tr className="text-center">
+                                            <td>{index + 1}</td>
                                                 <td>{v.name}</td>
-                                                <td>{v.category}</td>
-                                                <td>{v.price}</td>
-                                                <td style={{ backgroundColor: v.state === 'Activo' ? '#9EF597' : '#FFB6C1' }}>{v.state}</td>
-                                                <td>{v.existence}</td>
-                                                <td><img src={v.imageUrl} style={{ width: 40, height: 40 }} alt={v.name} /></td>
+                                                <td >{v.price}</td>
+                                                <td >{v.porcentage}</td>
+                                                <td>{(v.price) - ((v.price) * ((v.porcentage) / 100))}</td>
+                                                <td><img src={v.imageUrl} style={{ width: 70, height: 70 }} alt={v.name} /></td>
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
                                                             handleGetProduct(v._id)
                                                         }} style={{
-                                                            padding: 2,
-                                                            width: 30,
+                                                            padding: 1,
+                                                            width: 100,
                                                             margin: 2
+
                                                         }}
-                                                        title='Editar'
                                                     >
-                                                        <EditOutlined/>
+                                                        REGISTRAR OFERTAS
                                                     </button>
                                                     <button
                                                         className="btn btn-danger"
                                                         onClick={() => {
                                                             mostrarAlerta(v._id)
-                                                        }} style={{
-                                                            padding: 1,
-                                                            width: 30,
-                                                            margin: 2
                                                         }}
-                                                        title='Eliminar'
+                                                        style={{ padding: 13, width: 100, margin: 3 }}
                                                     >
-                                                        <DeleteOutlined/>
+                                                     Eliminar
                                                     </button>
+
+                                                    
+
                                                 </td>
                                             </tr>
                                         </>
@@ -203,11 +198,12 @@ export const ProductPage = () => {
                                 footer={null}
                                 open={visible}
                             >
+
                             </Modal>
                         </div>
                     </div>
                 </div>
-                <ModalUpdateProduct
+                <ModalAddOffer
                     show={showModal}
                     productToEdit={productToEdit}
                     setShowModal={setShowModal}
@@ -218,3 +214,4 @@ export const ProductPage = () => {
         </AdminLayout>
     )
 }
+
