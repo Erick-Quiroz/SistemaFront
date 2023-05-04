@@ -10,25 +10,35 @@ export const Navbar = () => {
     return (
         <nav className='navbar'>
             <img
-                className='logo'
                 alt="logo"
+                className='logo'
                 src={imageLogo}
             />
-            <ul className={Mobile ? 'nav-links-mobile' : 'nav-links'} onClick={() => setMobile(false)}>
+            <ul
+                className={Mobile ? 'nav-links-mobile' : 'nav-links'}
+                onClick={() => setMobile(false)}
+            >
                 <Link to={'/admin'} className='text-center'>
-                    <button type="summit" className="btn btn-outline-success "
+                    <button
+                        className="btn btn-outline-success "
                         style={{
                             height: '10hv',
-                            width: 100,
-                            margin: 14
+                            margin: '3vh',
+                            width: 100
                         }}
-                    >Ingresar</button>
+                        type="summit"
+                    >
+                        Ingresar
+                    </button>
                 </Link>
             </ul>
-            <button className='mobile-menu-icon ' onClick={() => setMobile(!Mobile)}>
+            <button
+                className='mobile-menu-icon '
+                onClick={() => setMobile(!Mobile)}
+            >
                 {Mobile ? <ImCross /> : <FaBars />}
             </button>
-        </nav>
+        </nav >
     )
 }
 export default Navbar
