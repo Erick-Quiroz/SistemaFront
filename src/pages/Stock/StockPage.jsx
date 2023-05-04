@@ -90,7 +90,16 @@ export const StockPage = () => {
                 productUpdated
             )
             if (data.success) {
-                getAllCategory()
+                getAllCategory(
+                    enqueueSnackbar('Datos guardados correctamente', {
+                        variant: 'success',
+                        autoHideDuration: 1500,
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right'
+                        }
+                    })
+                )
             } else {
                 toast.error(data.message)
             }
