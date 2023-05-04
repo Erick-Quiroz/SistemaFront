@@ -144,9 +144,9 @@ export const StockPage = () => {
                                                 <td>{((v.price * 100) - (v.cost * 100)) / 100}</td>
                                                 <td>{v.expiration}</td>
                                                 <td>{v.received}</td>
-        
+
                                                 <td>
-                                                <button
+                                                    <button
 
                                                         className="btn btn-primary"
                                                         onClick={() => {
@@ -161,7 +161,6 @@ export const StockPage = () => {
                                                     >
                                                         <EditOutlined/>
                                                     </button>
-                                                  
 
                                                 </td>
                                             </tr>
