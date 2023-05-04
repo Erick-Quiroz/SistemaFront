@@ -90,7 +90,16 @@ export const StockPage = () => {
                 productUpdated
             )
             if (data.success) {
-                getAllCategory()
+                getAllCategory(
+                    enqueueSnackbar('Datos guardados correctamente', {
+                        variant: 'success',
+                        autoHideDuration: 1500,
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'right'
+                        }
+                    })
+                )
             } else {
                 toast.error(data.message)
             }
@@ -148,6 +157,7 @@ export const StockPage = () => {
                                                 <td>
                                                     <button
 
+
                                                         className="btn btn-primary"
                                                         onClick={() => {
                                                             handleGetProduct(v._id)
@@ -161,6 +171,7 @@ export const StockPage = () => {
                                                     >
                                                         <EditOutlined/>
                                                     </button>
+
 
                                                 </td>
                                             </tr>

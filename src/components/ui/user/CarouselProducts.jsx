@@ -17,7 +17,7 @@ export const CarouselProducts = () => {
 
     return (
         <>
-            <Carousels Carousels autoplay draggable slidesToShow={4}>
+            <Carousels Carousels autoplay draggable slidesToShow={3}>
                 {
                     products?.map(product => (
                         <CardComponent key={product._id} {...product} />

@@ -26,7 +26,7 @@ const ModalAddOffer = ({
   const [price, setPrice]= useState({value:'', valid: true})
   const [porcentage, setPorcentage]= useState({value:'', valid: true})
   const [imageUrl, setImageUrl]= useState({value:'', valid: true})
-
+  const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
     if(productToEdit && Object.keys(productToEdit).length !== 0){
         setProduct(productToEdit) 
@@ -55,10 +55,11 @@ const ModalAddOffer = ({
   }
   const handleOnChangeValidationNumber = (value, min, max, callback) => {
     if (value === null || value === undefined || !/^[0-9]+$/.test(value) || value < 1 || value > 100 || value.length < min || value.length > max) {
-      
+      setShowAlert(true);
       callback({ value: value, valid: false });
       
     } else {
+      setShowAlert(false);
       callback({ value: value, valid: true });
     }
   }
@@ -104,7 +105,7 @@ const ModalAddOffer = ({
             value={porcentage.value}
           />
         </InputGroup>
-
+        {showAlert && <div className="alert alert-danger">Dato incorrecto</div>}
         
 
         
