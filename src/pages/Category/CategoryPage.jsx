@@ -136,11 +136,11 @@ export const CategoryPage = () => {
                             <div className="col-2">
                                 <Link to={'/admin/registro/categoria'}>
                                     <Button className=" btn btn-success" type="primary" htmlType="submit" style={{
-                                        padding: 10,
-                                        width: 80,
+                                        padding: 5,
+                                        width: 85,
                                         height: 35
                                     }}>
-                                        Agregar
+                                        Registrar
                                     </Button>
                                 </Link>
                             </div>
