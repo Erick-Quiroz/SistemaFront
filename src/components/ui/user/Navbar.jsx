@@ -20,7 +20,7 @@ export const Navbar = () => {
                         style={{
                             height: '10hv',
                             width: 100,
-                            margin: 6
+                            margin: 14
                         }}
                     >Ingresar</button>
                 </Link>
