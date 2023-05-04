@@ -111,6 +111,14 @@ export const OfferPage = () => {
             )
             if (data.success) {
                 getAllCategory()
+                enqueueSnackbar('Oferta Cofirmada', {
+                    variant: 'success',
+                    autoHideDuration: 1500,
+                    anchorOrigin: {
+                        vertical: 'top',
+                        horizontal: 'right'
+                    }
+                })
             } else {
                 toast.error(data.message)
             }
