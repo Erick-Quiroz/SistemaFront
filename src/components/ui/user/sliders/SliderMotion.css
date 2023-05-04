@@ -12,29 +12,67 @@
 }
 
 .inner-carousel {
-    /* display: flex; */
     background: lightblue;
 }
 
 /* tamanio que no muestra del carousel */
 .carousel {
-
     cursor: grab;
     overflow: hidden;
     background: rgb(230, 173, 173);
 }
 
 /* default */
-#root {
-    /* max-width: 1280px; */
-    max-width: 120vh;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-}
+
 
 @media (prefers-reduced-motion: no-preference) {
     a:nth-of-type(2) .logo {
         animation: logo-spin infinite 20s linear;
     }
+}
+
+/* prueba styles */
+.item {
+    position: relative;
+}
+
+.item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: carousel-animation 2s infinite;
+}
+
+.item img:nth-child(1) {
+    opacity: 1;
+}
+
+@keyframes carousel-animation {
+    0% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    25% {
+        opacity: 1;
+        transform: translateX(-100%);
+    }
+
+    45% {
+        opacity: 1;
+        transform: translateX(-100%);
+    }
+
+    50% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    /* Repeat for each image */
 }

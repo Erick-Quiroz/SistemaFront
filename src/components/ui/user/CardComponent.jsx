@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const { Meta } = Card
 
 export const CardComponent = (props) => {
-    const { name, description, imageUrl } = props
+    const { name, description, imageUrl, price } = props
 
     return (
         <Row
@@ -15,7 +15,6 @@ export const CardComponent = (props) => {
             gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
             style={{
                 padding: 14,
-                minHeight: '84vh',
                 height: '100%',
                 lineHeight: '100vh',
                 textAlign: 'center'
@@ -34,6 +33,7 @@ export const CardComponent = (props) => {
                         <img alt={name} src={imageUrl} />
                     }
                 >
+                    <div>precio: {price} Bs</div>
                     <Meta
                         style={{ color: 'yellowgreen' }}
                         title={name}
@@ -48,5 +48,6 @@ export const CardComponent = (props) => {
 CardComponent.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
-    imageUrl: PropTypes.string
+    imageUrl: PropTypes.string,
+    price: PropTypes.number
 }
