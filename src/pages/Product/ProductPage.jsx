@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import { Link } from 'react-router-dom'
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import Swal from 'sweetalert2'
 export const ProductPage = () => {
     const { Content } = Layout
@@ -162,9 +162,9 @@ export const ProductPage = () => {
                                                 <td>{v.name}</td>
                                                 <td>{v.category}</td>
                                                 <td>{v.price}</td>
-                                                <td>{v. estado}</td>
-                                                <TD>0</TD>
-                                                <td><img src={v. imageUrl} style={{ width: 100, height: 100 }  } alt={v. nombre} /></td>
+                                                <td>{v.estado}</td>
+                                                <td>0</td>
+                                                <td><img src={v.imageUrl} style={{ width: 100, height: 100 }} alt={v.nombre} /></td>
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"
@@ -177,7 +177,7 @@ export const ProductPage = () => {
                                                         }}
                                                         title='Editar'
                                                     >
-                                                        <EditOutlined/>
+                                                        <EditOutlined />
                                                     </button>
                                                     <button
                                                         className="btn btn-danger"
@@ -190,7 +190,7 @@ export const ProductPage = () => {
                                                         }}
                                                         title='Eliminar'
                                                     >
-                                                        <DeleteOutlined/>
+                                                        <DeleteOutlined />
                                                     </button>
                                                 </td>
                                             </tr>

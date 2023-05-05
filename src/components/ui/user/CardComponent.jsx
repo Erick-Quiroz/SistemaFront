@@ -19,30 +19,34 @@ export const CardComponent = (props) => {
             }}
         >
             <Col span={8} className="gutter-row" style={{
-                maxHeight:'60vh'
+                maxHeight: '60vh'
             }}>
                 <Card
                     className={styles.card}
                     style={{
+                        display: 'flow-root',
                         marginBottom: 50,
                         marginLeft: 0,
                         marginTop: 50,
-                        width: 200
+                        width: 200,
+                        height: 320
                     }}
                     cover={
-                        <img alt={name} src={imageUrl} />
+                        <img draggable={false} alt={name} src={imageUrl} style={{
+                            height: '100%',
+                            width: '100%'
+                        }}
+                        />
                     }
                 >
                     <div>precio: {price} Bs</div>
                     <Meta
                         style={{ color: 'yellowgreen' }}
                         title={name}
-                        description={description}                       
+                        description={description}
                     />
                 </Card>
             </Col>
-
-            
         </Row >
     )
 }
