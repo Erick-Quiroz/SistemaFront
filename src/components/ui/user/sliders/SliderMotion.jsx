@@ -42,7 +42,8 @@ export const SliderMotion = () => {
                         minWidth: '20rem',
                         display: 'flex',
                         flexWrap: 'nowrap',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        justifyContent: 'space-between'
                     }}>
                     {data.map((data) => {
                         return (
