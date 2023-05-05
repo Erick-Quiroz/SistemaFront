@@ -162,9 +162,9 @@ export const ProductPage = () => {
                                                 <td>{v.name}</td>
                                                 <td>{v.category}</td>
                                                 <td>{v.price}</td>
-                                                <td style={{ backgroundColor: v.state === 'Activo' ? '#9EF597' : '#FFB6C1' }}>{v.state}</td>
-                                                <td>{v.existence}</td>
-                                                <td><img src={v.imageUrl} style={{ width: 40, height: 40 }} alt={v.name} /></td>
+                                                <td>{v. estado}</td>
+                                                <TD>0</TD>
+                                                <td><img src={v. imageUrl} style={{ width: 100, height: 100 }  } alt={v. nombre} /></td>
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"
