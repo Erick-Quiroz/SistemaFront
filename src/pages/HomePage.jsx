@@ -1,8 +1,8 @@
 import { Layout } from 'antd'
 import { ShopLayout } from '../components/layouts/ShopLayout'
-import { CarouselAdds, CarouselProducts} from '../components/ui/user'
+import { CarouselAdds } from '../components/ui/user'
 import './HomePage.css'
-import React from 'react'
+import { SliderMotion } from '../components/ui/user/sliders/SliderMotion'
 
 export const HomePage = () => {
     const { Content } = Layout
@@ -18,10 +18,7 @@ export const HomePage = () => {
                 }}
             >
                 <CarouselAdds />
-                <div className= 'Contenedor'>
-                    <h1 style={{color:'white'}}>Productos</h1>
-                </div>
-                <CarouselProducts />
+                <SliderMotion />
             </Content >
         </ShopLayout>
     )
