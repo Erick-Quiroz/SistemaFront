@@ -32,7 +32,7 @@ const ModalUpdateCategory = ({
     setCategory({ ...category, [e.target.name]: e.target.value });
   };
 
-  const rules =  /^[a-zA-Z\s]+$/;
+  const rules = /^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/;
 
   const stateOptions = [
     { value: "Activo", label: "Activo" },
