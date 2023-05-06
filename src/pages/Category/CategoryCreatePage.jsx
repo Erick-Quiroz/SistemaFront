@@ -82,7 +82,7 @@ export const CategoryCreatePage = () => {
                                         required
                                         type="text"
                                         value={name}
-                                        pattern="[A-Za-z ]{3,20}"
+                                        pattern="[A-Za-zá-ú ]{3,20}"
                                     />
                                     <div className="invalid-feedback" style={{
                                         padding: 1
@@ -104,13 +104,14 @@ export const CategoryCreatePage = () => {
                                     <input
                                         className="form-control"
                                         id="description"
-                                        maxLength={20}
+                                        maxLength={100}
                                         minLength={3}
                                         name='description'
                                         onChange={handlerInputChange}
                                         required
                                         type="text"
                                         value={description}
+                                        pattern="[A-Za-zá-ú ]{3,100}"
                                     />
                                     <div className="invalid-feedback">
                                         Completa este campo.
