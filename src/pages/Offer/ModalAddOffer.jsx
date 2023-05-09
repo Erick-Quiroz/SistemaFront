@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, InputGroup, Form, Button } from "react-bootstrap";
-import validUrl from 'valid-url';
-import { useSnackbar } from 'notistack'
+
 const initialState = {
   name: '',
   description: "",

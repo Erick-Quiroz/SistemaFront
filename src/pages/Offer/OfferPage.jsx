@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { Layout, theme, Button, Modal } from 'antd'
-
+import {  DeleteOutlined, PlusOutlined  } from '@ant-design/icons'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
@@ -148,7 +148,7 @@ export const OfferPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
-                                    <th scope="col" style={{ backgroundColor: '#94B0BA' }}>ID</th>
+                                    <th scope="col" style={{ backgroundColor: '#94B0BA' }}>N°</th>
                                         <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Producto</th>
 
                                         <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Precio(Bs)</th>
@@ -168,29 +168,33 @@ export const OfferPage = () => {
                                                 <td >{v.price}</td>
                                                 <td >{v.porcentage}</td>
                                                 <td>{(v.price) - ((v.price) * ((v.porcentage) / 100))}</td>
-                                                <td><img src={v.imageUrl} style={{ width: 70, height: 70 }} alt={v.name} /></td>
+                                                <td><img src={v.imageUrl} style={{ width: 50, height: 50 }} alt={v.name} /></td>
                                                 <td>
-                                                    <button
+                                                <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
                                                             handleGetProduct(v._id)
                                                         }} style={{
-                                                            padding: 1,
-                                                            width: 100,
-                                                            margin: 2
+                                                            padding: 10,
+                                                            width: 45,
+                                                            margin: 3
 
                                                         }}
+                                                        title='REGISTRAR OFERTAS'
                                                     >
-                                                        REGISTRAR OFERTAS
+                                                        
+                                                        <PlusOutlined style={{ fontSize: '25px' }}/>
                                                     </button>
                                                     <button
                                                         className="btn btn-danger"
                                                         onClick={() => {
                                                             mostrarAlerta(v._id)
                                                         }}
-                                                        style={{ padding: 13, width: 100, margin: 3 }}
+                                                        style={{ padding: 10, width: 50, margin: 3 }}
+                                                        title='Eliminar'
                                                     >
-                                                     Eliminar
+                                                     
+                                                     <DeleteOutlined style={{ fontSize: '25px' }}/>
                                                     </button>
 
                                                     

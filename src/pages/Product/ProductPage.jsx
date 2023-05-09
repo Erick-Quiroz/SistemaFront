@@ -142,7 +142,7 @@ export const ProductPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
-                                        <th scope="col" >ID</th>
+                                        <th scope="col" >N°</th>
                                         <th scope="col" >Producto</th>
                                         <th scope="col" >Categoría</th>
                                         <th scope="col" >Precio(Bs)</th>
