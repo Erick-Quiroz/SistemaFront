@@ -184,7 +184,7 @@ export const ProveedoresPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
-                                        <th scope="col" >ID</th>
+                                        <th scope="col" >N°</th>
                                         <th scope="col" >Nombre</th>
                                         <th scope="col" >Direccion</th>
                                         <th scope="col" >Telefono</th>
