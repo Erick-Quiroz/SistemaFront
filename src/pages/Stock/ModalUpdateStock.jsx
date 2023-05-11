@@ -125,6 +125,7 @@ const [product, setProduct] = useState(initialState);
             />
             {!received.valid && (
               <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+
               El dato ingresado es incorrecto, por favor verifique.
               </div>
             )}
