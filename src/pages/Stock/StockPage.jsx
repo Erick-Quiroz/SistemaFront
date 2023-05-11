@@ -132,6 +132,7 @@ export const StockPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
+                                        <th scope="col" >N°</th>
                                         <th scope="col">Producto</th>
                                         <th scope="col">Proveedor</th>
                                         <th scope="col">Precio de compra(Bs)</th>
@@ -148,7 +149,7 @@ export const StockPage = () => {
                                     {categories?.map((v, index) =>
                                         <>
                                             <tr className="text-center" style={{ backgroundColor: index % 2 === 0 ? '' : '#F0F8FF' }}>
-
+                                                <td>{index + 1}</td>
                                                 <td>{v.name}</td>
                                                 <td>{v.supplier}</td>
                                                 <td>{v.cost}</td>
