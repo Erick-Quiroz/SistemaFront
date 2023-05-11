@@ -156,7 +156,7 @@ export const OfferPage = () => {
                                         <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Precio Ofertas(Bs)</th>
                                         <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Imagen</th>
                                         <th scope="col"style={{ backgroundColor: '#94B0BA' }}>Acciones</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -168,34 +168,41 @@ export const OfferPage = () => {
                                                 <td >{v.price}</td>
                                                 <td >{v.porcentage}</td>
                                                 <td>{(v.price) - ((v.price) * ((v.porcentage) / 100))}</td>
+
                                                 <td><img src={v.imageUrl} style={{ width: 40, height: 40 }} alt={v.name} /></td>
+
                                                 <td>
                                                 <button
                                                         className="btn btn-primary"
                                                         onClick={() => {
                                                             handleGetProduct(v._id)
                                                         }} style={{
+
                                                             padding: 2,
                                                             width: 30,
                                                             margin: 2
+
 
                                                         }}
                                                         title='REGISTRAR OFERTAS'
                                                     >
                                                         
+
                                                         <PlusOutlined />
+
                                                     </button>
                                                     <button
                                                         className="btn btn-danger"
                                                         onClick={() => {
                                                             mostrarAlerta(v._id)
                                                         }}
+
                                                         style={{ padding: 2, width: 30, margin: 2 }}
                                                         title='Eliminar'
                                                     >
                                                      
                                                      <DeleteOutlined />
-                                                    </button>
+                                                     </button>
 
                                                     
 
