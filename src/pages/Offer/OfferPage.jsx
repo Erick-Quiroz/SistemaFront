@@ -190,7 +190,7 @@ export const OfferPage = () => {
                                                         onClick={() => {
                                                             mostrarAlerta(v._id)
                                                         }}
-                                                        style={{ padding: 1, width: 30, margin: 2 }}
+                                                        style={{ padding: 2, width: 30, margin: 2 }}
                                                         title='Eliminar'
                                                     >
                                                      
