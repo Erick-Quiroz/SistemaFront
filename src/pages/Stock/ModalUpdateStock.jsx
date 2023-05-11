@@ -98,7 +98,7 @@ const [product, setProduct] = useState(initialState);
             />
           {!cost.valid && (
             <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
-             Este campo no puede contener caracteres especiales y es obligatorio.
+              El dato ingresado es incorrecto, por favor verifique.
             </div>
           )}
           
@@ -125,10 +125,10 @@ const [product, setProduct] = useState(initialState);
             />
             {!received.valid && (
               <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
-                
-                Este campo no puede contener caracteres especiales y es obligatorio.
+              El dato ingresado es incorrecto, por favor verifique.
               </div>
             )}
+            
             
           </InputGroup>
                
