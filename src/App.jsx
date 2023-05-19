@@ -4,9 +4,11 @@ import { AppRouter } from './routes/AppRouter'
 
 function App () {
     return (
+
         <SnackbarProvider maxSnack={3}>
             <AppRouter />
         </SnackbarProvider>
+
     )
 }
 

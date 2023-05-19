@@ -1,3 +1,3 @@
-const BACKENDURL ='https://sistema-back.onrender.com'
+const BACKENDURL = 'http://localhost:8080'
 
 export default BACKENDURL
