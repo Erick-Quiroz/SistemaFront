@@ -19,22 +19,16 @@ export const admin = [
 
             getItem('Proveedor', '5', <Link to={'/admin/proveedors'} />)
 
-
-
         ]
     ),
     getItem('Operaciones', 'sub3',
         <CarryOutOutlined />
         , [
+            getItem('Ventas', '6', <Link to={'/admin/ventas'} />),
+            getItem('Ofertas', '7', <Link to={'/admin/ofertas'} />),
 
-
-            getItem('Ofertas', '6', <Link to={'/admin/ofertas'} />),
-
-
-
-            getItem('Inventario', '9', <Link to={'/admin/stock'} />)
+            getItem('Inventario', '8', <Link to={'/admin/stock'} />)
             // getItem('Ventas', '8', <Link to={''} />)
-
 
         ]
     )

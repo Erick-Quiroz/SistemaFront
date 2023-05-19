@@ -9,9 +9,7 @@ export * from './HomePage'
 
 export * from './Offer/OfferPage'
 
+export * from './Stock/StockPage'
 
-export * from './Stock/StockPage' 
-
-
-
-
+export * from './ventas/VentasPage'
+export * from './Cart/CartPage'
