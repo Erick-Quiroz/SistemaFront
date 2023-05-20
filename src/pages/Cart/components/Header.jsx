@@ -27,7 +27,7 @@ export const Header = ({
     }
 
     return (
-        <header>
+        <headerr>
             <h1></h1>
 
             <div className='container-icon'>
@@ -110,6 +110,6 @@ export const Header = ({
                         )}
                 </div>
             </div>
-        </header>
+        </headerr>
     )
 }
