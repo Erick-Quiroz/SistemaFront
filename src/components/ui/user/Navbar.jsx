@@ -8,15 +8,14 @@ import { useCart } from 'react-use-cart'
 import { BiCart } from 'react-icons/bi'
 import { Header } from '../../../pages/Cart/components/Header'
 import { ProductList } from '../../../pages/Cart/components/ProductList'
+
 export const Navbar = () => {
     const [Mobile, setMobile] = useState(false)
-    const {
-        isEmpty,
-        totalItems
-    } = useCart()
+    const { isEmpty, totalItems } = useCart()
     const [allProducts, setAllProducts] = useState([])
     const [total, setTotal] = useState(0)
     const [countProducts, setCountProducts] = useState(0)
+
     return (
         <nav className='navbar'>
             <a href="/">
@@ -32,6 +31,19 @@ export const Navbar = () => {
                 className={Mobile ? 'nav-links-mobile' : 'nav-links'}
                 onClick={() => setMobile(false)}
             >
+                <Link to={'/register'} className='text-center'>
+                    <button
+                        className="btn btn-outline-success "
+                        style={{
+                            height: '10hv',
+                            margin: '3vh',
+                            width: 150
+                        }}
+                        type="summit"
+                    >
+                        Registrarse
+                    </button>
+                </Link>
                 <Link to={'/admin'} className='text-center'>
                     <button
                         className="btn btn-outline-success "
@@ -58,7 +70,6 @@ export const Navbar = () => {
                         Tienda
                     </button>
                 </Link>
-
             </ul>
             <button
                 className='mobile-menu-icon '
@@ -69,4 +80,5 @@ export const Navbar = () => {
         </nav >
     )
 }
+
 export default Navbar

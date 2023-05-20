@@ -12,3 +12,4 @@ export * from "./Offer/OfferPage";
 export * from "./Stock/StockPage";
 
 export * from "./Cart/CartPage";
+export * from "./User/RegisterPage"
