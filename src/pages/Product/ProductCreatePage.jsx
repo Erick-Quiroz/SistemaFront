@@ -14,21 +14,22 @@ const initialState = {
     state: 'Activo',
     category: '',
     price: 0,
-    imageUrl: ''
+    imageUrl: '',
+    supplier: ''
 }
 
 export const ProductCreatePage = () => {
     const navigate = useNavigate()
     const { token: { colorBgContainer } } = theme.useToken()
     const [formValues, handlerInputChange] = useForm(initialState)
-    const { name, description, state, category, price, imageUrl } = formValues
+    const { name, description, state, category, price, imageUrl , supplier } = formValues
     const { Content } = Layout
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            const { data } = await shopAPI.post('/productLG/create-productLG', { name, description, state, category, price, imageUrl })
+            const { data } = await shopAPI.post('/productLG/create-productLG', { name, description, state, category, price, imageUrl, supplier })
             if (data.success) {
                 navigate('/admin/productos')
                 enqueueSnackbar('Producto agregado', {
@@ -60,9 +61,20 @@ export const ProductCreatePage = () => {
             console.log(error)
         }
     }
-
+    const [proveedor, setProveedor] = useState([])
+    const getAllSupplier = async () => {
+        try {
+            const { data } = await shopAPI.get('/supplierLG/get-supplierLG')
+            if (data.success) {
+                setProveedor(data.supplier)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
     useEffect(() => {
         getAllCategory()
+        getAllSupplier()
     }, [])
 
     return (
@@ -229,6 +241,38 @@ export const ProductCreatePage = () => {
                                         Completa este campo.
                                     </div>
                                 </div>
+                                <div className="row  mb-3">
+                                <div className="col">
+                                    <label
+                                        htmlFor="disabledSelect"
+                                        className="form-label">
+                                        <strong>Proveedor</strong>
+                                    </label>
+                                    <select
+                                        className="form-select"
+                                        id="disabledSelect"
+                                        name='supplier'
+                                        onChange={handlerInputChange}
+                                        placeholder="Seleccione proveedor!!!"
+                                        required
+                                        value={supplier}
+
+                                    >
+                                        <option value="" disabled>Seleccione un proveedor</option>
+                                        {proveedor?.map((v) =>
+                                            <>
+                                                <option className="">
+                                                    {v.name}
+                                                </option>
+                                            </>
+                                        )}
+                                    </select>
+                                    <div className="invalid-feedback">
+                                        Completa este campo.
+                                    </div>
+                                </div>
+                                </div>
+                           
                             </div>
 
                             <div className="container text-end">

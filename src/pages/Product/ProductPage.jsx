@@ -142,7 +142,7 @@ export const ProductPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
-                                        <th scope="col" >ID</th>
+                                        <th scope="col" >N°</th>
                                         <th scope="col" >Producto</th>
                                         <th scope="col" >Categoría</th>
                                         <th scope="col" >Precio(Bs)</th>
@@ -162,9 +162,9 @@ export const ProductPage = () => {
                                                 <td>{v.name}</td>
                                                 <td>{v.category}</td>
                                                 <td>{v.price}</td>
-                                                <td>{v.estado}</td>
-                                                <td>0</td>
-                                                <td><img src={v.imageUrl} style={{ width: 100, height: 100 }} alt={v.nombre} /></td>
+                                                <td style={{ backgroundColor: v.state === 'Activo' ? '#9EF597' : '#FFB6C1' }}>{v.state}</td>
+                                                <td>{v.existence}</td>
+                                                <td><img src={v.imageUrl} style={{ width: 40, height: 40 }} alt={v.name} /></td>
                                                 <td>
                                                     <button
                                                         className="btn btn-primary"

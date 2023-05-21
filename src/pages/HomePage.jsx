@@ -9,7 +9,8 @@ export const HomePage = () => {
 
     return (
         <ShopLayout>
-            <Content className='fondo'
+            <Content
+                className='fondo'
                 style={{
                     height: '100%',
                     minHeight: '84vh',

@@ -150,7 +150,7 @@ export const CategoryPage = () => {
                                 <table border="1" className="table table-hover">
                                     <thead className="thead-dark">
                                         <tr className="text-center">
-                                            <th scope="col" style={{ backgroundColor: '#94B0BA' }}>ID</th>
+                                            <th scope="col" style={{ backgroundColor: '#94B0BA' }}>N°</th>
                                             <th scope="col" style={{ backgroundColor: '#94B0BA' }}>Categoria</th>
 
                                             <th scope="col" style={{ backgroundColor: '#94B0BA' }}>Descripción</th>

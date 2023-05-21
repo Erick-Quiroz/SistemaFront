@@ -76,10 +76,11 @@ export const StockPage = () => {
         setShowModal(true)
     }
 
-    const updateProduct = async (product, name, cost, expiration, received, existence) => {
+    const updateProduct = async (product, name, cost, expiration, received, existence , supplier) => {
         try {
             const productUpdated = {
                 name,
+                supplier,
                 received,
                 expiration,
                 cost,
@@ -131,7 +132,9 @@ export const StockPage = () => {
                             <table border="1" className="table table-hover">
                                 <thead className="thead-dark">
                                     <tr className="text-center" style={{ backgroundColor: '#94B0BA' }}>
+                                        <th scope="col" >N°</th>
                                         <th scope="col">Producto</th>
+                                        <th scope="col">Proveedor</th>
                                         <th scope="col">Precio de compra(Bs)</th>
                                         <th scope="col">Precio de venta(Bs)</th>
                                         <th scope="col">Utilidad(Bs)</th>
@@ -146,8 +149,9 @@ export const StockPage = () => {
                                     {categories?.map((v, index) =>
                                         <>
                                             <tr className="text-center" style={{ backgroundColor: index % 2 === 0 ? '' : '#F0F8FF' }}>
-
+                                                <td>{index + 1}</td>
                                                 <td>{v.name}</td>
+                                                <td>{v.supplier}</td>
                                                 <td>{v.cost}</td>
                                                 <td>{v.price}</td>
                                                 <td>{((v.price * 100) - (v.cost * 100)) / 100}</td>
