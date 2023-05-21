@@ -102,7 +102,7 @@ export const Search = () => {
 
     return (
         <div
-            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'white' }}>
+            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Autosuggest
                 style={{ border: '2px solid red' }}
                 suggestions={productos}
