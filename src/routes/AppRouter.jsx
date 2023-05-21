@@ -1,11 +1,15 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-
-import { CartPage, AdminPage, CategoryCreatePage, CategoryPage, HomePage, ProductCreatePage, ProductPage, ProveedorCreatePage, ProveedoresPage, OfferPage, StockPage, RegisterPage } from '../pages'
+import { AdminPage, CartPage, CategoryCreatePage, CategoryPage, HomePage, OfferPage, ProductCreatePage, ProductoPage, ProductPage, ProveedorCreatePage, ProveedoresPage, RegisterPage, StockPage } from '../pages'
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <HomePage />,
+        errorElement: <h1>error</h1>
+    },
+    {
+        path: '/productos/:productID',
+        element: <ProductoPage />,
         errorElement: <h1>error</h1>
     },
     {
@@ -64,7 +68,7 @@ const router = createBrowserRouter([
 
     {
         path: '/register',
-        element: <RegisterPage/>,
+        element: <RegisterPage />,
         errorElement: <h1>error</h1>
     }
 

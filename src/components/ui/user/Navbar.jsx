@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
 import { imageLogo } from '../../../helpers/imageAdds'
+import { Search } from '../Search'
 import './navbar.css'
 import { useCart } from 'react-use-cart'
 import { BiCart } from 'react-icons/bi'
@@ -31,6 +32,7 @@ export const Navbar = () => {
                 className={Mobile ? 'nav-links-mobile' : 'nav-links'}
                 onClick={() => setMobile(false)}
             >
+                <Search />
                 <Link to={'/register'} className='text-center'>
                     <button
                         className="btn btn-outline-success "
@@ -48,7 +50,6 @@ export const Navbar = () => {
                     <button
                         className="btn btn-outline-success "
                         style={{
-                            height: '10hv',
                             margin: '3vh',
                             width: 100
                         }}
