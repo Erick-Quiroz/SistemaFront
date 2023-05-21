@@ -17,8 +17,8 @@ export const HomePage = () => {
                     textAlign: 'center'
                 }}
             >
-                <CarouselAdds />
-                <SliderMotion />
+                <CarouselAdds style={{ position: 'absolute', zIndex: '1' }} />
+                <SliderMotion style={{ position: 'absolute', zIndex: '2' }} />
             </Content >
         </ShopLayout>
     )
