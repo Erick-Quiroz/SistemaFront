@@ -17,6 +17,7 @@ li {
 
 .navbar {
   display: flex;
+  background-color: white;
   justify-content: space-around;
   align-items: center;
   height: 10vh;
@@ -31,7 +32,7 @@ li {
 
 .nav-links {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 75%;
 }
 
