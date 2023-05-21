@@ -17,7 +17,7 @@
 }
 
 .fondoPantalla {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -27,7 +27,7 @@
 .fondo {
     place-items: center;
     min-width: 320px;
-    /* position: absolute; */
+    position: absolute;
     /* width: 99.1%; */
     width: 100%;
     background: linear-gradient(148deg, rgba(46, 27, 91, 1) 0%, rgba(46, 27, 91, 1) 47%, rgba(13, 175, 208, 1) 100%);
