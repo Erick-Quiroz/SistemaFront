@@ -14,6 +14,7 @@ export const Navbar = () => {
                 className='logo'
                 src={imageLogo}
             />
+            
             <ul
                 className={Mobile ? 'nav-links-mobile' : 'nav-links'}
                 onClick={() => setMobile(false)}
@@ -29,6 +30,19 @@ export const Navbar = () => {
                         type="summit"
                     >
                         Ingresar
+                    </button>
+                </Link>
+                <Link to={'/User'} className='text-center'>
+                    <button
+                        className="btn btn-outline-success "
+                        style={{
+                            height: '10hv',
+                            margin: '3vh',
+                            width: 160
+                        }}
+                        type="summit"
+                    >
+                        Editar Usuario
                     </button>
                 </Link>
             </ul>
