@@ -96,7 +96,7 @@ const ModalUpdateCategory = ({
   return (
     <Form noValidate >
     <Modal show={show} centered>
-      <Modal.Header>Editar Categoria</Modal.Header>
+      <Modal.Header>Editar Proveedor</Modal.Header>
       <Modal.Body>
         <InputGroup className="mb-3">
           <InputGroup.Text >Nombre Proveedor</InputGroup.Text>

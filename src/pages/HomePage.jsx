@@ -9,7 +9,8 @@ export const HomePage = () => {
 
     return (
         <ShopLayout>
-            <Content className='fondo'
+            <Content
+                className='fondo'
                 style={{
                     height: '100%',
                     minHeight: '84vh',
@@ -17,8 +18,8 @@ export const HomePage = () => {
                     textAlign: 'center'
                 }}
             >
-                <CarouselAdds />
-                <SliderMotion />
+                <CarouselAdds style={{ position: 'absolute', zIndex: '1' }} />
+                <SliderMotion style={{ position: 'absolute', zIndex: '2' }} />
             </Content >
         </ShopLayout>
     )

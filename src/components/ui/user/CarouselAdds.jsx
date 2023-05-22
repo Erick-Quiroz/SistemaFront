@@ -6,7 +6,8 @@ export const CarouselAdds = () => {
         <Carousel autoplay dots={false} draggable>
             <div style={{
                 padding: 14,
-                minHeight: '84vh'
+                minHeight: '84vh',
+                position: 'relative'
             }}>
                 <div className="contenedorTodo">
                     <section className='imagenSuperMercado'>
