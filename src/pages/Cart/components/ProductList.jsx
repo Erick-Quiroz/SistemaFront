@@ -1,3 +1,4 @@
+
 /* eslint-disable no-tabs */
 
 import { useEffect, useState } from 'react'
@@ -67,3 +68,4 @@ export const ProductList = ({
         </>
     )
 }
+

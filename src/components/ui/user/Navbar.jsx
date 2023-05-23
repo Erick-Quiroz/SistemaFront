@@ -46,16 +46,17 @@ export const Navbar = () => {
                         Registrarse
                     </button>
                 </Link>
-                <Link to={'/admin'} className='text-center'>
+                <Link to={'/Login'} className='text-center'>
                     <button
                         className="btn btn-outline-success "
                         style={{
+                            height: '10hv',
                             margin: '3vh',
                             width: 100
                         }}
                         type="summit"
                     >
-                        Ingresar
+                        Login
                     </button>
                 </Link>
                 <Link to={'/cart'} className='text-center'>
