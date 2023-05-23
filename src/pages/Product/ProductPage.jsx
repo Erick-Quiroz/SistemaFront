@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import { Link } from 'react-router-dom'
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import Swal from 'sweetalert2'
 export const ProductPage = () => {
     const { Content } = Layout
@@ -177,7 +177,7 @@ export const ProductPage = () => {
                                                         }}
                                                         title='Editar'
                                                     >
-                                                        <EditOutlined/>
+                                                        <EditOutlined />
                                                     </button>
                                                     <button
                                                         className="btn btn-danger"
@@ -190,7 +190,7 @@ export const ProductPage = () => {
                                                         }}
                                                         title='Eliminar'
                                                     >
-                                                        <DeleteOutlined/>
+                                                        <DeleteOutlined />
                                                     </button>
                                                 </td>
                                             </tr>
