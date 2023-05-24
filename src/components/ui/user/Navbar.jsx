@@ -56,7 +56,7 @@ export const Navbar = () => {
                         options = {categories?.map((cate) => ({ label:cate.name, value: cate.name}))}
                         onSelect={(value) => {
                             console.log(value)  
-                            window.location.href = `/Filter/${value}`                        
+                            href = `/Filter/${value}`                        
                         }}  
                     >                   
                     </Select>                
