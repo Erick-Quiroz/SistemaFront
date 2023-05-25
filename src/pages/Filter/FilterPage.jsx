@@ -10,7 +10,6 @@ export const FilterPage = () => {
     const { Content } = Layout
     const { Title } = Typography;
     const [products, setProducts] = useState([])//Todos los productos filtrados por categorias
-    const {categoria} = useParams();
     const location  = useLocation();
     const categoria = location.state.data;
 
