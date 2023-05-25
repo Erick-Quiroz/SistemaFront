@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
 import { imageLogo } from '../../../helpers/imageAdds'
@@ -19,9 +19,17 @@ export const Navbar = () => {
     const [allProducts, setAllProducts] = useState([])
     const [total, setTotal] = useState(0)
     const [countProducts, setCountProducts] = useState(0)
-
+    const navigate = useNavigate('')
     const [categories, setCategories] = useState([])
 
+    const handleSelectChange = ( event ) => {       
+        console.log(event);
+        console.log(`/Filter/`+ event);
+        //navigate(`/Filter/${event}`);
+        navigate(`/Filter`,{state: {data:`${event}`}})
+        window.location.reload()
+    };
+    
     const getAllCategory = async () => {
         try {
             const { data } = await shopAPI.get(`/category/get-category`)
@@ -49,21 +57,17 @@ export const Navbar = () => {
             </a>
             <ul>
                 <div>
-                    <Select
+                    <Select 
                         className='Boton_select'
                         allowClear
                         placeholder = "Categorías"
-                        options = {categories?.map((cate) => ({ label:cate.name, value: cate.name}))}
-                        onSelect={(value) => {
-                            console.log(value)  
-                            window.location.href = `/Filter/${value}`                        
-                        }}  
-                    >                   
+                        options = {categories.map((cate) => ({ label:cate.name, value: cate.name}))}
+                        onSelect={handleSelectChange}
+                    >                 
                     </Select>                
                 </div>
             </ul>
             
-
             <ul
                 className={Mobile ? 'nav-links-mobile' : 'nav-links'}
                 onClick={() => setMobile(false)}
