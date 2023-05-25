@@ -4,12 +4,15 @@ import { useEffect, useState } from 'react'
 import { CardComponent } from '../../components/ui/user/CardComponent'
 import { shopAPI } from '../../services'
 import { useParams } from "react-router"
+import { useLocation } from 'react-router-dom';
 
 export const FilterPage = () => {
     const { Content } = Layout
     const { Title } = Typography;
     const [products, setProducts] = useState([])//Todos los productos filtrados por categorias
     const {categoria} = useParams();
+    const location  = useLocation();
+    const categoria = location.state.data;
 
     const getAll = async () => {
         try {
