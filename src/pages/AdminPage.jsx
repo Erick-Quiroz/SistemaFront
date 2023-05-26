@@ -1,4 +1,4 @@
-import { Layout, theme, Progress } from 'antd'
+import { Layout, theme } from 'antd'
 import { AdminLayout } from '../components/layouts/AdminLayout'
 import './AdminPage.css'
 

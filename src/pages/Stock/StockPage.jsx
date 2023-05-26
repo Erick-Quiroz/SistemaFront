@@ -2,13 +2,11 @@ import BACKENDURL from '../../utils/backendUrl.js'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-import { Layout, theme, Button, Modal } from 'antd'
+import { Layout, theme, Modal } from 'antd'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { useSnackbar } from 'notistack'
 import ModalUpdateStock from './ModalUpdateStock.jsx'
-// import ModalUpdateProduct from './ModalUpdateProduct.jsx'
-
 import { EditOutlined } from '@ant-design/icons'
 
 export const StockPage = () => {
@@ -68,7 +66,6 @@ export const StockPage = () => {
             console.log(data)
             if (data.success) {
                 setProductToEdit(data.product)
-                console.log(product)
             }
         } catch (error) {
             toast.error('Something wwent wrong in getting catgeory')
@@ -76,7 +73,7 @@ export const StockPage = () => {
         setShowModal(true)
     }
 
-    const updateProduct = async (product, name, cost, expiration, received, existence , supplier) => {
+    const updateProduct = async (product, name, cost, expiration, received, existence, supplier) => {
         try {
             const productUpdated = {
                 name,
@@ -161,7 +158,6 @@ export const StockPage = () => {
                                                 <td>
                                                     <button
 
-
                                                         className="btn btn-primary"
                                                         onClick={() => {
                                                             handleGetProduct(v._id)
@@ -173,9 +169,8 @@ export const StockPage = () => {
                                                         }}
                                                         title='Editar'
                                                     >
-                                                        <EditOutlined/>
+                                                        <EditOutlined />
                                                     </button>
-
 
                                                 </td>
                                             </tr>

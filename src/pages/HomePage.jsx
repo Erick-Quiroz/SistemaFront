@@ -1,8 +1,8 @@
 import { Layout } from 'antd'
 import { ShopLayout } from '../components/layouts/ShopLayout'
 import { CarouselAdds } from '../components/ui/user'
-import './HomePage.css'
 import { SliderMotion } from '../components/ui/user/sliders/SliderMotion'
+import './HomePage.css'
 
 export const HomePage = () => {
     const { Content } = Layout
