@@ -2,21 +2,21 @@ import { enqueueSnackbar } from 'notistack'
 import { Layout, theme } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 
-//import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
+// import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { ShopLayout } from '../../components/layouts/ShopLayout.jsx'
 import { shopAPI } from '../../services/index.js'
 import { useForm } from '../../hooks/index.js'
 import axios from 'axios'
 
 const initialState = {
-    email:'',
+    email: '',
     name: '',
     description: '',
     state: '',
     lastname: '',
-    phone:'',
-    password:'',
-    passwordconfirm: '',
+    phone: '',
+    password: '',
+    passwordconfirm: ''
 
 }
 
@@ -24,14 +24,14 @@ export const RegisterPage = () => {
     const navigate = useNavigate()
     const { token: { colorBgContainer } } = theme.useToken()
     const [formValues, handlerInputChange] = useForm(initialState)
-    const { email, name, description, state, lastname, phone, password, passwordconfirm} = formValues
+    const { email, name, description, state, lastname, phone, password, passwordconfirm } = formValues
     const { Content } = Layout
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            const { data } = await shopAPI.post('/user/register-user', { email, name, lastname, phone, password})
+            const { data } = await shopAPI.post('/user/register-user', { email, name, lastname, phone, password })
             if (data.success) {
                 navigate('/')
                 enqueueSnackbar('Usuario Registrado', {
@@ -68,7 +68,7 @@ export const RegisterPage = () => {
                             <div className="col-md-6">
                                 <form className="p-4 rounded bg-white" onSubmit={handleSubmit}>
                                     <h4 className="text-center mb-4">Registro de Usuario</h4>
-                                    
+
                                     {/*
                                     <div className="mb-3">
                                         <label htmlFor="email" className="form-label">
@@ -221,7 +221,7 @@ export const RegisterPage = () => {
                                         <div className="invalid-feedback">
                                             Por favor, introduce una contraseña válida (8-50 caracteres).
                                         </div>
-                                    </div> 
+                                    </div>
 
                                     <div className="row justify-content-end">
                                         <div className="col-auto">

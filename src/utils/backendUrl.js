@@ -1,3 +1,3 @@
-const BACKENDURL = "https://sistema-back.onrender.com";
+const BACKENDURL = 'https://sistema-back.onrender.com'
 
-export default BACKENDURL;
+export default BACKENDURL

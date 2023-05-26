@@ -10,18 +10,15 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import ModalUpdateCategory from './ModalUpdateCategory.jsx'
 import { Link } from 'react-router-dom'
-import CategoryForm from '../../components/Form/CategoryForm.jsx'
 import Swal from 'sweetalert2'
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+
 export const ProveedoresPage = () => {
-    // const url = 'http://localhost:8080/api/supplierLG/get-supplierLG'
     const { Content } = Layout
 
     const { token: { colorBgContainer } } = theme.useToken()
     const [categories, setCategories] = useState([])
     const [visible, setVisible] = useState(false)
-    const [selected, setSelected] = useState(null)
-    const [updatedName, setUpdatedName] = useState('')
     // cambios
     const [supplierToEdit, setSupplierToEdit] = useState({})
     const [showModal, setShowModal] = useState(false)
@@ -42,37 +39,6 @@ export const ProveedoresPage = () => {
     useEffect(() => {
         getAllCategory()
     }, [])
-
-    // update category
-    /*
-    const handleUpdate = async (e) => {
-        e.preventDefault()
-        try {
-            const { data } = await axios.put(
-                `/api/productLG/update-productLG/${selected._id}`,
-                { name: updatedName }
-            )
-
-            if (data.success) {
-                toast.success(`${updatedName} is updated`)
-                setSelected(null)
-                setUpdatedName('')
-                setVisible(false)
-                getAllCategory()
-            } else {
-                toast.error(data.message)
-            }
-        } catch (error) {
-            toast.error('Somtihing went wrong')
-        }
-    }
-    */
-    // name,
-    // address,
-    // phonenumber1,
-    // phonenumber2,
-    // email1,
-    // email2,
 
     // update supplier new
     const mostrarAlerta = async (pId) => {
@@ -108,10 +74,6 @@ export const ProveedoresPage = () => {
             console.log(data)
             if (data.success) {
                 getAllCategory()
-                // const updatedCategoryIndex = categories.findIndex(c => c._id === categoryId);
-                // const updatedCategories = [...categories];
-                // updatedCategories[updatedCategoryIndex] = {...updatedCategories[updatedCategoryIndex], name};
-                // setCategories(updatedCategories); // actualizar el estado categories
             } else {
                 toast.error(data.message)
             }
@@ -220,7 +182,7 @@ export const ProveedoresPage = () => {
                                                         }}
                                                         title='Editar'
                                                     >
-                                                        <EditOutlined/>
+                                                        <EditOutlined />
 
                                                     </button>
 
@@ -228,14 +190,14 @@ export const ProveedoresPage = () => {
                                                         className="btn btn-danger"
                                                         onClick={() => {
                                                             mostrarAlerta(v._id)
-                                                        }}style={{
+                                                        }} style={{
                                                             padding: 1,
                                                             width: 30,
                                                             margin: 2
                                                         }}
                                                         title='Eliminar'
                                                     >
-                                                        <DeleteOutlined/>
+                                                        <DeleteOutlined />
                                                     </button>
 
                                                 </td>
