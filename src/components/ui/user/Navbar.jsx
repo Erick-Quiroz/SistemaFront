@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
@@ -6,13 +6,12 @@ import { imageLogo } from '../../../helpers/imageAdds'
 import { Search } from '../Search'
 import './navbar.css'
 import { useCart } from 'react-use-cart'
-import { useEffect } from 'react'
-import { Select} from 'antd';
-import { shopAPI } from '../../../services'
-import { BiCart } from 'react-icons/bi'
-import { Header } from '../../../pages/Cart/components/Header'
-import { ProductList } from '../../../pages/Cart/components/ProductList'
 
+import { Select } from 'antd'
+import { shopAPI } from '../../../services'
+
+import { CartContext } from '../../../pages/Cart/contexts/ShoppingCartContext'
+import { ShoppingCartOutlined } from '@ant-design/icons'
 export const Navbar = () => {
     const [Mobile, setMobile] = useState(false)
     const { isEmpty, totalItems } = useCart()
@@ -22,17 +21,17 @@ export const Navbar = () => {
     const navigate = useNavigate('')
     const [categories, setCategories] = useState([])
 
-    const handleSelectChange = ( event ) => {       
-        console.log(event);
-        console.log(`/Filter/`+ event);
-        //navigate(`/Filter/${event}`);
-        navigate(`/Filter`,{state: {data:`${event}`}})
+    const handleSelectChange = (event) => {
+        console.log(event)
+        console.log('/Filter/' + event)
+        // navigate(`/Filter/${event}`);
+        navigate('/Filter', { state: { data: `${event}` } })
         window.location.reload()
-    };
-    
+    }
+
     const getAllCategory = async () => {
         try {
-            const { data } = await shopAPI.get(`/category/get-category`)
+            const { data } = await shopAPI.get('/category/get-category')
             if (data.success) {
                 setCategories(data.category)
             }
@@ -44,35 +43,45 @@ export const Navbar = () => {
     useEffect(() => {
         getAllCategory()
     }, [])
+    const [cart, setCart] = useContext(CartContext)
 
+    const quantity = cart.reduce((acc, curr) => {
+        return acc + curr.quantity
+    }, 0)
+
+    const navStyles = {
+        color: '#fff',
+        listStyle: 'none',
+        textDecoration: 'none'
+    }
     return (
         <nav className='navbar'>
-            <a href="/">
+            <Link to={'/'} className='text-center'>
                 <img
                     alt="logo"
                     className='logo'
                     src={imageLogo}
-                    href="/"
+
                 />
-            </a>
+            </Link>
             <ul>
                 <div>
-                    <Select 
+                    <Select
                         className='Boton_select'
                         allowClear
-                        placeholder = "Categorías"
-                        options = {categories.map((cate) => ({ label:cate.name, value: cate.name}))}
+                        placeholder="Categorías"
+                        options={categories.map((cate) => ({ label: cate.name, value: cate.name }))}
                         onSelect={handleSelectChange}
-                    >                 
-                    </Select>                
+                    >
+                    </Select>
                 </div>
             </ul>
-            
+
             <ul
                 className={Mobile ? 'nav-links-mobile' : 'nav-links'}
                 onClick={() => setMobile(false)}
             >
-                
+
                 <Search />
                 <Link to={'/register'} className='text-center'>
                     <button
@@ -100,7 +109,7 @@ export const Navbar = () => {
                         Login
                     </button>
                 </Link>
-                <Link to={'/cart'} className='text-center'>
+                <Link to={'/shop'} className='text-center'>
                     <button
                         className="btn btn-outline-success "
                         style={{
@@ -112,6 +121,17 @@ export const Navbar = () => {
                     >
                         Tienda
                     </button>
+                </Link>
+                <Link to={'/cart'} className='text-center' >
+
+                    <ShoppingCartOutlined style={
+                        {
+                            fontSize: 40,
+                            color: '#000000',
+                            margin: '3vh 0vh'
+                        }}
+
+                    /><span className="cart-count" style={navStyles}>{quantity}</span>
                 </Link>
             </ul>
             <button
