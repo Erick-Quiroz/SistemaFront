@@ -24,7 +24,6 @@ export const Navbar = () => {
     const handleSelectChange = (event) => {
         console.log(event)
         console.log('/Filter/' + event)
-        // navigate(`/Filter/${event}`);
         navigate('/Filter', { state: { data: `${event}` } })
         window.location.reload()
     }
