@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState, useContext } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { CartContext } from '../Cart/contexts/ShoppingCartContext'
 import shopAPI from '../../services/axios.service'
 import '../Product/ProductPage.css'
 
@@ -7,13 +8,31 @@ export const ProductoPage = () => {
     const [data, setData] = useState({})
     const { productID } = useParams()
     const { name, description, imageUrl, price, category, supplier } = data
-
+    const _id = productID
     const getProduct = async () => {
         const { data: { product } } = await shopAPI.get(`/productLG/get-productLG/${productID}`)
         setData(product)
         console.log(product)
     }
+    const [cart, setCart] = useContext(CartContext)
 
+    const addToCart = () => {
+        setCart((currItems) => {
+            const isItemsFound = currItems.find((item) => item._id === _id)
+
+            if (isItemsFound) {
+                return currItems.map((item) => {
+                    if (item._id === _id) {
+                        return { ...item, quantity: item.quantity + 1 }
+                    } else {
+                        return item
+                    }
+                })
+            } else {
+                return [...currItems, { _id, quantity: 1, price, name, imageUrl }]
+            }
+        })
+    }
     useEffect(() => {
         getProduct()
     }, [])
@@ -59,13 +78,14 @@ export const ProductoPage = () => {
                                 </li>
 
                                 <li>
-                                    <button className="button">Agregar</button>
+
+                                    <Link to="/" onClick={addToCart} className="btn btn-success">Agregar</Link>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
