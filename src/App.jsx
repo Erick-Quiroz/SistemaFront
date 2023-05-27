@@ -2,13 +2,18 @@ import { SnackbarProvider } from 'notistack'
 import './App.css'
 import { AppRouter } from './routes/AppRouter'
 
-function App () {
+import { ShoppingCartProvider } from '../src/pages/Cart/contexts/ShoppingCartContext'
+
+function App() {
     return (
+        <>
+            <ShoppingCartProvider>
+                <SnackbarProvider maxSnack={3}>
 
-        <SnackbarProvider maxSnack={3}>
-            <AppRouter />
-        </SnackbarProvider>
-
+                    <AppRouter />
+                </SnackbarProvider>
+            </ShoppingCartProvider>
+        </>
     )
 }
 

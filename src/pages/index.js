@@ -9,7 +9,10 @@ export * from './Product/ProductoPage'
 export * from './Provier/ProveedorCreatePage'
 export * from './Provier/ProveedoresPage'
 export * from './Stock/StockPage'
-export * from './Cart/CartPage'
+
 export * from './User/RegisterPage'
-export * from "./Login/LoginPage";
+export * from './Login/LoginPage'
 export * from './Filter/FilterPage'
+
+export * from './Cart/contexts/ShoppingCartContext'
+export * from './Cart/components/ShoppingCart'
