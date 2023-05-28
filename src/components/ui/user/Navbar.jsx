@@ -14,9 +14,6 @@ import { shopAPI } from '../../../services'
 import { CartContext } from '../../../pages/Cart/contexts/ShoppingCartContext'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 
-
-import { CartContext } from '../../../pages/Cart/contexts/ShoppingCartContext'
-import { ShoppingCartOutlined } from '@ant-design/icons'
 export const Navbar = () => {
     const [Mobile, setMobile] = useState(false)
     const { isEmpty, totalItems } = useCart()
@@ -53,20 +50,11 @@ export const Navbar = () => {
         return acc + curr.quantity
     }, 0)
 
-
-    const [cart, setCart] = useContext(CartContext)
-
-    const quantity = cart.reduce((acc, curr) => {
-        return acc + curr.quantity
-    }, 0)
-
-
     const navStyles = {
         color: '#fff',
         listStyle: 'none',
         textDecoration: 'none'
     }
-
 
     const [toggleMenu, setToggleMenu] = useState(false)
     return (
