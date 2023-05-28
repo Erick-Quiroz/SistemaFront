@@ -1,16 +1,17 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { FaBars, FaTimes, FaReact } from 'react-icons/fa'
+import { FaBars } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
 import { imageLogo } from '../../../helpers/imageAdds'
 import { Search } from '../Search'
 import './navbar.css'
 import { useCart } from 'react-use-cart'
+
 import { Select } from 'antd'
 import { shopAPI } from '../../../services'
+
 import { CartContext } from '../../../pages/Cart/contexts/ShoppingCartContext'
 import { ShoppingCartOutlined } from '@ant-design/icons'
-
 export const Navbar = () => {
     const [Mobile, setMobile] = useState(false)
     const { isEmpty, totalItems } = useCart()
@@ -41,7 +42,6 @@ export const Navbar = () => {
     useEffect(() => {
         getAllCategory()
     }, [])
-
     const [cart, setCart] = useContext(CartContext)
 
     const quantity = cart.reduce((acc, curr) => {
@@ -53,116 +53,93 @@ export const Navbar = () => {
         listStyle: 'none',
         textDecoration: 'none'
     }
-
-    const [toggleMenu, setToggleMenu] = useState(false)
     return (
+        <nav className='navbar'>
+            <Link to={'/'} className='text-center'>
+                <img
+                    alt="logo"
+                    className='logo'
+                    src={imageLogo}
 
-        <div className="navbar-bg">
+                />
+            </Link>
+            <ul>
+                <div>
+                    <Select
+                        className='Boton_select'
+                        allowClear
+                        placeholder="Categorías"
+                        options={categories.map((cate) => ({ label: cate.name, value: cate.name }))}
+                        onSelect={handleSelectChange}
+                    >
+                    </Select>
+                </div>
+            </ul>
 
-            <div className="sb__navbar">
+            <ul
+                className={Mobile ? 'nav-links-mobile' : 'nav-links'}
+                onClick={() => setMobile(false)}
+            >
 
-                <Link to={'/'} className='navbar-brand'>
-                    <img alt="logo" className='logo' src={imageLogo} style={{ width: 60, height: 50, padding: '0 0 0 5px' }} />
+                <Search />
+                <Link to={'/register'} className='text-center'>
+                    <button
+                        className="btn btn-outline-success "
+                        style={{
+                            height: '10hv',
+                            margin: '3vh',
+                            width: 150
+                        }}
+                        type="summit"
+                    >
+                        Registrarse
+                    </button>
                 </Link>
-                <div className="sb__navbar-links">
+                <Link to={'/Login'} className='text-center'>
+                    <button
+                        className="btn btn-outline-success "
+                        style={{
+                            height: '10hv',
+                            margin: '3vh',
+                            width: 100
+                        }}
+                        type="summit"
+                    >
+                        Login
+                    </button>
+                </Link>
+                <Link to={'/shop'} className='text-center'>
+                    <button
+                        className="btn btn-outline-success "
+                        style={{
+                            height: '10hv',
+                            margin: '3vh',
+                            width: 100
+                        }}
+                        type="summit"
+                    >
+                        Tienda
+                    </button>
+                </Link>
+                <Link to={'/cart'} className='text-center' >
 
-                    <div className="sb__navbar-links_container ">
-                        <p><ul>
+                    <ShoppingCartOutlined style={
+                        {
+                            fontSize: 40,
+                            color: '#000000',
+                            margin: '3vh 0vh'
+                        }}
 
-                            <Select
-                                className='Boton_select'
-                                allowClear
-                                placeholder="Categoríasaa"
-                                options={categories.map((cate) => ({ label: cate.name, value: cate.name }))}
-                                onSelect={handleSelectChange}
-                            >
-                            </Select>
-
-                        </ul>
-                        </p>
-                        <p>
-                            <Search />
-                        </p>
-                        <p>
-                            <Link to={'/shop'} className='nav-link'>
-                                <button className="btn btn-outline-success btn_nav" type="submit">
-                                    Tienda
-                                </button>
-                            </Link>
-                        </p>
-                        <p>
-                            <Link to={'/register'} className='nav-link'>
-                                <button className="btn btn-outline-success btn_nav" type="submit">
-                                    Registrarse
-                                </button>
-                            </Link>
-                        </p>
-                        <p>
-                            <Link to={'/login'} className='nav-link' >
-                                <button className="btn btn-outline-success btn_nav" type="submit">
-                                    Login
-                                </button>
-                            </Link>
-                        </p>
-                    </div>
-                </div>
-                <div className="sb__navbar-button">
-                    <Link to={'/cart'} className='nav-link'>
-                        <ShoppingCartOutlined style={{ fontSize: 25, color: '#000000' }} />
-                        <span className="cart-count ml-2" style={navStyles}>{quantity}</span>
-                    </Link>
-                </div>
-                <div className="sb__navbar-menu">
-                    {toggleMenu
-                        ? (
-
-                            <FaTimes
-                                color="#000"
-                                size={27}
-                                onClick={() => setToggleMenu(false)}
-                            />)
-                        : (
-                            <FaBars
-                                color="#000"
-                                size={27}
-                                onClick={() => setToggleMenu(true)}
-                            />
-                        )}
-                    {toggleMenu && (
-                        <div className="sb__navbar-menu_container scale-up-center">
-                            <div className="sb__navbar-menu_container-links">
-
-                                <p><Search style={{ with: '5' }} /></p>
-                                <p>
-                                    <Link to={'/shop'} className='nav-link'>
-                                        <button className="btn btn-outline-success btn_nav" type="submit">
-                                            Tienda
-                                        </button>
-                                    </Link>
-                                </p>
-                                <p>
-                                    <Link to={'/register'} className='nav-link'>
-                                        <button className="btn btn-outline-success btn_nav" type="submit">
-                                            Registrarse
-                                        </button>
-                                    </Link>
-                                </p>
-                                <p>
-                                    <Link to={'/login'} className='nav-link' >
-                                        <button className="btn btn-outline-success btn_nav" type="submit">
-                                            Login
-                                        </button>
-                                    </Link>
-                                </p>
-                            </div>
-                            <div className="sb__navbar-menu_container-links-sign">
-
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </div>
-        </div>
+                    /><span className="cart-count" style={navStyles}>{quantity}</span>
+                </Link>
+            </ul>
+            <button
+                className='mobile-menu-icon '
+                onClick={() => setMobile(!Mobile)}
+            >
+                {Mobile ? <ImCross /> : <FaBars />}
+            </button>
+        </nav >
     )
 }
 
