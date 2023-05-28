@@ -69,58 +69,7 @@ export const FilterPage = () => {
             <ShopLayout>
                 <Content>
                     <>
-                        <Row justify="center">
-                            <Title className='Titulo'>Busquedaa de Productos</Title>
-                        </Row>
-                        <Row>
-                            <Col span={2} className='Buscador' style={{
-                                minWidth: '100px'
-                            }}>
-                                <div className='Fondo' style={{
-                                    backgroundColor: 'white'
-
-                                }}>
-                                    <Row justify="center">
-                                        <Title level={4}>Precio</Title>
-                                    </Row>
-                                    <Row>
-                                        <Radio.Group defaultValue={'0'} value={radio}>
-                                            <Space direction="vertical">
-                                                <Radio value="1" onClick={handleRadioPrecioChange}>De menor a mayor</Radio>
-                                                <Radio value="2" onClick={handleRadioPrecioChange}>De mayor a menor</Radio>
-                                            </Space>
-                                        </Radio.Group>
-                                    </Row>
-                                    <Row justify="center">
-                                        <Title level={4}>Ofertas</Title>
-                                    </Row>
-                                    <Row>
-                                        <Title level={5}>Todas las ofertas</Title>
-                                    </Row>
-                                    <Row>
-                                        <Radio.Group value={checked}>
-                                            <Space direction="vertical">
-                                                <Radio value="1" onClick={handleRadioOfertaChange}>Oferta</Radio>
-                                            </Space>
-                                        </Radio.Group>
-                                    </Row>
-                                </div>
-                            </Col>
-                            <Col span={22} className='Productos' style={{
-                                flexWrap: 'nowrap'
-                            }}>
-                                {/* <Row className='asds' justify="center" align="middle">
-                                    {
-                                        products?.map(c => (
-                                            <Col key={c._id}>
-                                                <CardComponent key={c._id} {...c} />
-                                            </Col>
-                                        ))
-                                    }
-                                </Row>*/}
-                            </Col>
-                        </Row>
-                    </>
+                        <h2>Hola</h2>
                 </Content >
             </ShopLayout>
         </>
