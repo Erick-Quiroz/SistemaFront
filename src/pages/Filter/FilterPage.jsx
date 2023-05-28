@@ -1,19 +1,19 @@
-import { Layout,Col, Row, Typography, Radio, Space, Button, Checkbox} from 'antd'
+import { Layout, Col, Row, Typography, Radio, Space, Button, Checkbox } from 'antd'
 import { ShopLayout } from '../../components/layouts/ShopLayout'
 import { useEffect, useState } from 'react'
 import { CardComponent } from '../../components/ui/user/CardComponent'
 import { shopAPI } from '../../services'
-import { useParams } from "react-router"
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router'
+import { useLocation } from 'react-router-dom'
 
 export const FilterPage = () => {
     const { Content } = Layout
-    const { Title } = Typography;
-    const [products, setProducts] = useState([])//Todos los productos filtrados por categorias
-    const [radio, setRadio] = useState("0") //el radio Precio
-    const [checked, setChecked] = useState("0")//El checkbox Oferta
-    const location  = useLocation();
-    const categoria = location.state.data;
+    const { Title } = Typography
+    const [products, setProducts] = useState([])// Todos los productos filtrados por categorias
+    const location = useLocation()
+    const categoria = location.state.data
+  
+
 
     const getAll = async () => {
         try {
@@ -60,16 +60,19 @@ export const FilterPage = () => {
     };
 
     useEffect(() => {
-        if(checked === "0"|| radio === "0") getAll();
-        if(checked !== "0"|| radio !== "0") filterProduct();
-    }, [checked, radio])
+
+        getAll()
+    }, [])
+
 
     return (
         <>
             <ShopLayout>
                 <Content>
-                    <>   
-                    <Row justify="center">
+
+                    <>
+                        <Row justify="center">
+
                             <Title className='Titulo'>Busqueda de Productos</Title>
                         </Row>
                         <Row>
@@ -107,19 +110,21 @@ export const FilterPage = () => {
                                 </div>
                             </Col>
                             <Col span={22} className='Productos' style={{
-                                flexWrap: 'nowrap',
+                                flexWrap: 'nowrap'
                             }}>
-                                <Row className='asds' justify="center" align="middle">      
+                                <Row className='asds' justify="center" align="middle">
                                     {
                                         products?.map(c => (
                                             <Col key={c._id}>
                                                 <CardComponent key={c._id} {...c} />
-                                            </Col>                                
+                                            </Col>
                                         ))
-                                    }  
+                                    }
                                 </Row>
-                            </Col>   
-                        </Row>                                 
+
+                            </Col>
+                        </Row>
+
                     </>
                 </Content >
             </ShopLayout>
