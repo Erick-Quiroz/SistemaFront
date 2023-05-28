@@ -72,7 +72,7 @@ export const Navbar = () => {
                             <Select
                                 className='Boton_select'
                                 allowClear
-                                placeholder="Categoríasaa"
+                                placeholder="Categoría"
                                 options={categories.map((cate) => ({ label: cate.name, value: cate.name }))}
                                 onSelect={handleSelectChange}
                             >
