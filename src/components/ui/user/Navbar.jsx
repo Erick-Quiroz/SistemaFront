@@ -67,16 +67,18 @@ export const Navbar = () => {
                 <div className="sb__navbar-links">
 
                     <div className="sb__navbar-links_container ">
-                        <p>
+                        <p><ul>
 
                             <Select
-                                className='Boton_select nav-link'
+                                className='Boton_select'
                                 allowClear
-                                placeholder="Categorías"
+                                placeholder="Categoríasaa"
                                 options={categories.map((cate) => ({ label: cate.name, value: cate.name }))}
                                 onSelect={handleSelectChange}
-                            />
+                            >
+                            </Select>
 
+                        </ul>
                         </p>
                         <p>
                             <Search />
