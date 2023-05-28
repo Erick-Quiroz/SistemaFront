@@ -1,5 +1,7 @@
 
+
 import React, { useState, useContext, useEffect, useRef } from 'react'
+
 
 import { Link, useNavigate } from 'react-router-dom'
 import { FaBars, FaTimes, FaReact } from 'react-icons/fa'
@@ -49,6 +51,14 @@ export const Navbar = () => {
     const quantity = cart.reduce((acc, curr) => {
         return acc + curr.quantity
     }, 0)
+
+
+    const [cart, setCart] = useContext(CartContext)
+
+    const quantity = cart.reduce((acc, curr) => {
+        return acc + curr.quantity
+    }, 0)
+
 
     const navStyles = {
         color: '#fff',
