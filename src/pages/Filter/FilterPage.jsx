@@ -1,77 +1,146 @@
-import { Layout, Col, Row, Typography, Radio, Space, Button, Checkbox } from 'antd'
-import { ShopLayout } from '../../components/layouts/ShopLayout'
-import { useEffect, useState } from 'react'
-import { CardComponent } from '../../components/ui/user/CardComponent'
-import { shopAPI } from '../../services'
-import { useParams } from 'react-router'
-import { useLocation } from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { FaBars } from 'react-icons/fa'
+import { ImCross } from 'react-icons/im'
+import { imageLogo } from '../../../helpers/imageAdds'
+import { Search } from '../Search'
+import './navbar.css'
+import { useCart } from 'react-use-cart'
 
-export const FilterPage = () => {
-    const { Content } = Layout
-    const { Title } = Typography
-    const [products, setProducts] = useState([])// Todos los productos filtrados por categorias
-    const [radio, setRadio] = useState('0') // el radio Precio
-    const [checked, setChecked] = useState('0')// El checkbox Oferta
-    const location = useLocation()
-    const categoria = location.state.data
+import { Select } from 'antd'
+import { shopAPI } from '../../../services'
 
-    const getAll = async () => {
+import { CartContext } from '../../../pages/Cart/contexts/ShoppingCartContext'
+import { ShoppingCartOutlined } from '@ant-design/icons'
+export const Navbar = () => {
+    const [Mobile, setMobile] = useState(false)
+    const { isEmpty, totalItems } = useCart()
+    const [allProducts, setAllProducts] = useState([])
+    const [total, setTotal] = useState(0)
+    const [countProducts, setCountProducts] = useState(0)
+    const navigate = useNavigate('')
+    const [categories, setCategories] = useState([])
+
+    const handleSelectChange = (event) => {
+        console.log(event)
+        console.log('/Filter/' + event)
+        navigate('/Filter', { state: { data: `${event}` } })
+        window.location.reload()
+    }
+
+    const getAllCategory = async () => {
         try {
-            const { data } = await shopAPI.get(`/productLG/filter-Category-productLG/${categoria}`)
+            const { data } = await shopAPI.get('/category/get-category')
             if (data.success) {
-                setProducts(data.product)
+                setCategories(data.category)
             }
         } catch (error) {
             console.log(error)
-        }
-    }
-
-    const filterProduct = async () => {
-        try {
-            console.log('envio de datos')
-            console.log(radio)// Precio
-            console.log(checked)// Categoria
-            console.log(categoria)
-            const { data } = await shopAPI.get(`/productLG/filter-Offer-Category-productLG/${radio}/${checked}/${categoria}`)
-            if (data.success) {
-                setProducts(data.products)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const handleRadioPrecioChange = (e) => {
-        const value = e.target.value
-        if (value === radio) {
-            setRadio('0')
-        } else {
-            setRadio(value)
-        }
-    }
-
-    const handleRadioOfertaChange = (e) => {
-        const value = e.target.value
-        if (value === checked) {
-            setChecked('0')
-        } else {
-            setChecked(value)
         }
     }
 
     useEffect(() => {
-        if (checked === '0' || radio === '0') getAll()
-        if (checked !== '0' || radio !== '0') filterProduct()
-    }, [checked, radio])
+        getAllCategory()
+    }, [])
+    const [cart, setCart] = useContext(CartContext)
 
+    const quantity = cart.reduce((acc, curr) => {
+        return acc + curr.quantity
+    }, 0)
+
+    const navStyles = {
+        color: '#fff',
+        listStyle: 'none',
+        textDecoration: 'none'
+    }
     return (
-        <>
-            <ShopLayout>
-                <Content>
-                   
-                        <h2>Hola</h2>
-                </Content >
-            </ShopLayout>
-        </>
+        <nav className='navbar'>
+            <Link to={'/'} className='text-center'>
+                <img
+                    alt="logo"
+                    className='logo'
+                    src={imageLogo}
+
+                />
+            </Link>
+            <ul>
+                <div>
+                    <Select
+                        className='Boton_select'
+                        allowClear
+                        placeholder="Categorías"
+                        options={categories.map((cate) => ({ label: cate.name, value: cate.name }))}
+                        onSelect={handleSelectChange}
+                    >
+                    </Select>
+                </div>
+            </ul>
+
+            <ul
+                className={Mobile ? 'nav-links-mobile' : 'nav-links'}
+                onClick={() => setMobile(false)}
+            >
+
+                <Search />
+                <Link to={'/register'} className='text-center'>
+                    <button
+                        className="btn btn-outline-success "
+                        style={{
+                            height: '10hv',
+                            margin: '3vh',
+                            width: 150
+                        }}
+                        type="summit"
+                    >
+                        Registrarse
+                    </button>
+                </Link>
+                <Link to={'/Login'} className='text-center'>
+                    <button
+                        className="btn btn-outline-success "
+                        style={{
+                            height: '10hv',
+                            margin: '3vh',
+                            width: 100
+                        }}
+                        type="summit"
+                    >
+                        Login
+                    </button>
+                </Link>
+                <Link to={'/shop'} className='text-center'>
+                    <button
+                        className="btn btn-outline-success "
+                        style={{
+                            height: '10hv',
+                            margin: '3vh',
+                            width: 100
+                        }}
+                        type="summit"
+                    >
+                        Tienda
+                    </button>
+                </Link>
+                <Link to={'/cart'} className='text-center' >
+
+                    <ShoppingCartOutlined style={
+                        {
+                            fontSize: 40,
+                            color: '#000000',
+                            margin: '3vh 0vh'
+                        }}
+
+                    /><span className="cart-count" style={navStyles}>{quantity}</span>
+                </Link>
+            </ul>
+            <button
+                className='mobile-menu-icon '
+                onClick={() => setMobile(!Mobile)}
+            >
+                {Mobile ? <ImCross /> : <FaBars />}
+            </button>
+        </nav >
     )
 }
+
+export default Navbar
