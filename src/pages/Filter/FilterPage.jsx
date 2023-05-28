@@ -1,146 +1,120 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { FaBars } from 'react-icons/fa'
-import { ImCross } from 'react-icons/im'
-import { imageLogo } from '../../../helpers/imageAdds'
-import { Search } from '../Search'
-import './navbar.css'
-import { useCart } from 'react-use-cart'
+import { Layout, Col, Row, Typography, Radio, Space, Button, Checkbox } from 'antd'
+import { ShopLayout } from '../../components/layouts/ShopLayout'
+import { useEffect, useState } from 'react'
+import { CardComponent } from '../../components/ui/user/CardComponent'
+import { shopAPI } from '../../services'
+import { useParams } from 'react-router'
+import { useLocation } from 'react-router-dom'
 
-import { Select } from 'antd'
-import { shopAPI } from '../../../services'
+export const FilterPage = () => {
+    const { Content } = Layout
+    const { Title } = Typography
+    const [products, setProducts] = useState([])// Todos los productos filtrados por categorias
+    const [radio, setRadio] = useState('0') // el radio Precio
+    const [checked, setChecked] = useState('0')// El checkbox Oferta
+    const location = useLocation()
+    const categoria = location.state.data
 
-import { CartContext } from '../../../pages/Cart/contexts/ShoppingCartContext'
-import { ShoppingCartOutlined } from '@ant-design/icons'
-export const Navbar = () => {
-    const [Mobile, setMobile] = useState(false)
-    const { isEmpty, totalItems } = useCart()
-    const [allProducts, setAllProducts] = useState([])
-    const [total, setTotal] = useState(0)
-    const [countProducts, setCountProducts] = useState(0)
-    const navigate = useNavigate('')
-    const [categories, setCategories] = useState([])
-
-    const handleSelectChange = (event) => {
-        console.log(event)
-        console.log('/Filter/' + event)
-        navigate('/Filter', { state: { data: `${event}` } })
-        window.location.reload()
-    }
-
-    const getAllCategory = async () => {
+    const getAll = async () => {
         try {
-            const { data } = await shopAPI.get('/category/get-category')
+            const { data } = await shopAPI.get(`/productLG/filter-Category-productLG/${categoria}`)
             if (data.success) {
-                setCategories(data.category)
+                setProducts(data.product)
             }
         } catch (error) {
             console.log(error)
         }
     }
 
-    useEffect(() => {
-        getAllCategory()
-    }, [])
-    const [cart, setCart] = useContext(CartContext)
-
-    const quantity = cart.reduce((acc, curr) => {
-        return acc + curr.quantity
-    }, 0)
-
-    const navStyles = {
-        color: '#fff',
-        listStyle: 'none',
-        textDecoration: 'none'
+    const filterProduct = async () => {
+        try {
+            console.log('envio de datos')
+            console.log(radio)// Precio
+            console.log(checked)// Categoria
+            console.log(categoria)
+            const { data } = await shopAPI.get(`/productLG/filter-Offer-Category-productLG/${radio}/${checked}/${categoria}`)
+            if (data.success) {
+                setProducts(data.products)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
+
+    const handleRadioPrecioChange = (e) => {
+        const value = e.target.value
+        if (value === radio) {
+            setRadio('0')
+        } else {
+            setRadio(value)
+        }
+    }
+
+    const handleRadioOfertaChange = (e) => {
+        const value = e.target.value
+        if (value === checked) {
+            setChecked('0')
+        } else {
+            setChecked(value)
+        }
+    }
+
+    useEffect(() => {
+        if (checked === '0' || radio === '0') getAll()
+        if (checked !== '0' || radio !== '0') filterProduct()
+    }, [checked, radio])
+
     return (
-        <nav className='navbar'>
-            <Link to={'/'} className='text-center'>
-                <img
-                    alt="logo"
-                    className='logo'
-                    src={imageLogo}
+        <>
+            <ShopLayout>
+                <Content>
+                    <>
+                        <Row justify="center">
+                            <Title className='Titulo'>Busqueda de Productos</Title>
+                        </Row>
+                        <Row>
+                            <Col span={2} className='Buscador' style={{
+                                minWidth: '100px'
+                            }}>
+                                <div className='Fondo' style={{
+                                    backgroundColor: 'white'
 
-                />
-            </Link>
-            <ul>
-                <div>
-                    <Select
-                        className='Boton_select'
-                        allowClear
-                        placeholder="Categorías"
-                        options={categories.map((cate) => ({ label: cate.name, value: cate.name }))}
-                        onSelect={handleSelectChange}
-                    >
-                    </Select>
-                </div>
-            </ul>
+                                }}>
+                                    <Row justify="center">
+                                        <Title level={4}>Precio</Title>
+                                    </Row>
+                                    <Row>
+                                        <Radio.Group defaultValue={'0'} value={radio}>
+                                            <Space direction="vertical">
+                                                <Radio value="1" onClick={handleRadioPrecioChange}>De menor a mayor</Radio>
+                                                <Radio value="2" onClick={handleRadioPrecioChange}>De mayor a menor</Radio>
+                                            </Space>
+                                        </Radio.Group>
+                                    </Row>
+                                    <Row justify="center">
+                                        <Title level={4}>Ofertas</Title>
+                                    </Row>
+                                    <Row>
+                                        <Title level={5}>Todas las ofertas</Title>
+                                    </Row>
+                                    <Row>
+                                        <Radio.Group value={checked}>
+                                            <Space direction="vertical">
+                                                <Radio value="1" onClick={handleRadioOfertaChange}>Oferta</Radio>
+                                            </Space>
+                                        </Radio.Group>
+                                    </Row>
+                                </div>
+                            </Col>
+                            <Col span={22} className='Productos' style={{
+                                flexWrap: 'nowrap'
+                            }}>
 
-            <ul
-                className={Mobile ? 'nav-links-mobile' : 'nav-links'}
-                onClick={() => setMobile(false)}
-            >
-
-                <Search />
-                <Link to={'/register'} className='text-center'>
-                    <button
-                        className="btn btn-outline-success "
-                        style={{
-                            height: '10hv',
-                            margin: '3vh',
-                            width: 150
-                        }}
-                        type="summit"
-                    >
-                        Registrarse
-                    </button>
-                </Link>
-                <Link to={'/Login'} className='text-center'>
-                    <button
-                        className="btn btn-outline-success "
-                        style={{
-                            height: '10hv',
-                            margin: '3vh',
-                            width: 100
-                        }}
-                        type="summit"
-                    >
-                        Login
-                    </button>
-                </Link>
-                <Link to={'/shop'} className='text-center'>
-                    <button
-                        className="btn btn-outline-success "
-                        style={{
-                            height: '10hv',
-                            margin: '3vh',
-                            width: 100
-                        }}
-                        type="summit"
-                    >
-                        Tienda
-                    </button>
-                </Link>
-                <Link to={'/cart'} className='text-center' >
-
-                    <ShoppingCartOutlined style={
-                        {
-                            fontSize: 40,
-                            color: '#000000',
-                            margin: '3vh 0vh'
-                        }}
-
-                    /><span className="cart-count" style={navStyles}>{quantity}</span>
-                </Link>
-            </ul>
-            <button
-                className='mobile-menu-icon '
-                onClick={() => setMobile(!Mobile)}
-            >
-                {Mobile ? <ImCross /> : <FaBars />}
-            </button>
-        </nav >
+                            </Col>
+                        </Row>
+                    </>
+                </Content >
+            </ShopLayout>
+        </>
     )
 }
-
-export default Navbar
