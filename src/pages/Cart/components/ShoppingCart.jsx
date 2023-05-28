@@ -95,7 +95,7 @@ export const ShoppingCart = () => {
                                             +
                                         </button>
                                     </td>
-                                    <td>${item.price * item.quantity}</td>
+                                    <td>{item.price * item.quantity} Bs.</td>
                                     <td>
                                         <button onClick={() => eliminarItem(index)} className="btn btn-outline-danger">
                                             <DeleteOutlined />
