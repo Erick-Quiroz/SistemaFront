@@ -109,7 +109,7 @@ export const FilterPage = () => {
                             <Col span={22} className='Productos' style={{
                                 flexWrap: 'nowrap'
                             }}>
-                                <Row className='asds' justify="center" align="middle">
+                                {/* <Row className='asds' justify="center" align="middle">
                                     {
                                         products?.map(c => (
                                             <Col key={c._id}>
@@ -117,7 +117,7 @@ export const FilterPage = () => {
                                             </Col>
                                         ))
                                     }
-                                </Row>
+                                </Row>*/}
                             </Col>
                         </Row>
                     </>
