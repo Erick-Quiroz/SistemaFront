@@ -15,7 +15,7 @@ a {
 
 .sb__navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: white;
   border-radius: 0.5rem;
@@ -27,7 +27,7 @@ a {
 .sb__navbar-links {
   flex: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -39,8 +39,8 @@ a {
 
 .sb__navbar-links_container {
   display: flex;
-  flex-direction: row;
-  margin-right: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .sb__navbar-button {
@@ -54,7 +54,7 @@ a {
 .sb__navbar-links_container p,
 .sb__navbar-button p,
 .sb__navbar-menu_container p {
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: 600;
   font-size: 13px;
   line-height: 25px;
@@ -170,7 +170,7 @@ a {
   }
 
   .sb__navbar-button {
-    display: none;
+    display: flex;
   }
 
   .sb__navbar-menu_container {
