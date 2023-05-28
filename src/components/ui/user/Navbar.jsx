@@ -67,7 +67,7 @@ export const Navbar = () => {
                 <div className="sb__navbar-links">
 
                     <div className="sb__navbar-links_container ">
-                        <p><ul>
+                        <p>
 
                             <Select
                                 className='Boton_select'
@@ -78,7 +78,7 @@ export const Navbar = () => {
                             >
                             </Select>
 
-                        </ul>
+                        
                         </p>
                         <p>
                             <Search />
