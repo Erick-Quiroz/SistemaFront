@@ -68,7 +68,7 @@ export const FilterPage = () => {
         <>
             <ShopLayout>
                 <Content>
-                    <>
+                   
                         <h2>Hola</h2>
                 </Content >
             </ShopLayout>
