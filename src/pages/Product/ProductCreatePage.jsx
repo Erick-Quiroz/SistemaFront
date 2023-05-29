@@ -1,5 +1,5 @@
 import { enqueueSnackbar } from 'notistack'
-import { Layout, theme, Button, Form, Input, Select, Space, Tooltip, Typography } from 'antd'
+import { Layout, theme, Button, Form, Input, Select, Space, Tooltip, Typography, Upload } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
@@ -7,6 +7,7 @@ import { shopAPI } from '../../services'
 import { useForm } from '../../hooks'
 import axios from 'axios'
 
+import { PlusOutlined } from '@ant-design/icons'
 const { Option } = Select
 const initialState = {
     name: '',
@@ -22,14 +23,23 @@ export const ProductCreatePage = () => {
     const navigate = useNavigate()
     const { token: { colorBgContainer } } = theme.useToken()
     const [formValues, handlerInputChange] = useForm(initialState)
-    const { name, description, state, category, price, imageUrl , supplier } = formValues
+    const { name, description, state, category, price, imageUrl, supplier } = formValues
     const { Content } = Layout
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            const { data } = await shopAPI.post('/productLG/create-productLG', { name, description, state, category, price, imageUrl, supplier })
+            const imageData = await convertImageToBase64(image) // Convert image to base64
+            const { data } = await shopAPI.post('/productLG/create-productLG', {
+                name,
+                description,
+                state,
+                category,
+                price,
+                imageUrl: imageData, // Send base64 image data
+                supplier
+            })
             if (data.success) {
                 navigate('/admin/productos')
                 enqueueSnackbar('Producto agregado', {
@@ -50,6 +60,7 @@ export const ProductCreatePage = () => {
             }
         }
     }
+
     const [categories, setCategories] = useState([])
     const getAllCategory = async () => {
         try {
@@ -61,6 +72,7 @@ export const ProductCreatePage = () => {
             console.log(error)
         }
     }
+
     const [proveedor, setProveedor] = useState([])
     const getAllSupplier = async () => {
         try {
@@ -72,10 +84,27 @@ export const ProductCreatePage = () => {
             console.log(error)
         }
     }
+
     useEffect(() => {
         getAllCategory()
         getAllSupplier()
     }, [])
+
+    const [image, setImage] = useState(null)
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]
+        setImage(file)
+    }
+
+    const convertImageToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.onload = () => resolve(reader.result)
+            reader.onerror = (error) => reject(error)
+            reader.readAsDataURL(file)
+        })
+    }
 
     return (
         <AdminLayout>
@@ -222,57 +251,51 @@ export const ProductCreatePage = () => {
                                 </div>
 
                                 <div className="col">
-                                    <label
-                                        htmlFor="disabledTextInput"
-                                        className="form-label">
-                                        <strong>Imagen(Url)</strong>
+                                    <label htmlFor="imageUpload" className="form-label">
+                                        <strong>Imagen (Url)</strong>
                                     </label>
                                     <input
                                         className="form-control"
-                                        id="disabledSelect"
-                                        minLength={7}
-                                        name='imageUrl'
-                                        onChange={handlerInputChange}
+                                        id="imageUpload"
+                                        type="file"
+                                        accept="image/*"
                                         required
-                                        type="text"
-                                        value={imageUrl}
+                                        onChange={handleImageChange}
                                     />
-                                    <div className="invalid-feedback">
-                                        Completa este campo.
-                                    </div>
+                                    <div className="invalid-feedback">Completa este campo.</div>
                                 </div>
                                 <div className="row  mb-3">
-                                <div className="col">
-                                    <label
-                                        htmlFor="disabledSelect"
-                                        className="form-label">
-                                        <strong>Proveedor</strong>
-                                    </label>
-                                    <select
-                                        className="form-select"
-                                        id="disabledSelect"
-                                        name='supplier'
-                                        onChange={handlerInputChange}
-                                        placeholder="Seleccione proveedor!!!"
-                                        required
-                                        value={supplier}
+                                    <div className="col">
+                                        <label
+                                            htmlFor="disabledSelect"
+                                            className="form-label">
+                                            <strong>Proveedor</strong>
+                                        </label>
+                                        <select
+                                            className="form-select"
+                                            id="disabledSelect"
+                                            name='supplier'
+                                            onChange={handlerInputChange}
+                                            placeholder="Seleccione proveedor!!!"
+                                            required
+                                            value={supplier}
 
-                                    >
-                                        <option value="" disabled>Seleccione un proveedor</option>
-                                        {proveedor?.map((v) =>
-                                            <>
-                                                <option className="">
-                                                    {v.name}
-                                                </option>
-                                            </>
-                                        )}
-                                    </select>
-                                    <div className="invalid-feedback">
-                                        Completa este campo.
+                                        >
+                                            <option value="" disabled>Seleccione un proveedor</option>
+                                            {proveedor?.map((v) =>
+                                                <>
+                                                    <option className="">
+                                                        {v.name}
+                                                    </option>
+                                                </>
+                                            )}
+                                        </select>
+                                        <div className="invalid-feedback">
+                                            Completa este campo.
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-                           
+
                             </div>
 
                             <div className="container text-end">

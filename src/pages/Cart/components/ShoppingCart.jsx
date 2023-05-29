@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { CartContext, ShoppingCartProvider } from '../contexts/ShoppingCartContext'
-import { Layout, theme, Button, Modal } from 'antd'
+import { CartContext } from '../contexts/ShoppingCartContext'
+import { Layout, Button } from 'antd'
 import { ShopLayout } from '../../../components/layouts/ShopLayout'
 import { DeleteOutlined } from '@ant-design/icons'
 import './style.css'
@@ -76,67 +76,73 @@ export const ShoppingCart = () => {
     return (
         <ShopLayout>
             <Content style={{ margin: '0 8px' }}>
-                <div className="container">
+                <div className="container_cart">
                     <h1>Productos en el carrito</h1>
 
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>Imagen</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                                <th>Sub total</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {cart.map((item, index) => (
-                                <tr key={index} className={index % 2 === 0 ? '' : 'even-row'}>
-                                    <td>{index + 1}</td>
-                                    <td>{item.name}</td>
-                                    <td>
-                                        <img src={item.imageUrl} alt={item.name} className="product-image" style={{ width: 40, height: 40 }} />
-                                    </td>
-                                    <td>{item.price} Bs.</td>
-
-                                    <td>
-                                        <button onClick={() => disminuirCantidad(index)} className="btn btn-outline-danger" style={{ margin: '6px 5px' }}>
-                                            -
-                                        </button>
-                                        <input
-                                            type="number"
-                                            min="1"
-                                            max={item.existence}
-                                            value={item.quantity}
-                                            step="1"
-                                            style={{ width: '40px' }}
-                                            onChange={(e) => handleInputChange(e, index)}
-                                        />
-
-                                        <button onClick={() => aumentarCantidad(index)} className="btn btn-outline-success" style={{ margin: '6px 5px' }}>
-                                            +
-                                        </button>
-                                    </td>
-                                    <td>{item.price * item.quantity} Bs.</td>
-                                    <td>
-                                        <button onClick={() => eliminarItem(index)} className="btn btn-outline-danger">
-                                            <DeleteOutlined />
-                                        </button>
-                                    </td>
+                    <div className="table-responsive">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Imagen</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Sub total</th>
+                                    <th></th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {cart.map((item, index) => (
+                                    <tr key={index} className={index % 2 === 0 ? '' : 'even-row'}>
+                                        <td>{index + 1}</td>
+                                        <td>{item.name}</td>
+                                        <td>
+                                            <img src={item.imageUrl} alt={item.name} className="product-image" style={{ width: 40, height: 40 }} />
+                                        </td>
+                                        <td>{item.price} Bs.</td>
 
-                    <div className="total">Total: {totalPrice} Bs.</div>
-
-                    <div className="total">
-                        <button className="btn btn-outline-danger" onClick={vaciar}>
-                            Vaciar carrito
-                        </button>
+                                        <td>
+                                            <div className="quantity-container">
+                                                <button onClick={() => disminuirCantidad(index)} className="btn btn-outline-danger">
+                                                    -
+                                                </button>
+                                                <input
+                                                    type="number"
+                                                    min="1"
+                                                    max={item.existence}
+                                                    value={item.quantity}
+                                                    step="1"
+                                                    style={{ width: '40px' }}
+                                                    onChange={(e) => handleInputChange(e, index)}
+                                                />
+                                                <button onClick={() => aumentarCantidad(index)} className="btn btn-outline-success">
+                                                    +
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>{item.price * item.quantity} Bs.</td>
+                                        <td>
+                                            <button onClick={() => eliminarItem(index)} className="btn btn-outline-danger">
+                                                <DeleteOutlined />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
+                    <div className='container_to'>
+                        <div className="total">Total: {totalPrice} Bs.</div>
+
+                        <div className="total">
+                            <button className="btn btn-outline-danger" onClick={vaciar}>
+                                vaciar carrito
+                            </button>
+                        </div>
+
+                    </div>
+
                 </div>
             </Content>
         </ShopLayout>

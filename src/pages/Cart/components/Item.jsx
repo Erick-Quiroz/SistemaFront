@@ -2,7 +2,7 @@ import React, { useContext, useDebugValue } from 'react'
 import { CartContext } from '../contexts/ShoppingCartContext'
 import { FaFileVideo } from 'react-icons/fa'
 
-export const Item = ({ name, price, _id, existence,imageUrl}) => {
+export const Item = ({ name, price, _id, existence, imageUrl}) => {
     const [cart, setCart] = useContext(CartContext)
 
     const addToCart = () => {
@@ -18,7 +18,7 @@ export const Item = ({ name, price, _id, existence,imageUrl}) => {
                     }
                 })
             } else {
-                return [...currItems, { _id, quantity: 1, price, name, existence,imageUrl }]
+                return [...currItems, { _id, quantity: 1, price, name, existence, imageUrl }]
             }
         })
     }
@@ -46,13 +46,14 @@ export const Item = ({ name, price, _id, existence,imageUrl}) => {
     const quantityPerItem = getQuantityById(_id)
 
     return (
+
         <div className="item-box">
             {quantityPerItem > 0 && (
                 <div className="item-quantity">{quantityPerItem}</div>
             )}
 
             <div>{name}</div>
-<img src={imageUrl} width="100" height="100" /> 
+            <img src={imageUrl} width="100" height="100" />
             <div className="item-price">${price}</div>
 
             {quantityPerItem === 0

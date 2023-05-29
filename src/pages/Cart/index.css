@@ -5,6 +5,9 @@
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
+
+  height: 100vh; /* o un valor fijo en píxeles */
+  overflow-y: auto;
 }
 
 /****** Item  box *********/
@@ -75,4 +78,3 @@
 
   padding: 5px;
 }
-
