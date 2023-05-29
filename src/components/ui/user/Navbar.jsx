@@ -24,7 +24,7 @@ export const Navbar = () => {
         console.log(event)
         console.log('/Filter/' + event)
         navigate('/Filter', { state: { data: `${event}` } })
-       
+       window.location.reload()
     }
 
     const getAllCategory = async () => {
