@@ -25,9 +25,13 @@ export const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const { data } = await shopAPI.post('/user/login-user', { email, password });
+      const Usuario={ email, password };
+      const { data } = await shopAPI.post('/user/login-user', Usuario);
       if (data.success) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);
         const { role } = data;
+        
         // Check user role and redirect accordingly
         if (role === 1) {
           navigate('/admin');
