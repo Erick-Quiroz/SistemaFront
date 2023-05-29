@@ -14,7 +14,15 @@ export * from './Offer/OfferPage'
 export * from './Stock/StockPage' 
 export * from './UserEdit/UserPage'
 export * from './Stock/StockPage'
-export * from './Cart/CartPage'
+
 export * from './User/RegisterPage'
+
 export * from './UserEdit/UserPage'
+
+
+export * from './Login/LoginPage'
+export * from './Filter/FilterPage'
+
+export * from './Cart/contexts/ShoppingCartContext'
+export * from './Cart/components/ShoppingCart'
 

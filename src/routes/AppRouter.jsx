@@ -1,8 +1,9 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { AdminPage, CartPage, CategoryCreatePage, CategoryPage, HomePage, OfferPage, ProductCreatePage, ProductoPage, ProductPage, ProveedorCreatePage, UserPage,ProveedoresPage, RegisterPage, StockPage } from '../pages'
 
-
+import { AdminPage, CategoryCreatePage, CategoryPage, HomePage, OfferPage, ProductCreatePage, ProductoPage, ProductPage, ProveedorCreatePage, ProveedoresPage, RegisterPage, StockPage, LoginPage, FilterPage ,UserPage} from '../pages'
+import { ItemList } from '../pages/Cart/components/ItemList'
+import { ShoppingCart } from '../pages/Cart/components/ShoppingCart'
 const router = createBrowserRouter([
     {
         path: '/',
@@ -70,8 +71,14 @@ const router = createBrowserRouter([
     },
 
     {
+        path: '/shop',
+        element: <ItemList />,
+        errorElement: <h1>error</h1>
+    },
+
+    {
         path: '/cart',
-        element: <CartPage />,
+        element: <ShoppingCart />,
         errorElement: <h1>error</h1>
     },
 
@@ -80,8 +87,29 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
         errorElement: <h1>error</h1>
 
+    },
+    { 
+    
+        path: '/User',
+        element: <UserPage />,
+        errorElement: <h1>error</h1>
+    
+    
+        
     }
+    ,
+    {
+        path: '/Login',
+        element: <LoginPage />,
+        errorElement: <h1>error</h1>
 
+
+    },
+    {
+        path: '/Filter',
+        element: <FilterPage />,
+        errorElement: <h1>error</h1>
+    }
 ])
 
 export const AppRouter = () => {
