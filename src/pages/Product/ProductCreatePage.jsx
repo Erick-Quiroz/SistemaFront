@@ -6,7 +6,7 @@ import { AdminLayout } from '../../components/layouts/AdminLayout.jsx'
 import { shopAPI } from '../../services'
 import { useForm } from '../../hooks'
 import axios from 'axios'
-import ImageCompressor from 'image-compressor'
+
 import { PlusOutlined } from '@ant-design/icons'
 const { Option } = Select
 const initialState = {
@@ -18,21 +18,7 @@ const initialState = {
     imageUrl: '',
     supplier: ''
 }
-const compressImage = async (file) => {
-    try {
-        const compressedFile = await new ImageCompressor(file, {
-            quality: 0.6,
-            maxWidth: 800,
-            maxHeight: 800,
-            mimeType: 'image/jpeg'
-        }).compress()
 
-        return compressedFile
-    } catch (error) {
-        console.error('Error al comprimir la imagen:', error)
-        return null
-    }
-}
 export const ProductCreatePage = () => {
     const navigate = useNavigate()
     const { token: { colorBgContainer } } = theme.useToken()
