@@ -1,55 +1,59 @@
-import { enqueueSnackbar } from 'notistack'
-import { Layout, theme } from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
-import { ShopLayout } from '../../components/layouts/ShopLayout.jsx'
-import { shopAPI } from '../../services/index.js'
-import { useForm } from '../../hooks/index.js'
-import axios from 'axios'
+import React, { useState } from 'react';
+import { Layout, theme, Alert } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
+import { ShopLayout } from '../../components/layouts/ShopLayout';
+import { shopAPI } from '../../services/index';
+import { useForm } from '../../hooks/index';
+import axios from 'axios';
 
 const initialState = {
   email: '',
   password: ''
-}
+};
 
 export const LoginPage = () => {
-  const navigate = useNavigate()
-  const { token: { colorBgContainer } } = theme.useToken()
-  const [formValues, handlerInputChange] = useForm(initialState)
-  const { email, password } = formValues
-  const { Content } = Layout
+  const navigate = useNavigate();
+  const { colorBgContainer } = theme.useToken().token;
+  const [formValues, setFormValues] = useForm(initialState);
+  const { email, password } = formValues;
+  const { Content } = Layout;
+  const [passwordIncorrect, setPasswordIncorrect] = useState(false);
+  const [userNotFound, setUserNotFound] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      const { data } = await shopAPI.post('/user/login-user', { email, password })
+      const { data } = await shopAPI.post('/user/login-user', { email, password });
       if (data.success) {
-        const { role } = data
+        const { role } = data;
         // Check user role and redirect accordingly
         if (role === 1) {
-          navigate('/admin')
+          navigate('/admin');
         } else if (role === 0) {
-          navigate('/')
+          navigate('/');
         }
-        
-        enqueueSnackbar('Usuario autenticado', {
-          variant: 'success',
-          autoHideDuration: 1500,
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'right'
-          }
-        })
+
+        setAlertMessage('Usuario autenticado');
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return {
-          hasError: true,
-          message: error.response?.data.message
+        const { response } = error;
+        if (response?.status === 400 && response?.data?.message === 'Contraseña incorrecta') {
+          setPasswordIncorrect(true);
+          setUserNotFound(false);
+          setAlertMessage('Contraseña incorrecta. Introduce una contraseña válida.');
+        } else if (response?.status === 404 && response?.data?.message === 'Usuario no encontrado') {
+          setPasswordIncorrect(false);
+          setUserNotFound(true);
+          setAlertMessage('El correo electrónico no está registrado. Introduce un correo electrónico válido.');
+        } else {
+          setAlertMessage(response?.data?.message || 'Error desconocido');
         }
       }
     }
-  }
+  };
 
   return (
     <ShopLayout>
@@ -58,7 +62,7 @@ export const LoginPage = () => {
           style={{
             padding: 14,
             minHeight: '84vh',
-            background: colorBgContainer
+            background: colorBgContainer,
           }}
         >
           <div className="container">
@@ -75,26 +79,43 @@ export const LoginPage = () => {
                       className="form-control"
                       id="email"
                       name="email"
-                      onChange={handlerInputChange}
+                      onChange={setFormValues}
                       required
                       type="email"
                       value={email}
                     />
+                    {userNotFound && (
+                      <div className="text-danger">Email no registrado. Introduce un email válido.</div>
+                    )}
                   </div>
                   <div className="mb-3">
                     <label htmlFor="password" className="form-label">
                       <strong>Contraseña</strong>
                     </label>
                     <input
-                      className="form-control"
+                      className={`form-control ${passwordIncorrect ? 'is-invalid' : ''}`}
                       id="password"
                       name="password"
-                      onChange={handlerInputChange}
+                      onChange={setFormValues}
                       required
                       type="password"
                       value={password}
                     />
+                    {passwordIncorrect && (
+                      <div className="invalid-feedback">
+                        Contraseña incorrecta. Introduce una contraseña válida.
+                      </div>
+                    )}
                   </div>
+                  
+                  {alertMessage && (
+                    <Alert
+                      className="mb-3"
+                      type="error"
+                      message={alertMessage}
+                    />
+                  )}
+
                   <div className="row justify-content-end">
                     <div className="col-auto">
                       <Link to="/">
@@ -113,7 +134,7 @@ export const LoginPage = () => {
                         type="submit"
                         style={{ width: '100px' }}
                       >
-                        INICIAR SESIÓN
+                        INGRESAR
                       </button>
                     </div>
                   </div>
@@ -124,5 +145,5 @@ export const LoginPage = () => {
         </div>
       </Content>
     </ShopLayout>
-  )
-}
+  );
+};

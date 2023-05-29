@@ -109,7 +109,15 @@ export const FilterPage = () => {
                             <Col span={22} className='Productos' style={{
                                 flexWrap: 'nowrap'
                             }}>
-
+                                <Row className='asds' justify="center" align="middle">      
+                                    {
+                                        products?.map(c => (
+                                            <Col key={c._id}>
+                                                <CardComponent key={c._id} {...c} />
+                                            </Col>                                
+                                        ))
+                                    }  
+                                </Row>
                             </Col>
                         </Row>
                     </>

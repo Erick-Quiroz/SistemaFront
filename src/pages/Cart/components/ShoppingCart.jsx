@@ -1,74 +1,88 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { CartContext, ShoppingCartProvider } from '../contexts/ShoppingCartContext'
 import { Layout, theme, Button, Modal } from 'antd'
 import { ShopLayout } from '../../../components/layouts/ShopLayout'
 import { DeleteOutlined } from '@ant-design/icons'
 import './style.css'
+
+import Swal from 'sweetalert2'
+
 export const ShoppingCart = () => {
     const [cart, setCart] = useContext(CartContext)
+    const [inputQuantity, setInputQuantity] = useState('')
 
-    const quantity = cart.reduce((acc, curr) => {
-        return acc + curr.quantity
-    }, 0)
-
-    const totalPrice = cart.reduce(
-        (acc, curr) => acc + curr.quantity * curr.price,
-        0
-    )
-    const obj = cart.forEach(element => {
-        console.log(element)
-    })
     const { Content } = Layout
+
     const handleCheckout = () => {
-        console.log(cart) // Realiza el proceso de checkout con los datos del carrito
+        console.log(cart)
     }
+
     const vaciar = () => {
-        setCart([]) // Vaciar el carrito estableciendo un arreglo vacío
+        setCart([])
         console.log('Carrito vaciado')
     }
+
     const aumentarCantidad = (index) => {
-        const updatedCart = [...cart] // Copia del carrito actual
-        updatedCart[index].quantity++ // Aumentar la cantidad del producto en 1
-        setCart(updatedCart) // Actualizar el carrito con la nueva cantidad
+        const updatedCart = [...cart]
+        const product = updatedCart[index]
+        if (product.quantity < product.existence) {
+            product.quantity++
+            setCart(updatedCart)
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Limite de Stock',
+                toast: true,
+                padding: 50,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            console.log('No se puede agregar más cantidad debido al stock disponible')
+        }
     }
 
     const disminuirCantidad = (index) => {
-        const updatedCart = [...cart] // Copia del carrito actual
+        const updatedCart = [...cart]
         if (updatedCart[index].quantity > 1) {
-            updatedCart[index].quantity-- // Disminuir la cantidad del producto en 1
-            setCart(updatedCart) // Actualizar el carrito con la nueva cantidad
+            updatedCart[index].quantity--
+            setCart(updatedCart)
         }
     }
+
     const eliminarItem = (index) => {
-        const updatedCart = [...cart] // Copia del carrito actual
-        updatedCart.splice(index, 1) // Eliminar el ítem del carrito
-        setCart(updatedCart) // Actualizar el carrito con el ítem eliminado
+        const updatedCart = [...cart]
+        updatedCart.splice(index, 1)
+        setCart(updatedCart)
     }
+
+    const handleInputChange = (e, index) => {
+        const updatedCart = [...cart]
+        const product = updatedCart[index]
+        const quantity = parseInt(e.target.value, 10)
+        if (quantity > 0 && quantity <= product.existence) {
+            product.quantity = quantity
+            setCart(updatedCart)
+        }
+    }
+
+    const totalPrice = cart.reduce((acc, curr) => acc + curr.quantity * curr.price, 0)
+
     return (
         <ShopLayout>
             <Content style={{ margin: '0 8px' }}>
-                {/* <div className="cart-container">
-                    <div>
-                        <div>Items in cart: {quantity}</div>
-                        <div>Total: {totalPrice} Bs.</div>
-                        <div>Cart items:</div>
-
-                        {cart.map((item, index) => (
-                            <div key={index}>Nombre:{item.name} Precio : {item.price} Cantidad:{item.quantity}</div>
-
-                        ))}
-                        <button onClick={handleCheckout}>Checkout</button>
-                    </div>
-                </div> */}
-                {/* Modelo de html cart */}
-
                 <div className="container">
                     <h1>Productos en el carrito</h1>
 
                     <table className="table">
                         <thead>
                             <tr>
-                                <th>N</th>
+                                <th>#</th>
                                 <th>Nombre</th>
                                 <th>Imagen</th>
                                 <th>Precio</th>
@@ -86,11 +100,21 @@ export const ShoppingCart = () => {
                                         <img src={item.imageUrl} alt={item.name} className="product-image" style={{ width: 40, height: 40 }} />
                                     </td>
                                     <td>{item.price} Bs.</td>
+
                                     <td>
                                         <button onClick={() => disminuirCantidad(index)} className="btn btn-outline-danger" style={{ margin: '6px 5px' }}>
                                             -
                                         </button>
-                                        {item.quantity}
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            max={item.existence}
+                                            value={item.quantity}
+                                            step="1"
+                                            style={{ width: '40px' }}
+                                            onChange={(e) => handleInputChange(e, index)}
+                                        />
+
                                         <button onClick={() => aumentarCantidad(index)} className="btn btn-outline-success" style={{ margin: '6px 5px' }}>
                                             +
                                         </button>
@@ -106,16 +130,15 @@ export const ShoppingCart = () => {
                         </tbody>
                     </table>
 
-                    <div className="total">
-                        Total: {totalPrice} Bs.
-                    </div>
+                    <div className="total">Total: {totalPrice} Bs.</div>
 
                     <div className="total">
-                        <button className="btn btn-outline-danger" onClick={vaciar}>Vaciar carrito</button>
+                        <button className="btn btn-outline-danger" onClick={vaciar}>
+                            Vaciar carrito
+                        </button>
                     </div>
                 </div>
-
             </Content>
-        </ShopLayout >
+        </ShopLayout>
     )
 }
