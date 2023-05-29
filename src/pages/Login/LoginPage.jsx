@@ -113,7 +113,7 @@ export const LoginPage = () => {
                         type="submit"
                         style={{ width: '100px' }}
                       >
-                        INICIAR SESIÓN
+                        INICIAR 
                       </button>
                     </div>
                   </div>
