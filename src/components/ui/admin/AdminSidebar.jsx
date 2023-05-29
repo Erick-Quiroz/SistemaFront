@@ -29,7 +29,6 @@ export const AdminSidebar = () => {
                         witch: '30vh'
 
                     }}
-
                 />
             </div>
             <Menu
