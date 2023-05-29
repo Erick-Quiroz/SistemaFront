@@ -2,7 +2,7 @@ import React, { useContext, useDebugValue } from 'react'
 import { CartContext } from '../contexts/ShoppingCartContext'
 import { FaFileVideo } from 'react-icons/fa'
 
-export const Item = ({ name, price, _id, imageUrl }) => {
+export const Item = ({ name, price, _id, existence, imageUrl }) => {
     const [cart, setCart] = useContext(CartContext)
 
     const addToCart = () => {
@@ -18,7 +18,7 @@ export const Item = ({ name, price, _id, imageUrl }) => {
                     }
                 })
             } else {
-                return [...currItems, { _id, quantity: 1, price, name, imageUrl }]
+                return [...currItems, { _id, quantity: 1, price, name, existence, imageUrl }]
             }
         })
     }
