@@ -12,6 +12,5 @@
         "src": "/Filter",
         "dest": "/index.html?data=:data"
       },
-    // Agrega más objetos de ruta según tus necesidades
   ]
 }
