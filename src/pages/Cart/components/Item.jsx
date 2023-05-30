@@ -54,7 +54,7 @@ export const Item = ({ name, price, _id, existence, imageUrl}) => {
 
             <div>{name}</div>
             <img src={imageUrl} width="100" height="100" />
-            <div className="item-price">${price}</div>
+            <div className="item-price">{price} Bs.</div>
 
             {quantityPerItem === 0
                 ? (
