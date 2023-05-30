@@ -86,10 +86,10 @@ const router = createBrowserRouter([
 
     },
     {
-        path: '/Filter',
+        path: '/Filter/:categoria',
         element: <FilterPage />,
-        errorElement: <h1>error</h1>
-    }
+        errorElement: <h1>error</h1>,
+    },
 ])
 
 export const AppRouter = () => {

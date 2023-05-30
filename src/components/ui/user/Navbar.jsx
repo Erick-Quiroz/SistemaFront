@@ -6,10 +6,10 @@ import { imageLogo } from '../../../helpers/imageAdds'
 import { Search } from '../Search'
 import './navbar.css'
 import { useCart } from 'react-use-cart'
-import { Select } from 'antd'
 import { shopAPI } from '../../../services'
 import { CartContext } from '../../../pages/Cart/contexts/ShoppingCartContext'
 import { ShoppingCartOutlined } from '@ant-design/icons'
+import { Dropdown } from 'react-bootstrap';
 
 export const Navbar = () => {
     const [Mobile, setMobile] = useState(false)
@@ -17,15 +17,7 @@ export const Navbar = () => {
     const [allProducts, setAllProducts] = useState([])
     const [total, setTotal] = useState(0)
     const [countProducts, setCountProducts] = useState(0)
-    const navigate = useNavigate('')
     const [categories, setCategories] = useState([])
-
-    const handleSelectChange = (event) => {
-        console.log(event)
-        console.log('/Filter/' + event)
-        navigate('/Filter', { state: { data: `${event}` } })
-       window.location.reload()
-    }
 
     const getAllCategory = async () => {
         try {
@@ -68,17 +60,19 @@ export const Navbar = () => {
 
                     <div className="sb__navbar-links_container ">
                         <p>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    Categorías
+                                </Dropdown.Toggle>
 
-                            <Select
-                                className='Boton_select'
-                                allowClear
-                                placeholder="Categoría"
-                                options={categories.map((cate) => ({ label: cate.name, value: cate.name }))}
-                                onSelect={handleSelectChange}
-                            >
-                            </Select>
-
-                        
+                                <Dropdown.Menu>
+                                    {categories?.map((c) => (
+                                    <Dropdown.Item key={c.name} href={`/Filter/${c.name}`}>
+                                        {c.name}
+                                    </Dropdown.Item>
+                                    ))}
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </p>
                         <p>
                             <Search />
