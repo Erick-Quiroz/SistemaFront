@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Layout, theme, Alert } from 'antd';
+import { Layout, theme } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShopLayout } from '../../components/layouts/ShopLayout';
-import { shopAPI } from '../../services/index';
-import { useForm } from '../../hooks/index';
+import { ShopLayout } from '../../components/layouts/ShopLayout.jsx';
+import { shopAPI } from '../../services/index.js';
+import { useForm } from '../../hooks/index.js';
 import axios from 'axios';
 
 const initialState = {
@@ -13,13 +13,11 @@ const initialState = {
 
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const { colorBgContainer } = theme.useToken().token;
-  const [formValues, setFormValues] = useForm(initialState);
+  const { token: { colorBgContainer } } = theme.useToken();
+  const [formValues, handlerInputChange] = useForm(initialState);
   const { email, password } = formValues;
   const { Content } = Layout;
-  const [passwordIncorrect, setPasswordIncorrect] = useState(false);
-  const [userNotFound, setUserNotFound] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,22 +36,13 @@ export const LoginPage = () => {
         } else if (role === 0) {
           navigate('/');
         }
-
-        setAlertMessage('Usuario autenticado');
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        const { response } = error;
-        if (response?.status === 400 && response?.data?.message === 'Contraseña incorrecta') {
-          setPasswordIncorrect(true);
-          setUserNotFound(false);
-          setAlertMessage('Contraseña incorrecta. Introduce una contraseña válida.');
-        } else if (response?.status === 404 && response?.data?.message === 'Usuario no encontrado') {
-          setPasswordIncorrect(false);
-          setUserNotFound(true);
-          setAlertMessage('El correo electrónico no está registrado. Introduce un correo electrónico válido.');
-        } else {
-          setAlertMessage(response?.data?.message || 'Error desconocido');
+        if (error.response.status === 401) {
+          setError('Contraseña incorrecta, intenta nuevamente.');
+        } else if (error.response.status === 404) {
+          setError('El correo electrónico no está registrado');
         }
       }
     }
@@ -66,7 +55,7 @@ export const LoginPage = () => {
           style={{
             padding: 14,
             minHeight: '84vh',
-            background: colorBgContainer,
+            background: colorBgContainer
           }}
         >
           <div className="container">
@@ -83,43 +72,27 @@ export const LoginPage = () => {
                       className="form-control"
                       id="email"
                       name="email"
-                      onChange={setFormValues}
+                      onChange={handlerInputChange}
                       required
                       type="email"
                       value={email}
                     />
-                    {userNotFound && (
-                      <div className="text-danger">Email no registrado. Introduce un email válido.</div>
-                    )}
                   </div>
                   <div className="mb-3">
                     <label htmlFor="password" className="form-label">
                       <strong>Contraseña</strong>
                     </label>
                     <input
-                      className={`form-control ${passwordIncorrect ? 'is-invalid' : ''}`}
+                      className="form-control"
                       id="password"
                       name="password"
-                      onChange={setFormValues}
+                      onChange={handlerInputChange}
                       required
                       type="password"
                       value={password}
                     />
-                    {passwordIncorrect && (
-                      <div className="invalid-feedback">
-                        Contraseña incorrecta. Introduce una contraseña válida.
-                      </div>
-                    )}
                   </div>
-                  
-                  {alertMessage && (
-                    <Alert
-                      className="mb-3"
-                      type="error"
-                      message={alertMessage}
-                    />
-                  )}
-
+                  {error && <div className="text-danger mb-3">{error}</div>}
                   <div className="row justify-content-end">
                     <div className="col-auto">
                       <Link to="/">
@@ -138,7 +111,7 @@ export const LoginPage = () => {
                         type="submit"
                         style={{ width: '100px' }}
                       >
-                        INGRESAR
+                        iniciar
                       </button>
                     </div>
                   </div>

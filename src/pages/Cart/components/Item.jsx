@@ -54,20 +54,20 @@ export const Item = ({ name, price, _id, existence, imageUrl}) => {
 
             <div>{name}</div>
             <img src={imageUrl} width="100" height="100" />
-            <div className="item-price">${price}</div>
+            <div className="item-price">{price} Bs.</div>
 
             {quantityPerItem === 0
                 ? (
                     <div>
                         <button className="item-add-button" onClick={() => addToCart()}>
-                            + Add to cart
+                            + Añadir a carrito
                         </button>
                     </div>
                 )
                 : (
                     <div>
                         <button className="item-plus-button" onClick={() => addToCart()}>
-                            + add more
+                            + Añadir mas
                         </button>
                     </div>
                 )}
@@ -75,7 +75,7 @@ export const Item = ({ name, price, _id, existence, imageUrl}) => {
             {quantityPerItem > 0 && (
                 <div>
                     <button className="item-minus-button" onClick={() => removeItem(_id)}>
-                        subtract item
+                        Quitar de carrito
                     </button>
                 </div>
             )}
