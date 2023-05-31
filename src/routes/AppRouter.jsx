@@ -86,7 +86,7 @@ const router = createBrowserRouter([
 
     },
     {
-        path: '/Filter/:categoria',
+        path: '/Filter',
         element: <FilterPage />,
         errorElement: <h1>error</h1>,
     },
