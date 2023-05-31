@@ -4,10 +4,10 @@ import './AdminPage.css'
 import BACKENDURL from '../utils/backendUrl.js'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Line } from '@ant-design/charts'
+
 import { useSnackbar } from 'notistack'
 import { RightCircleOutlined } from '@ant-design/icons'
-import { Link, useNavigate } from 'react-router-dom'
+
 export const AdminPage = () => {
     const { Content } = Layout
     const { token: { colorBgContainer } } = theme.useToken()
