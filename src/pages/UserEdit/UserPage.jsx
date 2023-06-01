@@ -102,7 +102,7 @@ export const UserPage = () => {
                         type="button"
                         style={{ width: '150px' }}
                       >
-                        CANCELAR
+                        VOLVER
                       </button>
                     </Link>
                   </div>
