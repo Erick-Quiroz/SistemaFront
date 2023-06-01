@@ -18,6 +18,11 @@ export const Navbar = () => {
     const [total, setTotal] = useState(0)
     const [countProducts, setCountProducts] = useState(0)
     const [categories, setCategories] = useState([])
+    const navigate = useNavigate('')
+
+    const handleDropdownItemClick = (event) => {
+        navigate('/Filter', { state: { data: `${event}` } })
+    }
 
     const getAllCategory = async () => {
         try {
@@ -60,21 +65,23 @@ export const Navbar = () => {
                 <div className="sb__navbar-links">
 
                     <div className="sb__navbar-links_container ">
-                        <p>
+                        
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                                     Categorías
                                 </Dropdown.Toggle>
-
                                 <Dropdown.Menu>
                                     {categories?.map((c) => (
-                                    <Dropdown.Item key={c.name} href={`/Filter/${c.name}`}>
+                                    <Dropdown.Item
+                                        key={c.name}
+                                        onClick={() => handleDropdownItemClick(c.name)}
+                                    >
                                         {c.name}
                                     </Dropdown.Item>
                                     ))}
                                 </Dropdown.Menu>
                             </Dropdown>
-                        </p>
+                        
                         <p>
                             <Search />
                         </p>

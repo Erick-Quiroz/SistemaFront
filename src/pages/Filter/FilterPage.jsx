@@ -3,7 +3,7 @@ import { ShopLayout } from '../../components/layouts/ShopLayout'
 import { useEffect, useState } from 'react'
 import { CardComponent } from '../../components/ui/user/CardComponent'
 import { shopAPI } from '../../services'
-import { useParams } from 'react-router'
+import { useLocation } from 'react-router-dom'
 
 export const FilterPage = () => {
     const { Content } = Layout
@@ -11,7 +11,8 @@ export const FilterPage = () => {
     const [products, setProducts] = useState([])// Todos los productos filtrados por categorias
     const [radio, setRadio] = useState('0') // el radio Precio
     const [checked, setChecked] = useState('0')// El checkbox Oferta
-    const {categoria} = useParams();
+    const location = useLocation()
+    const categoria = location.state.data
 
     const getAll = async () => {
         try {
@@ -26,10 +27,6 @@ export const FilterPage = () => {
 
     const filterProduct = async () => {
         try {
-            console.log('envio de datos')
-            console.log(radio)// Precio
-            console.log(checked)// Categoria
-            console.log(categoria)
             const { data } = await shopAPI.get(`/productLG/filter-Offer-Category-productLG/${radio}/${checked}/${categoria}`)
             if (data.success) {
                 setProducts(data.products)
@@ -60,7 +57,7 @@ export const FilterPage = () => {
     useEffect(() => {
         if (checked === '0' || radio === '0') getAll()
         if (checked !== '0' || radio !== '0') filterProduct()
-    }, [checked, radio])
+    }, [checked, radio, categoria])
 
     return (
         <>
