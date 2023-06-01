@@ -30,6 +30,7 @@ export const LoginPage = () => {
         if (role === 1) {
           navigate('/admin');
         } else if (role === 0) {
+          localStorage.setItem('email',email);
           navigate('/');
         }
       }
