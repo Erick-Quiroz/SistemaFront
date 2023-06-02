@@ -90,12 +90,13 @@ const ModalUpdateStock = ({
             <Form.Control
               style={{ border: cost.valid ? '1px solid green' : '1px solid red' }}
               placeholder="Costo unitario"
-              onChange={(e) => handleOnChangeValidationNumber(e.target.value, 1, 6, setCost)}
+              onChange={(e) => handleOnChangeValidationNumber(e.target.value, 1, 3, setCost)}
               name="value"
               value={cost.value}
             />
             {!cost.valid && (
               <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+                
                 El dato ingresado es incorrecto, por favor verifique.
               </div>
             )}
@@ -117,7 +118,7 @@ const ModalUpdateStock = ({
             <Form.Control
               style={{ border: received.valid ? '1px solid green' : '1px solid red' }}
               placeholder="Cantidad recibida"
-              onChange={(e) => handleOnChangeValidationNumber(e.target.value, 1, 6, setReceived)}
+              onChange={(e) => handleOnChangeValidationNumber(e.target.value, 1, 3, setReceived)}
               name="value"
               value={received.value}
             />
