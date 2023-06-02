@@ -73,7 +73,7 @@ const ModalUpdateStock = ({
     }
   }
   const handleOnChangeValidationNumber = (value, min, max, callback) => {
-    if (value === null || value === undefined || !/^[0-9]+$/.test(value) || value < 1 || value > 10000 || value.length < min || value.length > max) {
+    if (value === null || value === undefined || !/^[0-9]+$/.test(value) || value < 1 || value > 150 || value.length < min || value.length > max) {
       callback({ value, valid: false })
     } else {
       callback({ value, valid: true })
