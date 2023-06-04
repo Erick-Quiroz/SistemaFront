@@ -99,7 +99,7 @@ const ModalEdit = ({
           />
           {!name.valid && (
               <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
-                El Nombre ingresado es incorrecto, por favor verifique.
+                El nombre no puede tener caracteres especiales y debe tener entre 3 y 20 caracteres.
               </div>
             )}
         </InputGroup>
@@ -114,7 +114,7 @@ const ModalEdit = ({
           />
           {!lastname.valid && (
               <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
-                El Apellido ingresado es incorrecto, por favor verifique.
+                El Apellido no puede tener caracteres especiales y debe tener entre 3 y 20 caracteres
               </div>
             )}
         </InputGroup>
@@ -129,7 +129,7 @@ const ModalEdit = ({
           />
           {!phone.valid && (
               <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '0.5rem' }}>
-                El Teléfono ingresado es incorrecto, por favor verifique.
+                El Teléfono no puede tener caracteres especiales y debe tener entre 7 y 8 caracteres.
               </div>
             )}
         </InputGroup>
