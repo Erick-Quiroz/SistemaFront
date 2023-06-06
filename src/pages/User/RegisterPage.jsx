@@ -119,7 +119,7 @@ export const RegisterPage = () => {
                                             <strong>Nombre</strong>
                                         </label>
                                         <input
-                                            autoFocus
+                                            //autoFocus
                                             className="form-control"
                                             id="name"
                                             maxLength={20}
@@ -140,7 +140,7 @@ export const RegisterPage = () => {
                                             <strong>Apellido</strong>
                                         </label>
                                         <input
-                                            autoFocus
+                                            //autoFocus
                                             className="form-control"
                                             id="lastname"
                                             maxLength={20}
@@ -161,7 +161,7 @@ export const RegisterPage = () => {
                                             <strong>Celular</strong>
                                         </label>
                                         <input
-                                            autoFocus
+                                            //autoFocus
                                             className="form-control"
                                             id="phone"
                                             maxLength={8} // Establece el límite máximo de caracteres para el número de teléfono
