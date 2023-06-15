@@ -106,6 +106,7 @@ export const LoginPage = () => {
                       <button
                         className="btn btn-success"
                         type="submit"
+                        name="BotonIniciar"
                         style={{ width: '100px' }}
                       >
                         iniciar
