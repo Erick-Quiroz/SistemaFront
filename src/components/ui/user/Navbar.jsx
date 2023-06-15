@@ -100,7 +100,7 @@ export const Navbar = () => {
             {!emailAlmacenado && (
             <p>
                 <Link to={'/login'} className='nav-link' >
-                <button className="btn btn-outline-success btn_nav" type="submit">
+                <button className="btn btn-outline-success btn_nav" type="submit" name="BotonLogin">
                     Login
                 </button>
                 </Link>
@@ -109,7 +109,7 @@ export const Navbar = () => {
             {emailAlmacenado && (
               <p>
                 <Link to={'/User'} className='text-center'>
-                  <button className="btn btn-outline-success btn_nav" type="submit">
+                  <button className="btn btn-outline-success btn_nav" type="submit" name="BotonUsuario">
                     Usuario
                   </button>
                 </Link>
@@ -169,7 +169,7 @@ export const Navbar = () => {
                 {!emailAlmacenado && (
                     <p>
                         <Link to={'/login'} className='nav-link' >
-                        <button className="btn btn-outline-success btn_nav" type="submit">
+                        <button className="btn btn-outline-success btn_nav" type="submit" name="BotonLogin">
                             Login
                         </button>
                         </Link>
@@ -178,7 +178,7 @@ export const Navbar = () => {
                 {emailAlmacenado && (
                   <p>
                     <Link to={'/User'} className='nav-link' >
-                      <button className="btn btn-outline-success btn_nav" type="submit">
+                      <button className="btn btn-outline-success btn_nav" type="submit" name="BotonUsuario">
                         Usuario
                       </button>
                     </Link>
