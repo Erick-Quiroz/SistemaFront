@@ -139,10 +139,10 @@ const ModalEdit = ({
                
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={() => handleCancel()}>
+        <Button variant="danger" onClick={() => handleCancel()} name="BotonCancelar">
           Cancelar
         </Button>
-        <Button onClick={handleUpdateUser}>Aceptar</Button>
+        <Button onClick={handleUpdateUser} name="BotonAceptar">Aceptar</Button>
       </Modal.Footer>
     </Modal>
     </Form>
