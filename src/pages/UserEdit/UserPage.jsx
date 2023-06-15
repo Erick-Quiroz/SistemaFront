@@ -100,6 +100,7 @@ export const UserPage = () => {
                       <button
                         className="btn btn-danger"
                         type="button"
+                        name="BotonVolver"
                         style={{ width: '150px' }}
                       >
                         VOLVER
@@ -111,6 +112,7 @@ export const UserPage = () => {
                     <button
                       className="btn btn-success"
                       type="submit"
+                      name="BotonEditar"
                       onClick={() => {
                         getUserEdit(userData._id);
                       }}
