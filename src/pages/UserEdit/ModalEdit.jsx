@@ -94,7 +94,7 @@ const ModalEdit = ({
             style={{ border: name.valid ? '1px solid green': '1px solid red'}}
             placeholder="Nombre "
             onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 20, setName)}
-            name="value"
+            name="nombre"
             value={name.value}
           />
           {!name.valid && (
@@ -109,7 +109,7 @@ const ModalEdit = ({
             style={{ border: lastname.valid ? '1px solid green': '1px solid red'}}
             placeholder="Apellido"
             onChange={( e ) => handleOnChangeValidation(e.target.value, 3, 20, setlastname)}
-            name="value"
+            name="apellido"
             value={lastname.value}
           />
           {!lastname.valid && (
@@ -124,7 +124,7 @@ const ModalEdit = ({
             style={{ border: phone.valid ? '1px solid green': '1px solid red'}}
             placeholder="Teléfono "
             onChange={( e ) => handleOnChangeValidationNumber(e.target.value, 7, 8, setphone)}
-            name="value"
+            name="telefono"
             value={phone.value}
           />
           {!phone.valid && (
